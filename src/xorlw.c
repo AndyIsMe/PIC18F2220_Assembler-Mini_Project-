@@ -1,4 +1,4 @@
-#include "movlw.h"
+#include "xorlw.h"
 #include <string.h>
 #include <stdio.h>
 #include "Tokenizer.h"
@@ -8,28 +8,29 @@
 
 
 
-int movlw(char *movlwCode){
- Tokenizer *tokenizer = initTokenizer(movlwCode);
+int xorlw(char *xorlwCode){
+ Tokenizer *tokenizer = initTokenizer(xorlwCode);
  Token *token = getToken(tokenizer);
  IdentifierToken *idToken;
  IntegerToken *intToken;
 
 if(token->type == TOKEN_IDENTIFIER_TYPE){
 	idToken = (IdentifierToken *)token;
-	if(strcmp(idToken->str, "movlw") == 0) {
+	if(strcmp(idToken->str, "xorlw") == 0) {
 		token = getToken(tokenizer);
 		if(token->type == TOKEN_INTEGER_TYPE) {
 			IntegerToken *intToken = (IntegerToken *)token;
 			if(intToken->value > 0xff) {
 				printf("Warning Argument out of range.Least significant bits used.\n");
-				printf("movlw %d\n       ^", intToken->value);
+				printf("xorlw %d\n       ^", intToken->value);
 			}
-			return 0x0e00 + (intToken->value & 0xff);
+
+			return 0x0a00 + (intToken->value & 0xff);
 		}else{
 			Throw(NOT_VALID_OPERAND);
 		}
 	}else{
     Throw(NOT_VALID_INSTRUCTION);
+  }
 }
 }
-}//Tokenizer *initTokenizer(char *stringToTokenize);
