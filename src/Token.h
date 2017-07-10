@@ -64,6 +64,8 @@ typedef struct {
 } OperatorToken;
 
 typedef struct {
+  char *str;
+  int index;
   Token *currentToken;
 } Tokenizer;
 

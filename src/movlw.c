@@ -22,7 +22,7 @@ if(token->type == TOKEN_IDENTIFIER_TYPE){
 			IntegerToken *intToken = (IntegerToken *)token;
 			if(intToken->value > 0xff) {
 				printf("Warning Argument out of range.Least significant bits used.\n");
-				printf("movlw %d\n       ^", intToken->value);
+				printf("movlw %d\n       ^\n", intToken->value);
 			}
 			return 0x0e00 + (intToken->value & 0xff);
 		}else{

@@ -13,7 +13,7 @@ void tearDown(void){}
 void test_MOVLW_movlw_0x37_expect_exception(void){
 	CEXCEPTION_T ex;
 	int machineCode;
-	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
+	Tokenizer *tokenizer = (Tokenizer *)0x0badfac;
 	IdentifierToken movlwToken = {TOKEN_IDENTIFIER_TYPE, 3,5,"movlw"};
 	IntegerToken intToken = {TOKEN_INTEGER_TYPE,11,4,"0x37",0x37};
 	//IdentifierToken fffToken = {TOKEN_IDENTIFIER_TYPE, 17, 3, "fff"};
