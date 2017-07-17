@@ -5,14 +5,16 @@
 #include "Token.h"
 #include "error.h"
 #include "CException.h"
+#include "tolower.h"
 
 
-
-int addlw(char *addlwCode){
- Tokenizer *tokenizer = initTokenizer(addlwCode);
+int addlw(char *instr){
+  instr = tolowercase(instr);
+  Tokenizer *tokenizer = initTokenizer(instr);
  Token *token = getToken(tokenizer);
  IdentifierToken *idToken;
  IntegerToken *intToken;
+
 
 if(token->type == TOKEN_IDENTIFIER_TYPE){
 	idToken = (IdentifierToken *)token;

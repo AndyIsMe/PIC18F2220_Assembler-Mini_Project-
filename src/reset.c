@@ -5,11 +5,12 @@
 #include "Token.h"
 #include "error.h"
 #include "CException.h"
+#include "tolower.h"
 
 
-
-int reset(char *resetCode){
- Tokenizer *tokenizer = initTokenizer(resetCode);
+int reset(char *instr){
+  instr = tolowercase(instr);
+  Tokenizer *tokenizer = initTokenizer(instr);
  Token *token = getToken(tokenizer);
  IdentifierToken *idToken;
  OperatorToken *opToken;

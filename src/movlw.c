@@ -5,15 +5,16 @@
 #include "Token.h"
 #include "error.h"
 #include "CException.h"
+#include "tolower.h"
 
 
 
-int movlw(char *movlwCode){
- Tokenizer *tokenizer = initTokenizer(movlwCode);
+int movlw(char *instr){
+  instr = tolowercase(instr);
+  Tokenizer *tokenizer = initTokenizer(instr);
  Token *token = getToken(tokenizer);
  IdentifierToken *idToken;
  IntegerToken *intToken;
-
 if(token->type == TOKEN_IDENTIFIER_TYPE){
 	idToken = (IdentifierToken *)token;
 	if(strcmp(idToken->str, "movlw") == 0) {

@@ -5,11 +5,15 @@
 #include "Token.h"
 #include "error.h"
 #include "CException.h"
+#include "tolower.h"
 
 
 
-int pop(char *popCode){
- Tokenizer *tokenizer = initTokenizer(popCode);
+
+
+int pop(char *instr){
+  instr = tolowercase(instr);
+  Tokenizer *tokenizer = initTokenizer(instr);
  Token *token = getToken(tokenizer);
  IdentifierToken *idToken;
  OperatorToken *opToken;

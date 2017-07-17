@@ -5,11 +5,13 @@
 #include "Token.h"
 #include "error.h"
 #include "CException.h"
+#include "tolower.h"
 
 
 
-int retlw(char *retlwCode){
- Tokenizer *tokenizer = initTokenizer(retlwCode);
+int retlw(char *instr){
+  instr = tolowercase(instr);
+  Tokenizer *tokenizer = initTokenizer(instr);
  Token *token = getToken(tokenizer);
  IdentifierToken *idToken;
  IntegerToken *intToken;

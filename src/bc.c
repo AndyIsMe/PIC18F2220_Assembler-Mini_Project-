@@ -5,11 +5,13 @@
 #include "Token.h"
 #include "error.h"
 #include "CException.h"
+#include "tolower.h"
 
 
 
-int bc(char *bcCode){
- Tokenizer *tokenizer = initTokenizer(bcCode);
+int bc(char *instr){
+  instr = tolowercase(instr);
+  Tokenizer *tokenizer = initTokenizer(instr);
  Token *token = getToken(tokenizer);
  IdentifierToken *idToken;
  IntegerToken *intToken;
@@ -35,8 +37,9 @@ if(token->type == TOKEN_IDENTIFIER_TYPE){
 }
 }
 
-int bn(char *bnCode){
- Tokenizer *tokenizer = initTokenizer(bnCode);
+int bn(char *instr){
+  instr = tolowercase(instr);
+  Tokenizer *tokenizer = initTokenizer(instr);
  Token *token = getToken(tokenizer);
  IdentifierToken *idToken;
  IntegerToken *intToken;
@@ -62,8 +65,9 @@ if(token->type == TOKEN_IDENTIFIER_TYPE){
 }
 }
 
-int bnc(char *bncCode){
- Tokenizer *tokenizer = initTokenizer(bncCode);
+int bnc(char *instr){
+  instr = tolowercase(instr);
+  Tokenizer *tokenizer = initTokenizer(instr);
  Token *token = getToken(tokenizer);
  IdentifierToken *idToken;
  IntegerToken *intToken;
@@ -89,8 +93,9 @@ if(token->type == TOKEN_IDENTIFIER_TYPE){
 }
 }
 
-int bnn(char *bnnCode){
- Tokenizer *tokenizer = initTokenizer(bnnCode);
+int bnn(char *instr){
+  instr = tolowercase(instr);
+  Tokenizer *tokenizer = initTokenizer(instr);
  Token *token = getToken(tokenizer);
  IdentifierToken *idToken;
  IntegerToken *intToken;
@@ -116,8 +121,9 @@ if(token->type == TOKEN_IDENTIFIER_TYPE){
 }
 }
 
-int bnov(char *bnovCode){
- Tokenizer *tokenizer = initTokenizer(bnovCode);
+int bnov(char *instr){
+  instr = tolowercase(instr);
+  Tokenizer *tokenizer = initTokenizer(instr);
  Token *token = getToken(tokenizer);
  IdentifierToken *idToken;
  IntegerToken *intToken;
@@ -143,8 +149,9 @@ if(token->type == TOKEN_IDENTIFIER_TYPE){
 }
 }
 
-int bnz(char *bnzCode){
- Tokenizer *tokenizer = initTokenizer(bnzCode);
+int bnz(char *instr){
+  instr = tolowercase(instr);
+  Tokenizer *tokenizer = initTokenizer(instr);
  Token *token = getToken(tokenizer);
  IdentifierToken *idToken;
  IntegerToken *intToken;
@@ -170,8 +177,9 @@ if(token->type == TOKEN_IDENTIFIER_TYPE){
 }
 }
 
-int bov(char *bovCode){
- Tokenizer *tokenizer = initTokenizer(bovCode);
+int bov(char *instr){
+  instr = tolowercase(instr);
+  Tokenizer *tokenizer = initTokenizer(instr);
  Token *token = getToken(tokenizer);
  IdentifierToken *idToken;
  IntegerToken *intToken;
@@ -198,8 +206,9 @@ if(token->type == TOKEN_IDENTIFIER_TYPE){
 }
 
 
-int bz(char *bzCode){
- Tokenizer *tokenizer = initTokenizer(bzCode);
+int bz(char *instr){
+  instr = tolowercase(instr);
+  Tokenizer *tokenizer = initTokenizer(instr);
  Token *token = getToken(tokenizer);
  IdentifierToken *idToken;
  IntegerToken *intToken;

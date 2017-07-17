@@ -5,11 +5,13 @@
 #include "Token.h"
 #include "error.h"
 #include "CException.h"
+#include "toupper.h"
 
 
 
-int comf(char *comfCode){
- Tokenizer *tokenizer = initTokenizer(comfCode);
+int comf(char *instr){
+  instr = touppercase(instr);
+  Tokenizer *tokenizer = initTokenizer(instr);
  Token *token = getToken(tokenizer);
  IdentifierToken *idToken;
  IntegerToken *intToken;
@@ -17,7 +19,7 @@ int comf(char *comfCode){
 
 if(token->type == TOKEN_IDENTIFIER_TYPE){
 	idToken = (IdentifierToken *)token;
-	if((strcmp(idToken->str, "comf") == 0)||(strcmp(idToken->str, "COMF") == 0)) {
+	if(strcmp(idToken->str, "COMF") == 0) {
 		token = getToken(tokenizer);
 		if(token->type == TOKEN_INTEGER_TYPE) {
 			IntegerToken *intToken = (IntegerToken *)token;
@@ -32,7 +34,7 @@ if(token->type == TOKEN_IDENTIFIER_TYPE){
         token = getToken(tokenizer);
         if(token->type == TOKEN_IDENTIFIER_TYPE){
         idToken = (IdentifierToken *)token;
-        if((strcmp(idToken->str, "w")==0)||(strcmp(idToken->str,"WREG")==0)){
+        if((strcmp(idToken->str, "W")==0)||(strcmp(idToken->str,"WREG")==0)){
           token = getToken(tokenizer);
           if(token->type == TOKEN_OPERATOR_TYPE){
             opToken = (OperatorToken *)token;
@@ -54,7 +56,7 @@ if(token->type == TOKEN_IDENTIFIER_TYPE){
             }
           }
 
-        } else if((strcmp(idToken->str,"f")==0)||(strcmp(idToken->str,"F")==0)){
+        } else if(strcmp(idToken->str,"F")==0){
            token = getToken(tokenizer);
                   if(token->type == TOKEN_OPERATOR_TYPE){
                     opToken = (OperatorToken *)token;

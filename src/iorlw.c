@@ -5,11 +5,16 @@
 #include "Token.h"
 #include "error.h"
 #include "CException.h"
+#include "tolower.h"
 
 
 
-int iorlw(char *iorlwCode){
- Tokenizer *tokenizer = initTokenizer(iorlwCode);
+
+
+
+int iorlw(char *instr){
+  instr = tolowercase(instr);
+  Tokenizer *tokenizer = initTokenizer(instr);
  Token *token = getToken(tokenizer);
  IdentifierToken *idToken;
  IntegerToken *intToken;

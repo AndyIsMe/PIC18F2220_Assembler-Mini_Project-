@@ -5,11 +5,12 @@
 #include "Token.h"
 #include "error.h"
 #include "CException.h"
+#include "tolower.h"
 
 
-
-int mullw(char *mullwCode){
- Tokenizer *tokenizer = initTokenizer(mullwCode);
+int mullw(char *instr){
+  instr = tolowercase(instr);
+  Tokenizer *tokenizer = initTokenizer(instr);
  Token *token = getToken(tokenizer);
  IdentifierToken *idToken;
  IntegerToken *intToken;

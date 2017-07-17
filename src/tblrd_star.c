@@ -5,11 +5,14 @@
 #include "Token.h"
 #include "error.h"
 #include "CException.h"
+#include "tolower.h"
 
 
 
-int tblrd_star(char *tblrd_starCode){
- Tokenizer *tokenizer = initTokenizer(tblrd_starCode);
+
+int tblrd_star(char *instr){
+  instr = tolowercase(instr);
+  Tokenizer *tokenizer = initTokenizer(instr);
  Token *token = getToken(tokenizer);
  IdentifierToken *idToken;
  OperatorToken *opToken;
@@ -35,8 +38,9 @@ if(token->type == TOKEN_IDENTIFIER_TYPE){
 
 }
 
-int tblrd_star_plus(char *tblrd_star_plusCode){
- Tokenizer *tokenizer = initTokenizer(tblrd_star_plusCode);
+int tblrd_star_plus(char *instr){
+  instr = tolowercase(instr);
+  Tokenizer *tokenizer = initTokenizer(instr);
  Token *token = getToken(tokenizer);
  IdentifierToken *idToken;
  OperatorToken *opToken;
@@ -62,8 +66,9 @@ if(token->type == TOKEN_IDENTIFIER_TYPE){
 
 }
 
-int tblrd_star_minus(char *tblrd_star_minusCode){
- Tokenizer *tokenizer = initTokenizer(tblrd_star_minusCode);
+int tblrd_star_minus(char *instr){
+  instr = tolowercase(instr);
+  Tokenizer *tokenizer = initTokenizer(instr);
  Token *token = getToken(tokenizer);
  IdentifierToken *idToken;
  OperatorToken *opToken;
@@ -90,8 +95,9 @@ if(token->type == TOKEN_IDENTIFIER_TYPE){
 }
 }
 
-int tblrd_plus_star(char *tblrd_plus_starCode){
- Tokenizer *tokenizer = initTokenizer(tblrd_plus_starCode);
+int tblrd_plus_star(char *instr){
+  instr = tolowercase(instr);
+  Tokenizer *tokenizer = initTokenizer(instr);
  Token *token = getToken(tokenizer);
  IdentifierToken *idToken;
  OperatorToken *opToken;

@@ -5,11 +5,12 @@
 #include "Token.h"
 #include "error.h"
 #include "CException.h"
+#include "tolower.h"
 
 
-
-int clrwdt(char *clrwdtCode){
- Tokenizer *tokenizer = initTokenizer(clrwdtCode);
+int clrwdt(char *instr){
+  instr = tolowercase(instr);
+  Tokenizer *tokenizer = initTokenizer(instr);
  Token *token = getToken(tokenizer);
  IdentifierToken *idToken;
  OperatorToken *opToken;
