@@ -13,7 +13,7 @@ void setUp(void)
 void tearDown(void)
 {}
 
-void test_checkregister_0x37_WREG_ACCESS(void)
+void xtest_checkregister_0x37_WREG_ACCESS(void)
 {
   CEXCEPTION_T ex;
   OperandInfo operandInfo;
@@ -40,7 +40,7 @@ void test_checkregister_0x37_WREG_ACCESS(void)
   }
 }
 
-void test_checkregister_0x37_(void)
+void xtest_checkregister_0x37_(void)
 {
   CEXCEPTION_T ex;
   OperandInfo operandInfo;
@@ -49,10 +49,6 @@ void test_checkregister_0x37_(void)
   IntegerToken intToken = {TOKEN_INTEGER_TYPE,3,4,"0x37",0x37};
   OperatorToken opToken = {TOKEN_OPERATOR_TYPE, 7,1," "};
 
-
-
-
-  //getToken_ExpectAndReturn(tokenizer, (Token *)&addwfToken);//
   getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
   getToken_ExpectAndReturn(tokenizer,(Token *)&opToken);
 
@@ -66,7 +62,7 @@ void test_checkregister_0x37_(void)
   }
 }
 
-void test_checkregister_0x37_WREG(void)
+void xtest_checkregister_0x37_WREG(void)
 {
   CEXCEPTION_T ex;
   OperandInfo operandInfo;
@@ -91,7 +87,7 @@ void test_checkregister_0x37_WREG(void)
   }
 }
 
-void test_checkregister_0x37_WREG_BANKED(void)
+void xtest_checkregister_0x37_WREG_BANKED(void)
 {
   CEXCEPTION_T ex;
   OperandInfo operandInfo;
@@ -118,7 +114,7 @@ void test_checkregister_0x37_WREG_BANKED(void)
   }
 }
 
-void test_checkregister_0x37_4_ACCESS(void)
+void xtest_checkregister_0x37_4_ACCESS(void)
 {
   CEXCEPTION_T ex;
   OperandInfo operandInfo;
@@ -145,7 +141,7 @@ void test_checkregister_0x37_4_ACCESS(void)
   }
 }
 
-void test_checkregister_0x37_4_BANKED(void)
+void xtest_checkregister_0x37_4_BANKED(void)
 {
   CEXCEPTION_T ex;
   OperandInfo operandInfo;
@@ -166,6 +162,143 @@ void test_checkregister_0x37_4_BANKED(void)
 
   Try {
     fba(tokenizer ,operandInfo);
+
+  }Catch(ex) {
+    TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
+  }
+}
+
+void xtest_checkregister_0x37_ACCESS(void)
+{
+  CEXCEPTION_T ex;
+  OperandInfo operandInfo;
+
+  Tokenizer *tokenizer = (Tokenizer *)0x0badface;
+  IntegerToken intToken = {TOKEN_INTEGER_TYPE,3,4,"0x37",0x37};
+  OperatorToken opToken = {TOKEN_OPERATOR_TYPE, 7,1,","};
+  IdentifierToken ACCESSToken = {TOKEN_IDENTIFIER_TYPE, 8,4,"ACCESS"};
+
+
+
+  getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
+  getToken_ExpectAndReturn(tokenizer,(Token *)&opToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&ACCESSToken);
+
+
+  Try {
+    fa(tokenizer ,operandInfo);
+
+  }Catch(ex) {
+    TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
+  }
+}
+
+void xtest_checkregister_0x37_BANKED(void)
+{
+  CEXCEPTION_T ex;
+  OperandInfo operandInfo;
+
+  Tokenizer *tokenizer = (Tokenizer *)0x0badface;
+  IntegerToken intToken = {TOKEN_INTEGER_TYPE,3,4,"0x37",0x37};
+  OperatorToken opToken = {TOKEN_OPERATOR_TYPE, 7,1,","};
+  IdentifierToken BANKEDToken = {TOKEN_IDENTIFIER_TYPE, 8,4,"BANKED"};
+
+
+
+  getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
+  getToken_ExpectAndReturn(tokenizer,(Token *)&opToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&BANKEDToken);
+
+
+  Try {
+    fa(tokenizer ,operandInfo);
+
+  }Catch(ex) {
+    TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
+  }
+}
+
+void xtest_checkregister_0x37_0x123(void)
+{
+  CEXCEPTION_T ex;
+  OperandInfo operandInfo;
+
+  Tokenizer *tokenizer = (Tokenizer *)0x0badface;
+  IntegerToken intToken = {TOKEN_INTEGER_TYPE,3,4,"0x37",0x37};
+  OperatorToken opToken = {TOKEN_OPERATOR_TYPE, 7,1,","};
+  IntegerToken int1Token = {TOKEN_INTEGER_TYPE, 8,5,"0x123",0x123};
+
+  getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
+  getToken_ExpectAndReturn(tokenizer,(Token *)&opToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&int1Token);
+
+
+  Try {
+    ff(tokenizer ,operandInfo);
+
+  }Catch(ex) {
+    TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
+  }
+}
+
+void xtest_checkregister_0x40_(void)
+{
+  CEXCEPTION_T ex;
+  OperandInfo operandInfo;
+
+  Tokenizer *tokenizer = (Tokenizer *)0x0badface;
+  IntegerToken intToken = {TOKEN_INTEGER_TYPE,3,4,"0x40",0x40};
+
+  getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
+
+
+
+  Try {
+    k(tokenizer ,operandInfo);
+
+  }Catch(ex) {
+    TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
+  }
+}
+
+void test_checkregister_0x40_1_(void)
+{
+  CEXCEPTION_T ex;
+  OperandInfo operandInfo;
+
+  Tokenizer *tokenizer = (Tokenizer *)0x0badface;
+  IntegerToken intToken = {TOKEN_INTEGER_TYPE,3,4,"0x40",0x40};
+  OperatorToken opToken = {TOKEN_OPERATOR_TYPE,7,1,","};
+  IntegerToken int1Token = {TOKEN_INTEGER_TYPE,8,1,"1",1};
+
+  getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);
+  getToken_ExpectAndReturn(tokenizer,(Token *)&opToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&int1Token);
+
+
+
+  Try {
+    ks(tokenizer ,operandInfo);
+
+  }Catch(ex) {
+    TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
+  }
+}
+
+void xtest_checkregister_1_(void)
+{
+  CEXCEPTION_T ex;
+  OperandInfo operandInfo;
+
+  Tokenizer *tokenizer = (Tokenizer *)0x0badface;
+  IntegerToken intToken = {TOKEN_INTEGER_TYPE,1,1,"1",1};
+
+  getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);
+
+
+
+  Try {
+    handleS(tokenizer ,operandInfo);
 
   }Catch(ex) {
     TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
