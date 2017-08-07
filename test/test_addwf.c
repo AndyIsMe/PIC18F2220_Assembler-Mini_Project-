@@ -6,6 +6,7 @@
 #include "error.h"
 #include "Exception.h"
 #include "toupper.h"
+#include "checkregister.h"
 
 void setUp(void){}
 void tearDown(void){}
@@ -33,12 +34,12 @@ void test_ADDWF_addwf_0x37_coma_WREG_coma_ACCESS_expect_exception(void){
 
 	Try {
 		machineCode = addwf(instr);
-		printf("\nthe instruction opcode is %#4x",machineCode);
+		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
 	}Catch(ex) {
 		TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
 	}
 }
-
+/*
 void test_ADDWF_addwf_0x37_coma_WREG_coma_BANKED_expect_exception(void){
 	CEXCEPTION_T ex;
 	int machineCode;
@@ -125,3 +126,4 @@ void test_ADDWF_addwf_0x37_coma_f_coma_BANKED_expect_exception(void){
 		TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
 	}
 }
+*/
