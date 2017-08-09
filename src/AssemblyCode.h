@@ -31,6 +31,7 @@ int daw(char *instr);
 int iorlw(char *instr);
 int movlw(char *instr);
 int movwf(char *instr);
+int movff(char *instr);
 int mullw(char *instr);
 int mulwf(char *instr);
 int negf(char *instr);

@@ -31,6 +31,26 @@ void xtest_ADDLW_addlw_0x37_expect_0x0f37(void){
 		TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
 	}
 }
+void test_ADDMW_addmw_expect_NOT_VALID_IDENTIFIER(void){
+	CEXCEPTION_T ex;
+	int machineCode;
+	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
+  char instr[] = "   AdDvF    ";
+	IdentifierToken addwfToken = {TOKEN_IDENTIFIER_TYPE, 3,5,"ADDvF"};
+
+
+	initTokenizer_ExpectAndReturn(instr,tokenizer);
+	getToken_ExpectAndReturn(tokenizer, (Token *)&addwfToken);//
+
+	Try {
+		machineCode = addwf(instr);
+		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+	}Catch(ex) {
+		TEST_ASSERT_EQUAL(NOT_VALID_IDENTIFIER, ex);
+	}
+}
+
+
 
 void xtest_ADDWF_addwf_0x37_coma_WREG_coma_ACCESS_expect_0x2437(void){
 	CEXCEPTION_T ex;
@@ -59,7 +79,6 @@ void xtest_ADDWF_addwf_0x37_coma_WREG_coma_ACCESS_expect_0x2437(void){
 		TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
 	}
 }
-
 void xtest_ADDWF_addwf_0x37_coma_WREG_coma_BANKED_expect_0x2537(void){
 	CEXCEPTION_T ex;
 	int machineCode;
@@ -87,7 +106,6 @@ void xtest_ADDWF_addwf_0x37_coma_WREG_coma_BANKED_expect_0x2537(void){
 		TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
 	}
 }
-
 void xtest_ADDWF_addwf_0x37_coma_F_coma_ACCESS_expect_0x2637(void){
 	CEXCEPTION_T ex;
 	int machineCode;
@@ -115,7 +133,6 @@ void xtest_ADDWF_addwf_0x37_coma_F_coma_ACCESS_expect_0x2637(void){
 		TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
 	}
 }
-
 void xtest_ADDWF_addwf_0x37_coma_F_coma_BANKED_expect_2737(void){
 	CEXCEPTION_T ex;
 	int machineCode;
@@ -143,6 +160,25 @@ void xtest_ADDWF_addwf_0x37_coma_F_coma_BANKED_expect_2737(void){
 		TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
 	}
 }
+void test_ADDvF_addvf_expect_NOT_VALID_IDENTIFIER(void){
+	CEXCEPTION_T ex;
+	int machineCode;
+	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
+  char instr[] = "   AdDvF    ";
+	IdentifierToken addwfToken = {TOKEN_IDENTIFIER_TYPE, 3,5,"ADDvF"};
+
+
+	initTokenizer_ExpectAndReturn(instr,tokenizer);
+	getToken_ExpectAndReturn(tokenizer, (Token *)&addwfToken);//
+
+	Try {
+		machineCode = addwf(instr);
+		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+	}Catch(ex) {
+		TEST_ASSERT_EQUAL(NOT_VALID_IDENTIFIER, ex);
+	}
+}
+
 
 void xtest_ADDWFC_addwfc_0x37_coma_WREG_coma_ACCESS_expect_0x2037(void){
 	CEXCEPTION_T ex;
@@ -171,7 +207,6 @@ void xtest_ADDWFC_addwfc_0x37_coma_WREG_coma_ACCESS_expect_0x2037(void){
 		TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
 	}
 }
-
 void xtest_ADDWFC_addwfc_0x37_coma_WREG_coma_BANKED_expect_0x2137(void){
 	CEXCEPTION_T ex;
 	int machineCode;
@@ -199,7 +234,6 @@ void xtest_ADDWFC_addwfc_0x37_coma_WREG_coma_BANKED_expect_0x2137(void){
 		TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
 	}
 }
-
 void xtest_ADDWFC_addwfc_0x37_coma_F_coma_ACCESS_expect_0x2237(void){
 	CEXCEPTION_T ex;
 	int machineCode;
@@ -227,7 +261,6 @@ void xtest_ADDWFC_addwfc_0x37_coma_F_coma_ACCESS_expect_0x2237(void){
 		TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
 	}
 }
-
 void xtest_ADDWFC_addwfc_0x37_coma_F_coma_BANKED_expect_2337(void){
 	CEXCEPTION_T ex;
 	int machineCode;
@@ -255,6 +288,24 @@ void xtest_ADDWFC_addwfc_0x37_coma_F_coma_BANKED_expect_2337(void){
 		TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
 	}
 }
+void test_ADDWDF_addwdf_expect_NOT_VALID_IDENTIFIER(void){
+	CEXCEPTION_T ex;
+	int machineCode;
+	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
+  char instr[] = "   AdDwdF    ";
+	IdentifierToken addwfcToken = {TOKEN_IDENTIFIER_TYPE, 3,5,"ADDWDF"};
+
+
+	initTokenizer_ExpectAndReturn(instr,tokenizer);
+	getToken_ExpectAndReturn(tokenizer, (Token *)&addwfcToken);//
+
+	Try {
+		machineCode = addwfc(instr);
+		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+	}Catch(ex) {
+		TEST_ASSERT_EQUAL(NOT_VALID_IDENTIFIER, ex);
+	}
+}
 
 void xtest_ANDLW_addlw_0x37_expect_0xf37(void){
 	CEXCEPTION_T ex;
@@ -273,6 +324,24 @@ void xtest_ANDLW_addlw_0x37_expect_0xf37(void){
 		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
 	}Catch(ex) {
 		TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
+	}
+}
+void test_ANDDW_anddw_expect_NOT_VALID_IDENTIFIER(void){
+	CEXCEPTION_T ex;
+	int machineCode;
+	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
+  char instr[] = "   ANDdW    ";
+	IdentifierToken andlwToken = {TOKEN_IDENTIFIER_TYPE, 3,5,"ANDDW"};
+
+
+	initTokenizer_ExpectAndReturn(instr,tokenizer);
+	getToken_ExpectAndReturn(tokenizer, (Token *)&andlwToken);//
+
+	Try {
+		machineCode = andlw(instr);
+		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+	}Catch(ex) {
+		TEST_ASSERT_EQUAL(NOT_VALID_IDENTIFIER, ex);
 	}
 }
 
@@ -303,7 +372,6 @@ void xtest_ANDWF_andwf_0x37_coma_WREG_coma_ACCESS_expect_0x1437(void){
 		TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
 	}
 }
-
 void xtest_ANDWF_andwf_0x37_coma_WREG_coma_BANKED_expect_0x1537(void){
 	CEXCEPTION_T ex;
 	int machineCode;
@@ -331,7 +399,6 @@ void xtest_ANDWF_andwf_0x37_coma_WREG_coma_BANKED_expect_0x1537(void){
 		TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
 	}
 }
-
 void xtest_ANDWF_andwf_0x37_coma_F_coma_ACCESS_expect_0x1637(void){
 	CEXCEPTION_T ex;
 	int machineCode;
@@ -359,7 +426,6 @@ void xtest_ANDWF_andwf_0x37_coma_F_coma_ACCESS_expect_0x1637(void){
 		TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
 	}
 }
-
 void xtest_ANDWF_andwf_0x37_coma_F_coma_BANKED_expect_1737(void){
 	CEXCEPTION_T ex;
 	int machineCode;
@@ -528,7 +594,7 @@ void xtest_BOV_bov_0x37_expect_0xe41a(void){
 	}
 }
 
-void test_BZ_bz_0x37_expect_0xe01a(void){
+void xtest_BZ_bz_0x37_expect_0xe01a(void){
 	CEXCEPTION_T ex;
 	int machineCode;
 	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
@@ -577,7 +643,6 @@ void xtest_BCF_bcf_0x37_4_ACCESS_expect_0x9837(void){
     TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
   }
 }
-
 void xtest_BCF_bcf_0x37_4_BANKED_expect_0x9937(void){
   CEXCEPTION_T ex;
   OperandInfo operandInfo;
@@ -637,7 +702,6 @@ void xtest_BSF_bsf_0x37_4_ACCESS_expect_0x8837(void){
     TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
   }
 }
-
 void xtest_BSF_bsf_0x37_4_BANKED_expect_0x8937(void){
   CEXCEPTION_T ex;
   OperandInfo operandInfo;
@@ -697,7 +761,6 @@ void xtest_BTFSC_btfsc_0x37_4_ACCESS_expect_0xb837(void){
     TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
   }
 }
-
 void xtest_BTFSC_bsfsc_0x37_4_BANKED_expect_0xb937(void){
   CEXCEPTION_T ex;
   OperandInfo operandInfo;
@@ -757,7 +820,6 @@ void xtest_BTFSS_btfss_0x37_4_ACCESS_expect_0xa837(void){
     TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
   }
 }
-
 void xtest_BTFSS_btfss_0x37_4_BANKED_expect_0xa937(void){
   CEXCEPTION_T ex;
   OperandInfo operandInfo;
@@ -871,7 +933,6 @@ void xtest_CLRF_clrf_0x37_coma_ACCESS_expect_0x6a37(void){
 		TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
 	}
 }
-
 void xtest_CLRF_clrf_0x37_coma_BANKED_expect_0x6b37(void){
 	CEXCEPTION_T ex;
 	int machineCode;
@@ -941,7 +1002,6 @@ void xtest_COMF_comf_0x37_coma_WREG_coma_ACCESS_expect_0x1c37(void){
 		TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
 	}
 }
-
 void xtest_COMF_comf_0x37_coma_WREG_coma_BANKED_expect_0x1d37(void){
 	CEXCEPTION_T ex;
 	int machineCode;
@@ -969,7 +1029,6 @@ void xtest_COMF_comf_0x37_coma_WREG_coma_BANKED_expect_0x1d37(void){
 		TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
 	}
 }
-
 void xtest_COMF_comf_0x37_coma_F_coma_ACCESS_expect_0x1e37(void){
 	CEXCEPTION_T ex;
 	int machineCode;
@@ -997,7 +1056,6 @@ void xtest_COMF_comf_0x37_coma_F_coma_ACCESS_expect_0x1e37(void){
 		TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
 	}
 }
-
 void xtest_COMF_comf_0x37_coma_WREG_coma_BANKED_expect_0x1f37(void){
 	CEXCEPTION_T ex;
 	int machineCode;
@@ -1049,7 +1107,6 @@ void xtest_CPFSEQ_cpfseq_0x37_coma_ACCESS_expect_0x6237(void){
 		TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
 	}
 }
-
 void xtest_CPFSEQ_cpfseq_0x37_coma_BANKED_expect_0x6337(void){
 	CEXCEPTION_T ex;
 	int machineCode;
@@ -1097,7 +1154,6 @@ void xtest_CPFSGT_cpfsgt_0x37_coma_ACCESS_expect_0x6437(void){
 		TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
 	}
 }
-
 void xtest_CPFSGT_cpfsgt_0x37_coma_BANKED_expect_0x6537(void){
 	CEXCEPTION_T ex;
 	int machineCode;
@@ -1145,7 +1201,6 @@ void xtest_CPFSLT_cpfslt_0x37_coma_ACCESS_expect_0x6037(void){
 		TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
 	}
 }
-
 void xtest_CPFSLT_cpfslt_0x37_coma_BANKED_expect_0x6137(void){
 	CEXCEPTION_T ex;
 	int machineCode;
@@ -1254,6 +1309,30 @@ void xtest_MOVWF_movwf_0x37_coma_ACCESS_expect_0x6e37(void){
 	}
 }
 
+void test_MOVFF_movff_0x222_coma_movff_0xff_expect_0xc222_0xf0ff(void){
+	CEXCEPTION_T ex;
+	int machineCode;
+	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
+  char instr[] = "   MoVfF   0x222,0xff  ";
+	IdentifierToken movwfToken = {TOKEN_IDENTIFIER_TYPE, 3,5,"MOVFF"};
+	IntegerToken intToken = {TOKEN_INTEGER_TYPE,11,5,"0x222",0x222};
+  OperatorToken opToken = {TOKEN_OPERATOR_TYPE, 13,1,","};
+  IntegerToken int1Token = {TOKEN_INTEGER_TYPE, 14,4,"0xff",0xff};
+
+	initTokenizer_ExpectAndReturn(instr,tokenizer);
+	getToken_ExpectAndReturn(tokenizer, (Token *)&movwfToken);//
+	getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
+  getToken_ExpectAndReturn(tokenizer,(Token *)&opToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&int1Token);
+
+	Try {
+		machineCode = movff(instr);
+		printf("\nthe instruction[   %s   ] opcode is %#8x",instr,machineCode);
+	}Catch(ex) {
+		TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
+	}
+}
+
 void xtest_CLRF_clrf_0x37_coma_BANKED_expect_0x6f37(void){
 	CEXCEPTION_T ex;
 	int machineCode;
@@ -1321,7 +1400,6 @@ void xtest_MULWF_mulwf_0x37_coma_ACCESS_expect_0x0237(void){
 		TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
 	}
 }
-
 void xtest_MULWF_mulwf_0x37_coma_BANKED_expect_0x0337(void){
 	CEXCEPTION_T ex;
 	int machineCode;
@@ -1369,7 +1447,6 @@ void xtest_NEGF_negf_0x37_coma_ACCESS_expect_0x6c37(void){
 		TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
 	}
 }
-
 void xtest_NEGF_negf_0x37_coma_BANKED_expect_0x6d37(void){
 	CEXCEPTION_T ex;
 	int machineCode;
@@ -1471,7 +1548,6 @@ void xtest_SETF_setf_0x37_coma_ACCESS_expect_0x6837(void){
 		TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
 	}
 }
-
 void xtest_SETF_setf_0x37_coma_BANKED_expect_0x6937(void){
 	CEXCEPTION_T ex;
 	int machineCode;
@@ -1718,7 +1794,6 @@ void xtest_TSTFSZ_tstfsz_0x37_coma_ACCESS_expect_0x6637(void){
 		TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
 	}
 }
-
 void xtest_TSTFSZ_tstfsz_0x37_coma_BANKED_expect_0x6737(void){
 	CEXCEPTION_T ex;
 	int machineCode;
@@ -1771,7 +1846,6 @@ void xtest_XORWF_xorwf_0x37_coma_WREG_coma_ACCESS_expect_0x1837(void){
 		TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
 	}
 }
-
 void xtest_XORWF_xorwf_0x37_coma_WREG_coma_BANKED_expect_0x1937(void){
 	CEXCEPTION_T ex;
 	int machineCode;
@@ -1799,7 +1873,6 @@ void xtest_XORWF_xorwf_0x37_coma_WREG_coma_BANKED_expect_0x1937(void){
 		TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
 	}
 }
-
 void xtest_XORWF_xorwf_0x37_coma_F_coma_ACCESS_expect_0x1a37(void){
 	CEXCEPTION_T ex;
 	int machineCode;
@@ -1827,7 +1900,6 @@ void xtest_XORWF_xorwf_0x37_coma_F_coma_ACCESS_expect_0x1a37(void){
 		TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
 	}
 }
-
 void xtest_XORWF_xorwf_0x37_coma_F_coma_BANKED_expect_1b37(void){
 	CEXCEPTION_T ex;
 	int machineCode;

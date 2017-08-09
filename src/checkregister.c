@@ -13,7 +13,7 @@ void fda(Tokenizer *tokenizer , OperandInfo *operandInfo){
   OperatorToken *opToken;
   if(token->type == TOKEN_INTEGER_TYPE){
     IntegerToken *intToken = (IntegerToken *)token;
-    if(intToken->value > 0xff){
+    if(intToken->value >= 0xff){
       printf("Warning Argument out of range.Least significant bits used.\n");
       printf("This value has just caused an overflow : %d\n       ^", intToken->value);
     }
@@ -90,7 +90,7 @@ void fba(Tokenizer *tokenizer , OperandInfo *operandInfo){
   OperatorToken *opToken;
   if(token->type == TOKEN_INTEGER_TYPE){
     IntegerToken *intToken = (IntegerToken *)token;
-    if(intToken->value > 0xff){
+    if(intToken->value >= 0xff){
       printf("Warning Argument out of range.Least significant bits used.\n");
       printf("This value has just caused an overflow : %d\n       ^", intToken->value);
     }
@@ -165,7 +165,7 @@ void fa(Tokenizer *tokenizer , OperandInfo *operandInfo){
   OperatorToken *opToken;
   if(token->type == TOKEN_INTEGER_TYPE){
     IntegerToken *intToken = (IntegerToken *)token;
-    if(intToken->value > 0xff){
+    if(intToken->value >= 0xff){
       printf("Warning Argument out of range.Least significant bits used.\n");
       printf("This value has just caused an overflow : %d\n       ^", intToken->value);
     }
@@ -189,18 +189,22 @@ void fa(Tokenizer *tokenizer , OperandInfo *operandInfo){
       }
 }
 
-void ff(Tokenizer *tokenizer , OperandInfo *operandInfo){
+void ff(Tokenizer *tokenizer , OperandInfo *operandInfo, OperandInfo1 *operandInfo1){
   Token *token = getToken(tokenizer);
   IntegerToken *intToken;
   OperatorToken *opToken;
   if(token->type == TOKEN_INTEGER_TYPE){
     IntegerToken *intToken = (IntegerToken *)token;
-    if(intToken->value > 0xfff){
+    if(intToken->value >= 0xfff){
       printf("Warning Argument out of range.Least significant bits used.\n");
       printf("This value has just caused an overflow : %d\n       ^", intToken->value);
+      Throw(OVERFLOW);
+
     }
     else{
       operandInfo->value = ((IntegerToken *)token)->value;
+      operandInfo->dirType = 0x0000;
+      operandInfo->banktype = 0x0000;
     }
     token = getToken(tokenizer);
     if(token->type == TOKEN_OPERATOR_TYPE){
@@ -216,14 +220,15 @@ void ff(Tokenizer *tokenizer , OperandInfo *operandInfo){
     token = getToken(tokenizer);
     if(token->type == TOKEN_INTEGER_TYPE){
       IntegerToken *intToken = (IntegerToken *)token;
-      if(intToken->value > 0xfff){
+      if(intToken->value >= 0xfff){
         printf("Warning Argument out of range.Least significant bits used.\n");
         printf("This value has just caused an overflow : %d\n       ^", intToken->value);
+        Throw(OVERFLOW);
       }
       else{
-        operandInfo->value = ((IntegerToken *)token)->value;
-        operandInfo->dirType = 0x0000;
-        operandInfo->banktype = 0x0000;
+        operandInfo1->value1 = ((IntegerToken *)token)->value;
+        operandInfo1->dirType1 = 0x0000;
+        operandInfo1->banktype1 = 0x0000;
       }
     }
   }
@@ -233,7 +238,7 @@ void k(Tokenizer *tokenizer , OperandInfo *operandInfo){
     IntegerToken *intToken;
     if(token->type == TOKEN_INTEGER_TYPE){
       IntegerToken *intToken = (IntegerToken *)token;
-      if(intToken->value > 0xff){
+      if(intToken->value >= 0xff){
         printf("Warning Argument out of range.Least significant bits used.\n");
         printf("This value has just caused an overflow : %d\n       ^", intToken->value);
       }
@@ -251,7 +256,7 @@ void ks(Tokenizer *tokenizer , OperandInfo *operandInfo){
     OperatorToken *opToken;
     if(token->type == TOKEN_INTEGER_TYPE){
       IntegerToken *intToken = (IntegerToken *)token;
-      if(intToken->value > 0xfff){
+      if(intToken->value >= 0xfff){
         printf("Warning Argument out of range.Least significant bits used.\n");
         printf("This value has just caused an overflow : %d\n       ^", intToken->value);
       }
@@ -296,7 +301,7 @@ void n(Tokenizer *tokenizer , OperandInfo *operandInfo){
       OperatorToken *opToken;
       if(token->type == TOKEN_INTEGER_TYPE){
         IntegerToken *intToken = (IntegerToken *)token;
-        if(intToken->value > 0xff){
+        if(intToken->value >= 0xff){
           printf("Warning Argument out of range.Least significant bits used.\n");
           printf("This value has just caused an overflow : %d\n       ^", intToken->value);
         }

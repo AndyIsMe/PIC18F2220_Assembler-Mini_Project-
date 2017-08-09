@@ -6,5 +6,6 @@
 #define EXTRA_OPERAND 47
 #define NOT_VALID_OPERATOR 48
 #define NOT_VALID_IDENTIFIER 49
+#define OVERFLOW 50
 
 #endif // _ERROR_H

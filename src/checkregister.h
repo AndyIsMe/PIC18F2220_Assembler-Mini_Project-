@@ -10,13 +10,20 @@ struct OperandInfo {
   int banktype;
 };
 
+typedef struct OperandInfo1 OperandInfo1;
+struct OperandInfo1 {
+  int value1;
+  int dirType1;
+  int banktype1;
+};
+
 void fda(Tokenizer *tokenizer , OperandInfo *operandInfo);
 void handleDirBank(Tokenizer *tokenizer ,OperandInfo *operandInfo);
 void handleBank(Tokenizer *tokenizer ,OperandInfo *operandInfo);
 void fba(Tokenizer *tokenizer , OperandInfo *operandInfo);
 void handleB(Tokenizer *tokenizer ,OperandInfo *operandInfo);
 void fa(Tokenizer *tokenizer , OperandInfo *operandInfo);
-void ff(Tokenizer *tokenizer , OperandInfo *operandInfo);
+void ff(Tokenizer *tokenizer , OperandInfo *operandInfo , OperandInfo1 *operandInfo1);
 void k(Tokenizer *tokenizer , OperandInfo *operandInfo);
 void ks(Tokenizer *tokenizer , OperandInfo *operandInfo);
 void handleS(Tokenizer *tokenizer ,OperandInfo *operandInfo);
