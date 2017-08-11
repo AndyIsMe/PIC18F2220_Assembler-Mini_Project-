@@ -31,7 +31,7 @@ void xtest_ADDLW_addlw_0x37_expect_0x0f37(void){
 		TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
 	}
 }
-void test_ADDMW_addmw_expect_NOT_VALID_IDENTIFIER(void){
+void xtest_ADDMW_addmw_expect_NOT_VALID_IDENTIFIER(void){
 	CEXCEPTION_T ex;
 	int machineCode;
 	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
@@ -115,8 +115,8 @@ void xtest_ADDWF_addwf_0x37_coma_F_coma_ACCESS_expect_0x2637(void){
 	IntegerToken intToken = {TOKEN_INTEGER_TYPE,11,4,"0x37",0x37};
   OperatorToken opToken = {TOKEN_OPERATOR_TYPE, 15,1,","};
   IdentifierToken FToken = {TOKEN_IDENTIFIER_TYPE, 16,4,"F"};
-  OperatorToken op1Token = {TOKEN_OPERATOR_TYPE, 20,1,","};
-  IdentifierToken ACCESSToken = {TOKEN_IDENTIFIER_TYPE, 21,6,"ACCESS"};
+  OperatorToken op1Token = {TOKEN_OPERATOR_TYPE, 17,1,","};
+  IdentifierToken ACCESSToken = {TOKEN_IDENTIFIER_TYPE, 18,6,"ACCESS"};
 
 	initTokenizer_ExpectAndReturn(instr,tokenizer);
 	getToken_ExpectAndReturn(tokenizer, (Token *)&addwfToken);//
@@ -142,8 +142,8 @@ void xtest_ADDWF_addwf_0x37_coma_F_coma_BANKED_expect_2737(void){
 	IntegerToken intToken = {TOKEN_INTEGER_TYPE,11,4,"0x37",0x37};
   OperatorToken opToken = {TOKEN_OPERATOR_TYPE, 15,1,","};
   IdentifierToken FToken = {TOKEN_IDENTIFIER_TYPE, 16,4,"F"};
-  OperatorToken op1Token = {TOKEN_OPERATOR_TYPE, 20,1,","};
-  IdentifierToken BANKEDToken = {TOKEN_IDENTIFIER_TYPE, 21,6,"BANKED"};
+  OperatorToken op1Token = {TOKEN_OPERATOR_TYPE, 17,1,","};
+  IdentifierToken BANKEDToken = {TOKEN_IDENTIFIER_TYPE, 18,6,"BANKED"};
 
 	initTokenizer_ExpectAndReturn(instr,tokenizer);
 	getToken_ExpectAndReturn(tokenizer, (Token *)&addwfToken);//
@@ -160,7 +160,7 @@ void xtest_ADDWF_addwf_0x37_coma_F_coma_BANKED_expect_2737(void){
 		TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
 	}
 }
-void test_ADDvF_addvf_expect_NOT_VALID_IDENTIFIER(void){
+void xtest_ADDvF_addvf_expect_NOT_VALID_IDENTIFIER(void){
 	CEXCEPTION_T ex;
 	int machineCode;
 	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
@@ -238,13 +238,13 @@ void xtest_ADDWFC_addwfc_0x37_coma_F_coma_ACCESS_expect_0x2237(void){
 	CEXCEPTION_T ex;
 	int machineCode;
 	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
-  char instr[] = "   AdDwFc   0x37,f,ACCESS  ";
+  char instr[] = "   AdDwFc  0x37,f,ACCESS  ";
 	IdentifierToken addwfcToken = {TOKEN_IDENTIFIER_TYPE, 3,5,"ADDWFC"};
 	IntegerToken intToken = {TOKEN_INTEGER_TYPE,11,4,"0x37",0x37};
   OperatorToken opToken = {TOKEN_OPERATOR_TYPE, 15,1,","};
   IdentifierToken FToken = {TOKEN_IDENTIFIER_TYPE, 16,4,"F"};
-  OperatorToken op1Token = {TOKEN_OPERATOR_TYPE, 20,1,","};
-  IdentifierToken ACCESSToken = {TOKEN_IDENTIFIER_TYPE, 21,6,"ACCESS"};
+  OperatorToken op1Token = {TOKEN_OPERATOR_TYPE, 17,1,","};
+  IdentifierToken ACCESSToken = {TOKEN_IDENTIFIER_TYPE, 18,6,"ACCESS"};
 
 	initTokenizer_ExpectAndReturn(instr,tokenizer);
 	getToken_ExpectAndReturn(tokenizer, (Token *)&addwfcToken);//
@@ -265,13 +265,13 @@ void xtest_ADDWFC_addwfc_0x37_coma_F_coma_BANKED_expect_2337(void){
 	CEXCEPTION_T ex;
 	int machineCode;
 	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
-  char instr[] = "   AdDwFc   0x37,f,BaNkEd  ";
+  char instr[] = "   AdDwFc  0x37,f,BaNkEd  ";
 	IdentifierToken addwfcToken = {TOKEN_IDENTIFIER_TYPE, 3,5,"ADDWFC"};
 	IntegerToken intToken = {TOKEN_INTEGER_TYPE,11,4,"0x37",0x37};
   OperatorToken opToken = {TOKEN_OPERATOR_TYPE, 15,1,","};
   IdentifierToken FToken = {TOKEN_IDENTIFIER_TYPE, 16,4,"F"};
-  OperatorToken op1Token = {TOKEN_OPERATOR_TYPE, 20,1,","};
-  IdentifierToken BANKEDToken = {TOKEN_IDENTIFIER_TYPE, 21,6,"BANKED"};
+  OperatorToken op1Token = {TOKEN_OPERATOR_TYPE, 17,1,","};
+  IdentifierToken BANKEDToken = {TOKEN_IDENTIFIER_TYPE, 18,6,"BANKED"};
 
 	initTokenizer_ExpectAndReturn(instr,tokenizer);
 	getToken_ExpectAndReturn(tokenizer, (Token *)&addwfcToken);//
@@ -288,7 +288,7 @@ void xtest_ADDWFC_addwfc_0x37_coma_F_coma_BANKED_expect_2337(void){
 		TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
 	}
 }
-void test_ADDWDF_addwdf_expect_NOT_VALID_IDENTIFIER(void){
+void xtest_ADDWDF_addwdf_expect_NOT_VALID_IDENTIFIER(void){
 	CEXCEPTION_T ex;
 	int machineCode;
 	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
@@ -326,7 +326,7 @@ void xtest_ANDLW_addlw_0x37_expect_0xf37(void){
 		TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
 	}
 }
-void test_ANDDW_anddw_expect_NOT_VALID_IDENTIFIER(void){
+void xtest_ANDDW_anddw_expect_NOT_VALID_IDENTIFIER(void){
 	CEXCEPTION_T ex;
 	int machineCode;
 	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
@@ -408,8 +408,8 @@ void xtest_ANDWF_andwf_0x37_coma_F_coma_ACCESS_expect_0x1637(void){
 	IntegerToken intToken = {TOKEN_INTEGER_TYPE,11,4,"0x37",0x37};
   OperatorToken opToken = {TOKEN_OPERATOR_TYPE, 15,1,","};
   IdentifierToken FToken = {TOKEN_IDENTIFIER_TYPE, 16,4,"F"};
-  OperatorToken op1Token = {TOKEN_OPERATOR_TYPE, 20,1,","};
-  IdentifierToken ACCESSToken = {TOKEN_IDENTIFIER_TYPE, 21,6,"ACCESS"};
+  OperatorToken op1Token = {TOKEN_OPERATOR_TYPE, 17,1,","};
+  IdentifierToken ACCESSToken = {TOKEN_IDENTIFIER_TYPE, 18,6,"ACCESS"};
 
 	initTokenizer_ExpectAndReturn(instr,tokenizer);
 	getToken_ExpectAndReturn(tokenizer, (Token *)&andwfToken);//
@@ -435,8 +435,8 @@ void xtest_ANDWF_andwf_0x37_coma_F_coma_BANKED_expect_1737(void){
 	IntegerToken intToken = {TOKEN_INTEGER_TYPE,11,4,"0x37",0x37};
   OperatorToken opToken = {TOKEN_OPERATOR_TYPE, 15,1,","};
   IdentifierToken FToken = {TOKEN_IDENTIFIER_TYPE, 16,4,"F"};
-  OperatorToken op1Token = {TOKEN_OPERATOR_TYPE, 20,1,","};
-  IdentifierToken BANKEDToken = {TOKEN_IDENTIFIER_TYPE, 21,6,"BANKED"};
+  OperatorToken op1Token = {TOKEN_OPERATOR_TYPE, 17,1,","};
+  IdentifierToken BANKEDToken = {TOKEN_IDENTIFIER_TYPE, 18,6,"BANKED"};
 
 	initTokenizer_ExpectAndReturn(instr,tokenizer);
 	getToken_ExpectAndReturn(tokenizer, (Token *)&andwfToken);//
@@ -979,8 +979,8 @@ void xtest_COMF_comf_0x37_coma_WREG_coma_ACCESS_expect_0x1c37(void){
 	CEXCEPTION_T ex;
 	int machineCode;
 	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
-  char instr[] = "   cOmF   0x37,WREG,ACCESS  ";
-	IdentifierToken comfToken = {TOKEN_IDENTIFIER_TYPE, 3,5,"COMF"};
+  char instr[] = "   cOmF    0x37,WREG,ACCESS  ";
+	IdentifierToken comfToken = {TOKEN_IDENTIFIER_TYPE, 3,4,"COMF"};
 	IntegerToken intToken = {TOKEN_INTEGER_TYPE,11,4,"0x37",0x37};
   OperatorToken opToken = {TOKEN_OPERATOR_TYPE, 15,1,","};
   IdentifierToken WREGToken = {TOKEN_IDENTIFIER_TYPE, 16,4,"WREG"};
@@ -1006,8 +1006,8 @@ void xtest_COMF_comf_0x37_coma_WREG_coma_BANKED_expect_0x1d37(void){
 	CEXCEPTION_T ex;
 	int machineCode;
 	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
-  char instr[] = "   cOmF   0x37,WREG,BANKED  ";
-	IdentifierToken comfToken = {TOKEN_IDENTIFIER_TYPE, 3,5,"COMF"};
+  char instr[] = "   cOmF    0x37,WREG,BANKED  ";
+	IdentifierToken comfToken = {TOKEN_IDENTIFIER_TYPE, 3,4,"COMF"};
 	IntegerToken intToken = {TOKEN_INTEGER_TYPE,11,4,"0x37",0x37};
   OperatorToken opToken = {TOKEN_OPERATOR_TYPE, 15,1,","};
   IdentifierToken WREGToken = {TOKEN_IDENTIFIER_TYPE, 16,4,"WREG"};
@@ -1033,13 +1033,13 @@ void xtest_COMF_comf_0x37_coma_F_coma_ACCESS_expect_0x1e37(void){
 	CEXCEPTION_T ex;
 	int machineCode;
 	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
-  char instr[] = "   cOmF   0x37,F,ACCESS  ";
-	IdentifierToken comfToken = {TOKEN_IDENTIFIER_TYPE, 3,5,"COMF"};
+  char instr[] = "   cOmF    0x37,F,ACCESS  ";
+	IdentifierToken comfToken = {TOKEN_IDENTIFIER_TYPE, 3,4,"COMF"};
 	IntegerToken intToken = {TOKEN_INTEGER_TYPE,11,4,"0x37",0x37};
   OperatorToken opToken = {TOKEN_OPERATOR_TYPE, 15,1,","};
   IdentifierToken FToken = {TOKEN_IDENTIFIER_TYPE, 16,4,"F"};
-  OperatorToken op1Token = {TOKEN_OPERATOR_TYPE, 20,1,","};
-  IdentifierToken ACCESSToken = {TOKEN_IDENTIFIER_TYPE, 21,6,"ACCESS"};
+  OperatorToken op1Token = {TOKEN_OPERATOR_TYPE, 17,1,","};
+  IdentifierToken ACCESSToken = {TOKEN_IDENTIFIER_TYPE, 18,6,"ACCESS"};
 
 	initTokenizer_ExpectAndReturn(instr,tokenizer);
 	getToken_ExpectAndReturn(tokenizer, (Token *)&comfToken);//
@@ -1060,13 +1060,13 @@ void xtest_COMF_comf_0x37_coma_WREG_coma_BANKED_expect_0x1f37(void){
 	CEXCEPTION_T ex;
 	int machineCode;
 	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
-  char instr[] = "   cOmF   0x37,F,BANKED  ";
-	IdentifierToken comfToken = {TOKEN_IDENTIFIER_TYPE, 3,5,"COMF"};
+  char instr[] = "   cOmF    0x37,F,BANKED  ";
+	IdentifierToken comfToken = {TOKEN_IDENTIFIER_TYPE, 3,4,"COMF"};
 	IntegerToken intToken = {TOKEN_INTEGER_TYPE,11,4,"0x37",0x37};
   OperatorToken opToken = {TOKEN_OPERATOR_TYPE, 15,1,","};
   IdentifierToken FToken = {TOKEN_IDENTIFIER_TYPE, 16,4,"F"};
-  OperatorToken op1Token = {TOKEN_OPERATOR_TYPE, 20,1,","};
-  IdentifierToken BANKEDToken = {TOKEN_IDENTIFIER_TYPE, 21,6,"BANKED"};
+  OperatorToken op1Token = {TOKEN_OPERATOR_TYPE, 17,1,","};
+  IdentifierToken BANKEDToken = {TOKEN_IDENTIFIER_TYPE, 18,6,"BANKED"};
 
 	initTokenizer_ExpectAndReturn(instr,tokenizer);
 	getToken_ExpectAndReturn(tokenizer, (Token *)&comfToken);//
@@ -1245,6 +1245,660 @@ void xtest_DAW_daw_expect_0x0007(void){
 	}
 }
 
+void xtest_DECF_decf_0x37_coma_WREG_coma_ACCESS_expect_0x0437(void){
+	CEXCEPTION_T ex;
+	int machineCode;
+	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
+  char instr[] = "   dEcF    0x37,WREG,ACCESS  ";
+	IdentifierToken decfToken = {TOKEN_IDENTIFIER_TYPE, 3,4,"DECF"};
+	IntegerToken intToken = {TOKEN_INTEGER_TYPE,11,4,"0x37",0x37};
+  OperatorToken opToken = {TOKEN_OPERATOR_TYPE, 15,1,","};
+  IdentifierToken WREGToken = {TOKEN_IDENTIFIER_TYPE, 16,4,"WREG"};
+  OperatorToken op1Token = {TOKEN_OPERATOR_TYPE, 20,1,","};
+  IdentifierToken ACCESSToken = {TOKEN_IDENTIFIER_TYPE, 21,6,"ACCESS"};
+
+	initTokenizer_ExpectAndReturn(instr,tokenizer);
+	getToken_ExpectAndReturn(tokenizer, (Token *)&decfToken);//
+	getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
+  getToken_ExpectAndReturn(tokenizer,(Token *)&opToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&WREGToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&op1Token);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&ACCESSToken);
+
+	Try {
+		machineCode = decf(instr);
+		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+	}Catch(ex) {
+		TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
+	}
+}
+void xtest_DECF_decf_0x37_coma_WREG_coma_BANKED_expect_0x0537(void){
+	CEXCEPTION_T ex;
+	int machineCode;
+	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
+  char instr[] = "   dEcF    0x37,WREG,BANKED  ";
+	IdentifierToken decfToken = {TOKEN_IDENTIFIER_TYPE, 3,4,"DECF"};
+	IntegerToken intToken = {TOKEN_INTEGER_TYPE,11,4,"0x37",0x37};
+  OperatorToken opToken = {TOKEN_OPERATOR_TYPE, 15,1,","};
+  IdentifierToken WREGToken = {TOKEN_IDENTIFIER_TYPE, 16,4,"WREG"};
+  OperatorToken op1Token = {TOKEN_OPERATOR_TYPE, 20,1,","};
+  IdentifierToken BANKEDToken = {TOKEN_IDENTIFIER_TYPE, 21,6,"BANKED"};
+
+	initTokenizer_ExpectAndReturn(instr,tokenizer);
+	getToken_ExpectAndReturn(tokenizer, (Token *)&decfToken);//
+	getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
+  getToken_ExpectAndReturn(tokenizer,(Token *)&opToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&WREGToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&op1Token);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&BANKEDToken);
+
+	Try {
+		machineCode = decf(instr);
+		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+	}Catch(ex) {
+		TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
+	}
+}
+void xtest_DECF_decf_0x37_coma_F_coma_ACCESS_expect_0x0637(void){
+	CEXCEPTION_T ex;
+	int machineCode;
+	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
+  char instr[] = "   dEcF    0x37,F,ACCESS  ";
+	IdentifierToken decfToken = {TOKEN_IDENTIFIER_TYPE, 3,4,"DECF"};
+	IntegerToken intToken = {TOKEN_INTEGER_TYPE,11,4,"0x37",0x37};
+  OperatorToken opToken = {TOKEN_OPERATOR_TYPE, 15,1,","};
+  IdentifierToken FToken = {TOKEN_IDENTIFIER_TYPE, 16,1,"F"};
+  OperatorToken op1Token = {TOKEN_OPERATOR_TYPE, 17,1,","};
+  IdentifierToken ACCESSToken = {TOKEN_IDENTIFIER_TYPE, 18,6,"ACCESS"};
+
+	initTokenizer_ExpectAndReturn(instr,tokenizer);
+	getToken_ExpectAndReturn(tokenizer, (Token *)&decfToken);//
+	getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
+  getToken_ExpectAndReturn(tokenizer,(Token *)&opToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&FToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&op1Token);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&ACCESSToken);
+
+	Try {
+		machineCode = decf(instr);
+		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+	}Catch(ex) {
+		TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
+	}
+}
+void xtest_DECF_decf_0x37_coma_F_coma_BANKED_expect_0x0737(void){
+	CEXCEPTION_T ex;
+	int machineCode;
+	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
+  char instr[] = "   dEcF    0x37,F,BANKED  ";
+	IdentifierToken decfToken = {TOKEN_IDENTIFIER_TYPE, 3,4,"DECF"};
+	IntegerToken intToken = {TOKEN_INTEGER_TYPE,11,4,"0x37",0x37};
+  OperatorToken opToken = {TOKEN_OPERATOR_TYPE, 15,1,","};
+  IdentifierToken FToken = {TOKEN_IDENTIFIER_TYPE, 16,4,"F"};
+  OperatorToken op1Token = {TOKEN_OPERATOR_TYPE, 17,1,","};
+  IdentifierToken BANKEDToken = {TOKEN_IDENTIFIER_TYPE, 18,6,"BANKED"};
+
+	initTokenizer_ExpectAndReturn(instr,tokenizer);
+	getToken_ExpectAndReturn(tokenizer, (Token *)&decfToken);//
+	getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
+  getToken_ExpectAndReturn(tokenizer,(Token *)&opToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&FToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&op1Token);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&BANKEDToken);
+
+	Try {
+		machineCode = decf(instr);
+		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+	}Catch(ex) {
+		TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
+	}
+}
+
+void xtest_DECFSZ_decfsz_0x37_coma_WREG_coma_ACCESS_expect_0x2c37(void){
+	CEXCEPTION_T ex;
+	int machineCode;
+	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
+  char instr[] = "   dEcFsZ  0x37,WREG,ACCESS  ";
+	IdentifierToken decfszToken = {TOKEN_IDENTIFIER_TYPE, 3,6,"DECFSZ"};
+	IntegerToken intToken = {TOKEN_INTEGER_TYPE,11,4,"0x37",0x37};
+  OperatorToken opToken = {TOKEN_OPERATOR_TYPE, 15,1,","};
+  IdentifierToken WREGToken = {TOKEN_IDENTIFIER_TYPE, 16,4,"WREG"};
+  OperatorToken op1Token = {TOKEN_OPERATOR_TYPE, 20,1,","};
+  IdentifierToken ACCESSToken = {TOKEN_IDENTIFIER_TYPE, 21,6,"ACCESS"};
+
+	initTokenizer_ExpectAndReturn(instr,tokenizer);
+	getToken_ExpectAndReturn(tokenizer, (Token *)&decfszToken);//
+	getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
+  getToken_ExpectAndReturn(tokenizer,(Token *)&opToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&WREGToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&op1Token);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&ACCESSToken);
+
+	Try {
+		machineCode = decfsz(instr);
+		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+	}Catch(ex) {
+		TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
+	}
+}
+void xtest_DECFSZ_decfsz_0x37_coma_WREG_coma_BANKED_expect_0x2d37(void){
+	CEXCEPTION_T ex;
+	int machineCode;
+	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
+  char instr[] = "   dEcFsZ  0x37,WREG,BANKED  ";
+	IdentifierToken decfszToken = {TOKEN_IDENTIFIER_TYPE, 3,6,"DECFSZ"};
+	IntegerToken intToken = {TOKEN_INTEGER_TYPE,11,4,"0x37",0x37};
+  OperatorToken opToken = {TOKEN_OPERATOR_TYPE, 15,1,","};
+  IdentifierToken WREGToken = {TOKEN_IDENTIFIER_TYPE, 16,4,"WREG"};
+  OperatorToken op1Token = {TOKEN_OPERATOR_TYPE, 20,1,","};
+  IdentifierToken BANKEDToken = {TOKEN_IDENTIFIER_TYPE, 21,6,"BANKED"};
+
+	initTokenizer_ExpectAndReturn(instr,tokenizer);
+	getToken_ExpectAndReturn(tokenizer, (Token *)&decfszToken);//
+	getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
+  getToken_ExpectAndReturn(tokenizer,(Token *)&opToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&WREGToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&op1Token);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&BANKEDToken);
+
+	Try {
+		machineCode = decfsz(instr);
+		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+	}Catch(ex) {
+		TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
+	}
+}
+void xtest_DECFSZ_decfsz_0x37_coma_F_coma_ACCESS_expect_0x2e37(void){
+	CEXCEPTION_T ex;
+	int machineCode;
+	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
+  char instr[] = "   dEcFsZ  0x37,F,ACCESS  ";
+	IdentifierToken decfszToken = {TOKEN_IDENTIFIER_TYPE, 3,6,"DECFSZ"};
+	IntegerToken intToken = {TOKEN_INTEGER_TYPE,11,4,"0x37",0x37};
+  OperatorToken opToken = {TOKEN_OPERATOR_TYPE, 15,1,","};
+  IdentifierToken FToken = {TOKEN_IDENTIFIER_TYPE, 16,4,"F"};
+  OperatorToken op1Token = {TOKEN_OPERATOR_TYPE, 17,1,","};
+  IdentifierToken ACCESSToken = {TOKEN_IDENTIFIER_TYPE, 18,6,"ACCESS"};
+
+	initTokenizer_ExpectAndReturn(instr,tokenizer);
+	getToken_ExpectAndReturn(tokenizer, (Token *)&decfszToken);//
+	getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
+  getToken_ExpectAndReturn(tokenizer,(Token *)&opToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&FToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&op1Token);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&ACCESSToken);
+
+	Try {
+		machineCode = decfsz(instr);
+		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+	}Catch(ex) {
+		TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
+	}
+}
+void xtest_DECFSZ_decfsz_0x37_coma_F_coma_BANKED_expect_0x2f37(void){
+	CEXCEPTION_T ex;
+	int machineCode;
+	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
+  char instr[] = "   dEcFsZ  0x37,F,BANKED  ";
+	IdentifierToken decfszToken = {TOKEN_IDENTIFIER_TYPE, 3,6,"DECFSZ"};
+	IntegerToken intToken = {TOKEN_INTEGER_TYPE,11,4,"0x37",0x37};
+  OperatorToken opToken = {TOKEN_OPERATOR_TYPE, 15,1,","};
+  IdentifierToken FToken = {TOKEN_IDENTIFIER_TYPE, 16,4,"F"};
+  OperatorToken op1Token = {TOKEN_OPERATOR_TYPE, 17,1,","};
+  IdentifierToken BANKEDToken = {TOKEN_IDENTIFIER_TYPE, 18,6,"BANKED"};
+
+	initTokenizer_ExpectAndReturn(instr,tokenizer);
+	getToken_ExpectAndReturn(tokenizer, (Token *)&decfszToken);//
+	getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
+  getToken_ExpectAndReturn(tokenizer,(Token *)&opToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&FToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&op1Token);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&BANKEDToken);
+
+	Try {
+		machineCode = decfsz(instr);
+		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+	}Catch(ex) {
+		TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
+	}
+}
+
+void xtest_DCFSNZ_dcfsnz_0x37_coma_WREG_coma_ACCESS_expect_0x4c37(void){
+	CEXCEPTION_T ex;
+	int machineCode;
+	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
+  char instr[] = "   dcFsnZ  0x37,WREG,ACCESS  ";
+	IdentifierToken dcfsnzToken = {TOKEN_IDENTIFIER_TYPE, 3,6,"DCFSNZ"};
+	IntegerToken intToken = {TOKEN_INTEGER_TYPE,11,4,"0x37",0x37};
+  OperatorToken opToken = {TOKEN_OPERATOR_TYPE, 15,1,","};
+  IdentifierToken WREGToken = {TOKEN_IDENTIFIER_TYPE, 16,4,"WREG"};
+  OperatorToken op1Token = {TOKEN_OPERATOR_TYPE, 20,1,","};
+  IdentifierToken ACCESSToken = {TOKEN_IDENTIFIER_TYPE, 21,6,"ACCESS"};
+
+	initTokenizer_ExpectAndReturn(instr,tokenizer);
+	getToken_ExpectAndReturn(tokenizer, (Token *)&dcfsnzToken);//
+	getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
+  getToken_ExpectAndReturn(tokenizer,(Token *)&opToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&WREGToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&op1Token);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&ACCESSToken);
+
+	Try {
+		machineCode = dcfsnz(instr);
+		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+	}Catch(ex) {
+		TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
+	}
+}
+void xtest_DCFSNZ_dcfsnz_0x37_coma_WREG_coma_BANKED_expect_0x4d37(void){
+	CEXCEPTION_T ex;
+	int machineCode;
+	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
+  char instr[] = "   dcFsnZ  0x37,WREG,BANKED  ";
+	IdentifierToken dcfsnzToken = {TOKEN_IDENTIFIER_TYPE, 3,6,"DCFSNZ"};
+	IntegerToken intToken = {TOKEN_INTEGER_TYPE,11,4,"0x37",0x37};
+  OperatorToken opToken = {TOKEN_OPERATOR_TYPE, 15,1,","};
+  IdentifierToken WREGToken = {TOKEN_IDENTIFIER_TYPE, 16,4,"WREG"};
+  OperatorToken op1Token = {TOKEN_OPERATOR_TYPE, 20,1,","};
+  IdentifierToken BANKEDToken = {TOKEN_IDENTIFIER_TYPE, 21,6,"BANKED"};
+
+	initTokenizer_ExpectAndReturn(instr,tokenizer);
+	getToken_ExpectAndReturn(tokenizer, (Token *)&dcfsnzToken);//
+	getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
+  getToken_ExpectAndReturn(tokenizer,(Token *)&opToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&WREGToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&op1Token);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&BANKEDToken);
+
+	Try {
+		machineCode = dcfsnz(instr);
+		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+	}Catch(ex) {
+		TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
+	}
+}
+void xtest_DCFSNZ_dcfsnz_0x37_coma_F_coma_ACCESS_expect_0x4e37(void){
+	CEXCEPTION_T ex;
+	int machineCode;
+	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
+  char instr[] = "   dcFsnZ  0x37,F,ACCESS  ";
+	IdentifierToken dcfsnzToken = {TOKEN_IDENTIFIER_TYPE, 3,6,"DCFSNZ"};
+	IntegerToken intToken = {TOKEN_INTEGER_TYPE,11,4,"0x37",0x37};
+  OperatorToken opToken = {TOKEN_OPERATOR_TYPE, 15,1,","};
+  IdentifierToken FToken = {TOKEN_IDENTIFIER_TYPE, 16,4,"F"};
+  OperatorToken op1Token = {TOKEN_OPERATOR_TYPE, 17,1,","};
+  IdentifierToken ACCESSToken = {TOKEN_IDENTIFIER_TYPE, 18,6,"ACCESS"};
+
+	initTokenizer_ExpectAndReturn(instr,tokenizer);
+	getToken_ExpectAndReturn(tokenizer, (Token *)&dcfsnzToken);//
+	getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
+  getToken_ExpectAndReturn(tokenizer,(Token *)&opToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&FToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&op1Token);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&ACCESSToken);
+
+	Try {
+		machineCode = dcfsnz(instr);
+		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+	}Catch(ex) {
+		TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
+	}
+}
+void xtest_DCFSNZ_dcfsnz_0x37_coma_F_coma_BANKED_expect_0x4f37(void){
+	CEXCEPTION_T ex;
+	int machineCode;
+	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
+  char instr[] = "   dcFsnZ  0x37,F,BANKED  ";
+	IdentifierToken dcfsnzToken = {TOKEN_IDENTIFIER_TYPE, 3,6,"DCFSNZ"};
+	IntegerToken intToken = {TOKEN_INTEGER_TYPE,11,4,"0x37",0x37};
+  OperatorToken opToken = {TOKEN_OPERATOR_TYPE, 15,1,","};
+  IdentifierToken FToken = {TOKEN_IDENTIFIER_TYPE, 16,4,"F"};
+  OperatorToken op1Token = {TOKEN_OPERATOR_TYPE, 17,1,","};
+  IdentifierToken BANKEDToken = {TOKEN_IDENTIFIER_TYPE, 18,6,"BANKED"};
+
+	initTokenizer_ExpectAndReturn(instr,tokenizer);
+	getToken_ExpectAndReturn(tokenizer, (Token *)&dcfsnzToken);//
+	getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
+  getToken_ExpectAndReturn(tokenizer,(Token *)&opToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&FToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&op1Token);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&BANKEDToken);
+
+	Try {
+		machineCode = dcfsnz(instr);
+		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+	}Catch(ex) {
+		TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
+	}
+}
+
+void xtest_INCF_incf_0x37_coma_WREG_coma_ACCESS_expect_0x2837(void){
+	CEXCEPTION_T ex;
+	int machineCode;
+	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
+  char instr[] = "   incF    0x37,WREG,ACCESS  ";
+	IdentifierToken incfToken = {TOKEN_IDENTIFIER_TYPE, 3,4,"INCF"};
+	IntegerToken intToken = {TOKEN_INTEGER_TYPE,11,4,"0x37",0x37};
+  OperatorToken opToken = {TOKEN_OPERATOR_TYPE, 15,1,","};
+  IdentifierToken WREGToken = {TOKEN_IDENTIFIER_TYPE, 16,4,"WREG"};
+  OperatorToken op1Token = {TOKEN_OPERATOR_TYPE, 20,1,","};
+  IdentifierToken ACCESSToken = {TOKEN_IDENTIFIER_TYPE, 21,6,"ACCESS"};
+
+	initTokenizer_ExpectAndReturn(instr,tokenizer);
+	getToken_ExpectAndReturn(tokenizer, (Token *)&incfToken);//
+	getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
+  getToken_ExpectAndReturn(tokenizer,(Token *)&opToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&WREGToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&op1Token);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&ACCESSToken);
+
+	Try {
+		machineCode = incf(instr);
+		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+	}Catch(ex) {
+		TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
+	}
+}
+void xtest_INCF_incf_0x37_coma_WREG_coma_BANKED_expect_0x2937(void){
+	CEXCEPTION_T ex;
+	int machineCode;
+	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
+  char instr[] = "   IncF    0x37,WREG,BANKED  ";
+	IdentifierToken incfToken = {TOKEN_IDENTIFIER_TYPE, 3,4,"INCF"};
+	IntegerToken intToken = {TOKEN_INTEGER_TYPE,11,4,"0x37",0x37};
+  OperatorToken opToken = {TOKEN_OPERATOR_TYPE, 15,1,","};
+  IdentifierToken WREGToken = {TOKEN_IDENTIFIER_TYPE, 16,4,"WREG"};
+  OperatorToken op1Token = {TOKEN_OPERATOR_TYPE, 20,1,","};
+  IdentifierToken BANKEDToken = {TOKEN_IDENTIFIER_TYPE, 21,6,"BANKED"};
+
+	initTokenizer_ExpectAndReturn(instr,tokenizer);
+	getToken_ExpectAndReturn(tokenizer, (Token *)&incfToken);//
+	getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
+  getToken_ExpectAndReturn(tokenizer,(Token *)&opToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&WREGToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&op1Token);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&BANKEDToken);
+
+	Try {
+		machineCode = incf(instr);
+		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+	}Catch(ex) {
+		TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
+	}
+}
+void xtest_INCF_incf_0x37_coma_F_coma_ACCESS_expect_0x2a37(void){
+	CEXCEPTION_T ex;
+	int machineCode;
+	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
+  char instr[] = "   iNcF    0x37,F,ACCESS  ";
+	IdentifierToken incfToken = {TOKEN_IDENTIFIER_TYPE, 3,4,"INCF"};
+	IntegerToken intToken = {TOKEN_INTEGER_TYPE,11,4,"0x37",0x37};
+  OperatorToken opToken = {TOKEN_OPERATOR_TYPE, 15,1,","};
+  IdentifierToken FToken = {TOKEN_IDENTIFIER_TYPE, 16,1,"F"};
+  OperatorToken op1Token = {TOKEN_OPERATOR_TYPE, 17,1,","};
+  IdentifierToken ACCESSToken = {TOKEN_IDENTIFIER_TYPE, 18,6,"ACCESS"};
+
+	initTokenizer_ExpectAndReturn(instr,tokenizer);
+	getToken_ExpectAndReturn(tokenizer, (Token *)&incfToken);//
+	getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
+  getToken_ExpectAndReturn(tokenizer,(Token *)&opToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&FToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&op1Token);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&ACCESSToken);
+
+	Try {
+		machineCode = incf(instr);
+		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+	}Catch(ex) {
+		TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
+	}
+}
+void xtest_INCF_incf_0x37_coma_F_coma_BANKED_expect_0x2b37(void){
+	CEXCEPTION_T ex;
+	int machineCode;
+	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
+  char instr[] = "   iNcF    0x37,F,BANKED  ";
+	IdentifierToken incfToken = {TOKEN_IDENTIFIER_TYPE, 3,4,"INCF"};
+	IntegerToken intToken = {TOKEN_INTEGER_TYPE,11,4,"0x37",0x37};
+  OperatorToken opToken = {TOKEN_OPERATOR_TYPE, 15,1,","};
+  IdentifierToken FToken = {TOKEN_IDENTIFIER_TYPE, 16,4,"F"};
+  OperatorToken op1Token = {TOKEN_OPERATOR_TYPE, 17,1,","};
+  IdentifierToken BANKEDToken = {TOKEN_IDENTIFIER_TYPE, 18,6,"BANKED"};
+
+	initTokenizer_ExpectAndReturn(instr,tokenizer);
+	getToken_ExpectAndReturn(tokenizer, (Token *)&incfToken);//
+	getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
+  getToken_ExpectAndReturn(tokenizer,(Token *)&opToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&FToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&op1Token);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&BANKEDToken);
+
+	Try {
+		machineCode = incf(instr);
+		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+	}Catch(ex) {
+		TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
+	}
+}
+
+void xtest_INCFSZ_incfsz_0x37_coma_WREG_coma_ACCESS_expect_0x3c37(void){
+	CEXCEPTION_T ex;
+	int machineCode;
+	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
+  char instr[] = "   iNcFsZ  0x37,WREG,ACCESS  ";
+	IdentifierToken incfszToken = {TOKEN_IDENTIFIER_TYPE, 3,6,"INCFSZ"};
+	IntegerToken intToken = {TOKEN_INTEGER_TYPE,11,4,"0x37",0x37};
+  OperatorToken opToken = {TOKEN_OPERATOR_TYPE, 15,1,","};
+  IdentifierToken WREGToken = {TOKEN_IDENTIFIER_TYPE, 16,4,"WREG"};
+  OperatorToken op1Token = {TOKEN_OPERATOR_TYPE, 20,1,","};
+  IdentifierToken ACCESSToken = {TOKEN_IDENTIFIER_TYPE, 21,6,"ACCESS"};
+
+	initTokenizer_ExpectAndReturn(instr,tokenizer);
+	getToken_ExpectAndReturn(tokenizer, (Token *)&incfszToken);//
+	getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
+  getToken_ExpectAndReturn(tokenizer,(Token *)&opToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&WREGToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&op1Token);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&ACCESSToken);
+
+	Try {
+		machineCode = incfsz(instr);
+		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+	}Catch(ex) {
+		TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
+	}
+}
+void xtest_INCFSZ_incfsz_0x37_coma_WREG_coma_BANKED_expect_0x3d37(void){
+	CEXCEPTION_T ex;
+	int machineCode;
+	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
+  char instr[] = "   iNcFsZ  0x37,WREG,BANKED  ";
+	IdentifierToken incfszToken = {TOKEN_IDENTIFIER_TYPE, 3,6,"INCFSZ"};
+	IntegerToken intToken = {TOKEN_INTEGER_TYPE,11,4,"0x37",0x37};
+  OperatorToken opToken = {TOKEN_OPERATOR_TYPE, 15,1,","};
+  IdentifierToken WREGToken = {TOKEN_IDENTIFIER_TYPE, 16,4,"WREG"};
+  OperatorToken op1Token = {TOKEN_OPERATOR_TYPE, 20,1,","};
+  IdentifierToken BANKEDToken = {TOKEN_IDENTIFIER_TYPE, 21,6,"BANKED"};
+
+	initTokenizer_ExpectAndReturn(instr,tokenizer);
+	getToken_ExpectAndReturn(tokenizer, (Token *)&incfszToken);//
+	getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
+  getToken_ExpectAndReturn(tokenizer,(Token *)&opToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&WREGToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&op1Token);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&BANKEDToken);
+
+	Try {
+		machineCode = incfsz(instr);
+		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+	}Catch(ex) {
+		TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
+	}
+}
+void xtest_INCFSZ_incfsz_0x37_coma_F_coma_ACCESS_expect_0x3e37(void){
+	CEXCEPTION_T ex;
+	int machineCode;
+	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
+  char instr[] = "   iNcFsZ  0x37,F,ACCESS  ";
+	IdentifierToken incfszToken = {TOKEN_IDENTIFIER_TYPE, 3,6,"INCFSZ"};
+	IntegerToken intToken = {TOKEN_INTEGER_TYPE,11,4,"0x37",0x37};
+  OperatorToken opToken = {TOKEN_OPERATOR_TYPE, 15,1,","};
+  IdentifierToken FToken = {TOKEN_IDENTIFIER_TYPE, 16,4,"F"};
+  OperatorToken op1Token = {TOKEN_OPERATOR_TYPE, 17,1,","};
+  IdentifierToken ACCESSToken = {TOKEN_IDENTIFIER_TYPE, 18,6,"ACCESS"};
+
+	initTokenizer_ExpectAndReturn(instr,tokenizer);
+	getToken_ExpectAndReturn(tokenizer, (Token *)&incfszToken);//
+	getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
+  getToken_ExpectAndReturn(tokenizer,(Token *)&opToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&FToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&op1Token);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&ACCESSToken);
+
+	Try {
+		machineCode = incfsz(instr);
+		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+	}Catch(ex) {
+		TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
+	}
+}
+void xtest_INCFSZ_incfsz_0x37_coma_F_coma_BANKED_expect_0x3f37(void){
+	CEXCEPTION_T ex;
+	int machineCode;
+	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
+  char instr[] = "   iNcFsZ  0x37,F,BANKED  ";
+	IdentifierToken incfszToken = {TOKEN_IDENTIFIER_TYPE, 3,6,"INCFSZ"};
+	IntegerToken intToken = {TOKEN_INTEGER_TYPE,11,4,"0x37",0x37};
+  OperatorToken opToken = {TOKEN_OPERATOR_TYPE, 15,1,","};
+  IdentifierToken FToken = {TOKEN_IDENTIFIER_TYPE, 16,4,"F"};
+  OperatorToken op1Token = {TOKEN_OPERATOR_TYPE, 17,1,","};
+  IdentifierToken BANKEDToken = {TOKEN_IDENTIFIER_TYPE, 18,6,"BANKED"};
+
+	initTokenizer_ExpectAndReturn(instr,tokenizer);
+	getToken_ExpectAndReturn(tokenizer, (Token *)&incfszToken);//
+	getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
+  getToken_ExpectAndReturn(tokenizer,(Token *)&opToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&FToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&op1Token);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&BANKEDToken);
+
+	Try {
+		machineCode = incfsz(instr);
+		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+	}Catch(ex) {
+		TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
+	}
+}
+
+void xtest_INFSNZ_infsnz_0x37_coma_WREG_coma_ACCESS_expect_0x4837(void){
+	CEXCEPTION_T ex;
+	int machineCode;
+	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
+  char instr[] = "   inFsnZ  0x37,WREG,ACCESS  ";
+	IdentifierToken infsnzToken = {TOKEN_IDENTIFIER_TYPE, 3,6,"INFSNZ"};
+	IntegerToken intToken = {TOKEN_INTEGER_TYPE,11,4,"0x37",0x37};
+  OperatorToken opToken = {TOKEN_OPERATOR_TYPE, 15,1,","};
+  IdentifierToken WREGToken = {TOKEN_IDENTIFIER_TYPE, 16,4,"WREG"};
+  OperatorToken op1Token = {TOKEN_OPERATOR_TYPE, 20,1,","};
+  IdentifierToken ACCESSToken = {TOKEN_IDENTIFIER_TYPE, 21,6,"ACCESS"};
+
+	initTokenizer_ExpectAndReturn(instr,tokenizer);
+	getToken_ExpectAndReturn(tokenizer, (Token *)&infsnzToken);//
+	getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
+  getToken_ExpectAndReturn(tokenizer,(Token *)&opToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&WREGToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&op1Token);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&ACCESSToken);
+
+	Try {
+		machineCode = infsnz(instr);
+		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+	}Catch(ex) {
+		TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
+	}
+}
+void xtest_INFSNZ_infsnz_0x37_coma_WREG_coma_BANKED_expect_0x4937(void){
+	CEXCEPTION_T ex;
+	int machineCode;
+	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
+  char instr[] = "   inFsnZ  0x37,WREG,BANKED  ";
+	IdentifierToken infsnzToken = {TOKEN_IDENTIFIER_TYPE, 3,6,"INFSNZ"};
+	IntegerToken intToken = {TOKEN_INTEGER_TYPE,11,4,"0x37",0x37};
+  OperatorToken opToken = {TOKEN_OPERATOR_TYPE, 15,1,","};
+  IdentifierToken WREGToken = {TOKEN_IDENTIFIER_TYPE, 16,4,"WREG"};
+  OperatorToken op1Token = {TOKEN_OPERATOR_TYPE, 20,1,","};
+  IdentifierToken BANKEDToken = {TOKEN_IDENTIFIER_TYPE, 21,6,"BANKED"};
+
+	initTokenizer_ExpectAndReturn(instr,tokenizer);
+	getToken_ExpectAndReturn(tokenizer, (Token *)&infsnzToken);//
+	getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
+  getToken_ExpectAndReturn(tokenizer,(Token *)&opToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&WREGToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&op1Token);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&BANKEDToken);
+
+	Try {
+		machineCode = infsnz(instr);
+		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+	}Catch(ex) {
+		TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
+	}
+}
+void xtest_INFSNZ_infsnz_0x37_coma_F_coma_ACCESS_expect_0x4a37(void){
+	CEXCEPTION_T ex;
+	int machineCode;
+	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
+  char instr[] = "   inFsnZ  0x37,F,ACCESS  ";
+	IdentifierToken infsnzToken = {TOKEN_IDENTIFIER_TYPE, 3,6,"INFSNZ"};
+	IntegerToken intToken = {TOKEN_INTEGER_TYPE,11,4,"0x37",0x37};
+  OperatorToken opToken = {TOKEN_OPERATOR_TYPE, 15,1,","};
+  IdentifierToken FToken = {TOKEN_IDENTIFIER_TYPE, 16,4,"F"};
+  OperatorToken op1Token = {TOKEN_OPERATOR_TYPE, 17,1,","};
+  IdentifierToken ACCESSToken = {TOKEN_IDENTIFIER_TYPE, 18,6,"ACCESS"};
+
+	initTokenizer_ExpectAndReturn(instr,tokenizer);
+	getToken_ExpectAndReturn(tokenizer, (Token *)&infsnzToken);//
+	getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
+  getToken_ExpectAndReturn(tokenizer,(Token *)&opToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&FToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&op1Token);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&ACCESSToken);
+
+	Try {
+		machineCode = infsnz(instr);
+		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+	}Catch(ex) {
+		TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
+	}
+}
+void xtest_INFSNZ_infsnz_0x37_coma_F_coma_BANKED_expect_0x4b37(void){
+	CEXCEPTION_T ex;
+	int machineCode;
+	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
+  char instr[] = "   inFsnZ  0x37,F,BANKED  ";
+	IdentifierToken infsnzToken = {TOKEN_IDENTIFIER_TYPE, 3,6,"INFSNZ"};
+	IntegerToken intToken = {TOKEN_INTEGER_TYPE,11,4,"0x37",0x37};
+  OperatorToken opToken = {TOKEN_OPERATOR_TYPE, 15,1,","};
+  IdentifierToken FToken = {TOKEN_IDENTIFIER_TYPE, 16,4,"F"};
+  OperatorToken op1Token = {TOKEN_OPERATOR_TYPE, 17,1,","};
+  IdentifierToken BANKEDToken = {TOKEN_IDENTIFIER_TYPE, 18,6,"BANKED"};
+
+	initTokenizer_ExpectAndReturn(instr,tokenizer);
+	getToken_ExpectAndReturn(tokenizer, (Token *)&infsnzToken);//
+	getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
+  getToken_ExpectAndReturn(tokenizer,(Token *)&opToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&FToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&op1Token);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&BANKEDToken);
+
+	Try {
+		machineCode = infsnz(instr);
+		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+	}Catch(ex) {
+		TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
+	}
+}
+
 void xtest_IORLW_iorlw_0x37_expect_0x0937(void){
 	CEXCEPTION_T ex;
 	int machineCode;
@@ -1303,6 +1957,115 @@ void xtest_MOVWF_movwf_0x37_coma_ACCESS_expect_0x6e37(void){
 
 	Try {
 		machineCode = movwf(instr);
+		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+	}Catch(ex) {
+		TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
+	}
+}
+
+void xtest_MOVF_movf_0x37_coma_WREG_coma_ACCESS_expect_0x5037(void){
+	CEXCEPTION_T ex;
+	int machineCode;
+	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
+  char instr[] = "   mOvF   0x37,WREG,ACCESS  ";
+	IdentifierToken movfToken = {TOKEN_IDENTIFIER_TYPE, 3,5,"MOVF"};
+	IntegerToken intToken = {TOKEN_INTEGER_TYPE,11,4,"0x37",0x37};
+  OperatorToken opToken = {TOKEN_OPERATOR_TYPE, 15,1,","};
+  IdentifierToken WREGToken = {TOKEN_IDENTIFIER_TYPE, 16,4,"WREG"};
+  OperatorToken op1Token = {TOKEN_OPERATOR_TYPE, 20,1,","};
+  IdentifierToken ACCESSToken = {TOKEN_IDENTIFIER_TYPE, 21,6,"ACCESS"};
+
+	initTokenizer_ExpectAndReturn(instr,tokenizer);
+	getToken_ExpectAndReturn(tokenizer, (Token *)&movfToken);//
+	getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
+  getToken_ExpectAndReturn(tokenizer,(Token *)&opToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&WREGToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&op1Token);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&ACCESSToken);
+
+	Try {
+		machineCode = movf(instr);
+		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+	}Catch(ex) {
+		TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
+	}
+}
+void xtest_MOVF_movf_0x37_coma_WREG_coma_BANKED_expect_0x5137(void){
+	CEXCEPTION_T ex;
+	int machineCode;
+	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
+  char instr[] = "   mOvF   0x37,WREG,BANKED  ";
+	IdentifierToken movfToken = {TOKEN_IDENTIFIER_TYPE, 3,5,"MOVF"};
+	IntegerToken intToken = {TOKEN_INTEGER_TYPE,11,4,"0x37",0x37};
+  OperatorToken opToken = {TOKEN_OPERATOR_TYPE, 15,1,","};
+  IdentifierToken WREGToken = {TOKEN_IDENTIFIER_TYPE, 16,4,"WREG"};
+  OperatorToken op1Token = {TOKEN_OPERATOR_TYPE, 20,1,","};
+  IdentifierToken BANKEDToken = {TOKEN_IDENTIFIER_TYPE, 21,6,"BANKED"};
+
+	initTokenizer_ExpectAndReturn(instr,tokenizer);
+	getToken_ExpectAndReturn(tokenizer, (Token *)&movfToken);//
+	getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
+  getToken_ExpectAndReturn(tokenizer,(Token *)&opToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&WREGToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&op1Token);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&BANKEDToken);
+
+	Try {
+		machineCode = movf(instr);
+		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+	}Catch(ex) {
+		TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
+	}
+}
+void xtest_MOVF_movf_0x37_coma_F_coma_ACCESS_expect_0x5237(void){
+	CEXCEPTION_T ex;
+	int machineCode;
+	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
+  char instr[] = "   mOvF   0x37,F,ACCESS  ";
+	IdentifierToken movfToken = {TOKEN_IDENTIFIER_TYPE, 3,5,"MOVF"};
+	IntegerToken intToken = {TOKEN_INTEGER_TYPE,11,4,"0x37",0x37};
+  OperatorToken opToken = {TOKEN_OPERATOR_TYPE, 15,1,","};
+  IdentifierToken FToken = {TOKEN_IDENTIFIER_TYPE, 16,4,"F"};
+  OperatorToken op1Token = {TOKEN_OPERATOR_TYPE, 17,1,","};
+  IdentifierToken ACCESSToken = {TOKEN_IDENTIFIER_TYPE, 18,6,"ACCESS"};
+
+	initTokenizer_ExpectAndReturn(instr,tokenizer);
+	getToken_ExpectAndReturn(tokenizer, (Token *)&movfToken);//
+	getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
+  getToken_ExpectAndReturn(tokenizer,(Token *)&opToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&FToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&op1Token);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&ACCESSToken);
+
+	Try {
+		machineCode = movf(instr);
+		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+	}Catch(ex) {
+		TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
+	}
+}
+void xtest_MOVF_movf_0x37_coma_F_coma_BANKED_expect_0x5337(void){
+	CEXCEPTION_T ex;
+	int machineCode;
+	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
+  char instr[] = "   mOvF   0x37,F,BANKED  ";
+	IdentifierToken movfToken = {TOKEN_IDENTIFIER_TYPE, 3,5,"MOVF"};
+	IntegerToken intToken = {TOKEN_INTEGER_TYPE,11,4,"0x37",0x37};
+  OperatorToken opToken = {TOKEN_OPERATOR_TYPE, 15,1,","};
+  IdentifierToken FToken = {TOKEN_IDENTIFIER_TYPE, 16,4,"F"};
+  OperatorToken op1Token = {TOKEN_OPERATOR_TYPE, 17,1,","};
+  IdentifierToken BANKEDToken = {TOKEN_IDENTIFIER_TYPE, 18,6,"BANKED"};
+
+	initTokenizer_ExpectAndReturn(instr,tokenizer);
+	getToken_ExpectAndReturn(tokenizer, (Token *)&movfToken);//
+	getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
+  getToken_ExpectAndReturn(tokenizer,(Token *)&opToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&FToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&op1Token);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&BANKEDToken);
+
+	Try {
+		machineCode = movf(instr);
 		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
 	}Catch(ex) {
 		TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
@@ -1520,6 +2283,333 @@ void xtest_RESET_reset_expect_exception(void){
 	Try {
 		machineCode = reset(instr);
 		printf("\nthe instruction opcode is %#4x",machineCode);
+	}Catch(ex) {
+		TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
+	}
+}
+
+void xtest_RLCF_rlcf_0x37_coma_WREG_coma_ACCESS_expect_0x3437(void){
+	CEXCEPTION_T ex;
+	int machineCode;
+	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
+  char instr[] = "   RlcF    0x37,WREG,ACCESS  ";
+	IdentifierToken rlcfToken = {TOKEN_IDENTIFIER_TYPE, 3,4,"RLCF"};
+	IntegerToken intToken = {TOKEN_INTEGER_TYPE,11,4,"0x37",0x37};
+  OperatorToken opToken = {TOKEN_OPERATOR_TYPE, 15,1,","};
+  IdentifierToken WREGToken = {TOKEN_IDENTIFIER_TYPE, 16,4,"WREG"};
+  OperatorToken op1Token = {TOKEN_OPERATOR_TYPE, 20,1,","};
+  IdentifierToken ACCESSToken = {TOKEN_IDENTIFIER_TYPE, 21,6,"ACCESS"};
+
+	initTokenizer_ExpectAndReturn(instr,tokenizer);
+	getToken_ExpectAndReturn(tokenizer, (Token *)&rlcfToken);//
+	getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
+  getToken_ExpectAndReturn(tokenizer,(Token *)&opToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&WREGToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&op1Token);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&ACCESSToken);
+
+	Try {
+		machineCode = rlcf(instr);
+		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+	}Catch(ex) {
+		TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
+	}
+}
+void xtest_RLCF_rlcf_0x37_coma_WREG_coma_BANKED_expect_0x3537(void){
+	CEXCEPTION_T ex;
+	int machineCode;
+	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
+  char instr[] = "   RlcF    0x37,WREG,BANKED  ";
+	IdentifierToken rlcfToken = {TOKEN_IDENTIFIER_TYPE, 3,4,"RLCF"};
+	IntegerToken intToken = {TOKEN_INTEGER_TYPE,11,4,"0x37",0x37};
+  OperatorToken opToken = {TOKEN_OPERATOR_TYPE, 15,1,","};
+  IdentifierToken WREGToken = {TOKEN_IDENTIFIER_TYPE, 16,4,"WREG"};
+  OperatorToken op1Token = {TOKEN_OPERATOR_TYPE, 20,1,","};
+  IdentifierToken BANKEDToken = {TOKEN_IDENTIFIER_TYPE, 21,6,"BANKED"};
+
+	initTokenizer_ExpectAndReturn(instr,tokenizer);
+	getToken_ExpectAndReturn(tokenizer, (Token *)&rlcfToken);//
+	getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
+  getToken_ExpectAndReturn(tokenizer,(Token *)&opToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&WREGToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&op1Token);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&BANKEDToken);
+
+	Try {
+		machineCode = rlcf(instr);
+		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+	}Catch(ex) {
+		TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
+	}
+}
+void xtest_RLCF_rlcf_0x37_coma_F_coma_ACCESS_expect_0x3637(void){
+	CEXCEPTION_T ex;
+	int machineCode;
+	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
+  char instr[] = "   RlcF    0x37,F,ACCESS  ";
+	IdentifierToken rlcfToken = {TOKEN_IDENTIFIER_TYPE, 3,4,"RLCF"};
+	IntegerToken intToken = {TOKEN_INTEGER_TYPE,11,4,"0x37",0x37};
+  OperatorToken opToken = {TOKEN_OPERATOR_TYPE, 15,1,","};
+  IdentifierToken FToken = {TOKEN_IDENTIFIER_TYPE, 16,4,"F"};
+  OperatorToken op1Token = {TOKEN_OPERATOR_TYPE, 17,1,","};
+  IdentifierToken ACCESSToken = {TOKEN_IDENTIFIER_TYPE, 18,6,"ACCESS"};
+
+	initTokenizer_ExpectAndReturn(instr,tokenizer);
+	getToken_ExpectAndReturn(tokenizer, (Token *)&rlcfToken);//
+	getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
+  getToken_ExpectAndReturn(tokenizer,(Token *)&opToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&FToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&op1Token);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&ACCESSToken);
+
+	Try {
+		machineCode = rlcf(instr);
+		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+	}Catch(ex) {
+		TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
+	}
+}
+void xtest_RLCF_rlcf_0x37_coma_F_coma_BANKED_expect_0x3737(void){
+	CEXCEPTION_T ex;
+	int machineCode;
+	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
+  char instr[] = "   RlcF    0x37,F,BANKED  ";
+	IdentifierToken rlcfToken = {TOKEN_IDENTIFIER_TYPE, 3,4,"RLCF"};
+	IntegerToken intToken = {TOKEN_INTEGER_TYPE,11,4,"0x37",0x37};
+  OperatorToken opToken = {TOKEN_OPERATOR_TYPE, 15,1,","};
+  IdentifierToken FToken = {TOKEN_IDENTIFIER_TYPE, 16,4,"F"};
+  OperatorToken op1Token = {TOKEN_OPERATOR_TYPE, 17,1,","};
+  IdentifierToken BANKEDToken = {TOKEN_IDENTIFIER_TYPE, 18,6,"BANKED"};
+
+	initTokenizer_ExpectAndReturn(instr,tokenizer);
+	getToken_ExpectAndReturn(tokenizer, (Token *)&rlcfToken);//
+	getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
+  getToken_ExpectAndReturn(tokenizer,(Token *)&opToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&FToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&op1Token);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&BANKEDToken);
+
+	Try {
+		machineCode = rlcf(instr);
+		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+	}Catch(ex) {
+		TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
+	}
+}
+
+void xtest_RLNCF_rlncf_0x37_coma_WREG_coma_ACCESS_expect_0x4437(void){
+	CEXCEPTION_T ex;
+	int machineCode;
+	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
+  char instr[] = "   RlncF   0x37,WREG,ACCESS  ";
+	IdentifierToken rlncfToken = {TOKEN_IDENTIFIER_TYPE, 3,5,"RLNCF"};
+	IntegerToken intToken = {TOKEN_INTEGER_TYPE,11,4,"0x37",0x37};
+  OperatorToken opToken = {TOKEN_OPERATOR_TYPE, 15,1,","};
+  IdentifierToken WREGToken = {TOKEN_IDENTIFIER_TYPE, 16,4,"WREG"};
+  OperatorToken op1Token = {TOKEN_OPERATOR_TYPE, 20,1,","};
+  IdentifierToken ACCESSToken = {TOKEN_IDENTIFIER_TYPE, 21,6,"ACCESS"};
+
+	initTokenizer_ExpectAndReturn(instr,tokenizer);
+	getToken_ExpectAndReturn(tokenizer, (Token *)&rlncfToken);//
+	getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
+  getToken_ExpectAndReturn(tokenizer,(Token *)&opToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&WREGToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&op1Token);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&ACCESSToken);
+
+	Try {
+		machineCode = rlncf(instr);
+		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+	}Catch(ex) {
+		TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
+	}
+}
+void xtest_RLNCF_rlncf_0x37_coma_WREG_coma_BANKED_expect_0x4537(void){
+	CEXCEPTION_T ex;
+	int machineCode;
+	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
+  char instr[] = "   RlncF   0x37,WREG,BANKED  ";
+	IdentifierToken rlncfToken = {TOKEN_IDENTIFIER_TYPE, 3,5,"RLNCF"};
+	IntegerToken intToken = {TOKEN_INTEGER_TYPE,11,4,"0x37",0x37};
+  OperatorToken opToken = {TOKEN_OPERATOR_TYPE, 15,1,","};
+  IdentifierToken WREGToken = {TOKEN_IDENTIFIER_TYPE, 16,4,"WREG"};
+  OperatorToken op1Token = {TOKEN_OPERATOR_TYPE, 20,1,","};
+  IdentifierToken BANKEDToken = {TOKEN_IDENTIFIER_TYPE, 21,6,"BANKED"};
+
+	initTokenizer_ExpectAndReturn(instr,tokenizer);
+	getToken_ExpectAndReturn(tokenizer, (Token *)&rlncfToken);//
+	getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
+  getToken_ExpectAndReturn(tokenizer,(Token *)&opToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&WREGToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&op1Token);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&BANKEDToken);
+
+	Try {
+		machineCode = rlncf(instr);
+		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+	}Catch(ex) {
+		TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
+	}
+}
+void xtest_RLNCF_rlncf_0x37_coma_F_coma_ACCESS_expect_0x4637(void){
+	CEXCEPTION_T ex;
+	int machineCode;
+	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
+  char instr[] = "   RlncF   0x37,F,ACCESS  ";
+	IdentifierToken rlncfToken = {TOKEN_IDENTIFIER_TYPE, 3,5,"RLNCF"};
+	IntegerToken intToken = {TOKEN_INTEGER_TYPE,11,4,"0x37",0x37};
+  OperatorToken opToken = {TOKEN_OPERATOR_TYPE, 15,1,","};
+  IdentifierToken FToken = {TOKEN_IDENTIFIER_TYPE, 16,4,"F"};
+  OperatorToken op1Token = {TOKEN_OPERATOR_TYPE, 17,1,","};
+  IdentifierToken ACCESSToken = {TOKEN_IDENTIFIER_TYPE, 18,6,"ACCESS"};
+
+	initTokenizer_ExpectAndReturn(instr,tokenizer);
+	getToken_ExpectAndReturn(tokenizer, (Token *)&rlncfToken);//
+	getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
+  getToken_ExpectAndReturn(tokenizer,(Token *)&opToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&FToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&op1Token);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&ACCESSToken);
+
+	Try {
+		machineCode = rlncf(instr);
+		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+	}Catch(ex) {
+		TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
+	}
+}
+void xtest_RLNCF_rlncf_0x37_coma_F_coma_BANKED_expect_0x4737(void){
+	CEXCEPTION_T ex;
+	int machineCode;
+	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
+  char instr[] = "   RlncF   0x37,F,BANKED  ";
+	IdentifierToken rlncfToken = {TOKEN_IDENTIFIER_TYPE, 3,5,"RLNCF"};
+	IntegerToken intToken = {TOKEN_INTEGER_TYPE,11,4,"0x37",0x37};
+  OperatorToken opToken = {TOKEN_OPERATOR_TYPE, 15,1,","};
+  IdentifierToken FToken = {TOKEN_IDENTIFIER_TYPE, 16,4,"F"};
+  OperatorToken op1Token = {TOKEN_OPERATOR_TYPE, 17,1,","};
+  IdentifierToken BANKEDToken = {TOKEN_IDENTIFIER_TYPE, 18,6,"BANKED"};
+
+	initTokenizer_ExpectAndReturn(instr,tokenizer);
+	getToken_ExpectAndReturn(tokenizer, (Token *)&rlncfToken);//
+	getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
+  getToken_ExpectAndReturn(tokenizer,(Token *)&opToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&FToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&op1Token);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&BANKEDToken);
+
+	Try {
+		machineCode = rlncf(instr);
+		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+	}Catch(ex) {
+		TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
+	}
+}
+
+void xtest_RRCF_rrcf_0x37_coma_WREG_coma_ACCESS_expect_0x3037(void){
+	CEXCEPTION_T ex;
+	int machineCode;
+	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
+  char instr[] = "   RrcF    0x37,WREG,ACCESS  ";
+	IdentifierToken rrcfToken = {TOKEN_IDENTIFIER_TYPE, 3,4,"RRCF"};
+	IntegerToken intToken = {TOKEN_INTEGER_TYPE,11,4,"0x37",0x37};
+  OperatorToken opToken = {TOKEN_OPERATOR_TYPE, 15,1,","};
+  IdentifierToken WREGToken = {TOKEN_IDENTIFIER_TYPE, 16,4,"WREG"};
+  OperatorToken op1Token = {TOKEN_OPERATOR_TYPE, 20,1,","};
+  IdentifierToken ACCESSToken = {TOKEN_IDENTIFIER_TYPE, 21,6,"ACCESS"};
+
+	initTokenizer_ExpectAndReturn(instr,tokenizer);
+	getToken_ExpectAndReturn(tokenizer, (Token *)&rrcfToken);//
+	getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
+  getToken_ExpectAndReturn(tokenizer,(Token *)&opToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&WREGToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&op1Token);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&ACCESSToken);
+
+	Try {
+		machineCode = rrcf(instr);
+		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+	}Catch(ex) {
+		TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
+	}
+}
+void xtest_RRCF_rrcf_0x37_coma_WREG_coma_BANKED_expect_0x3137(void){
+	CEXCEPTION_T ex;
+	int machineCode;
+	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
+  char instr[] = "   RrcF    0x37,WREG,BANKED  ";
+	IdentifierToken rrcfToken = {TOKEN_IDENTIFIER_TYPE, 3,4,"RRCF"};
+	IntegerToken intToken = {TOKEN_INTEGER_TYPE,11,4,"0x37",0x37};
+  OperatorToken opToken = {TOKEN_OPERATOR_TYPE, 15,1,","};
+  IdentifierToken WREGToken = {TOKEN_IDENTIFIER_TYPE, 16,4,"WREG"};
+  OperatorToken op1Token = {TOKEN_OPERATOR_TYPE, 20,1,","};
+  IdentifierToken BANKEDToken = {TOKEN_IDENTIFIER_TYPE, 21,6,"BANKED"};
+
+	initTokenizer_ExpectAndReturn(instr,tokenizer);
+	getToken_ExpectAndReturn(tokenizer, (Token *)&rrcfToken);//
+	getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
+  getToken_ExpectAndReturn(tokenizer,(Token *)&opToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&WREGToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&op1Token);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&BANKEDToken);
+
+	Try {
+		machineCode = rrcf(instr);
+		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+	}Catch(ex) {
+		TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
+	}
+}
+void xtest_RRCF_rrcf_0x37_coma_F_coma_ACCESS_expect_0x3237(void){
+	CEXCEPTION_T ex;
+	int machineCode;
+	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
+  char instr[] = "   RrcF    0x37,F,ACCESS  ";
+	IdentifierToken rrcfToken = {TOKEN_IDENTIFIER_TYPE, 3,4,"RRCF"};
+	IntegerToken intToken = {TOKEN_INTEGER_TYPE,11,4,"0x37",0x37};
+  OperatorToken opToken = {TOKEN_OPERATOR_TYPE, 15,1,","};
+  IdentifierToken FToken = {TOKEN_IDENTIFIER_TYPE, 16,4,"F"};
+  OperatorToken op1Token = {TOKEN_OPERATOR_TYPE, 17,1,","};
+  IdentifierToken ACCESSToken = {TOKEN_IDENTIFIER_TYPE, 18,6,"ACCESS"};
+
+	initTokenizer_ExpectAndReturn(instr,tokenizer);
+	getToken_ExpectAndReturn(tokenizer, (Token *)&rrcfToken);//
+	getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
+  getToken_ExpectAndReturn(tokenizer,(Token *)&opToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&FToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&op1Token);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&ACCESSToken);
+
+	Try {
+		machineCode = rrcf(instr);
+		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+	}Catch(ex) {
+		TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
+	}
+}
+void xtest_RRCF_rrcf_0x37_coma_F_coma_BANKED_expect_0x3337(void){
+	CEXCEPTION_T ex;
+	int machineCode;
+	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
+  char instr[] = "   RrcF    0x37,F,BANKED  ";
+	IdentifierToken rrcfToken = {TOKEN_IDENTIFIER_TYPE, 3,4,"RRCF"};
+	IntegerToken intToken = {TOKEN_INTEGER_TYPE,11,4,"0x37",0x37};
+  OperatorToken opToken = {TOKEN_OPERATOR_TYPE, 15,1,","};
+  IdentifierToken FToken = {TOKEN_IDENTIFIER_TYPE, 16,4,"F"};
+  OperatorToken op1Token = {TOKEN_OPERATOR_TYPE, 17,1,","};
+  IdentifierToken BANKEDToken = {TOKEN_IDENTIFIER_TYPE, 18,6,"BANKED"};
+
+	initTokenizer_ExpectAndReturn(instr,tokenizer);
+	getToken_ExpectAndReturn(tokenizer, (Token *)&rrcfToken);//
+	getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
+  getToken_ExpectAndReturn(tokenizer,(Token *)&opToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&FToken);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&op1Token);
+  getToken_ExpectAndReturn(tokenizer, (Token *)&BANKEDToken);
+
+	Try {
+		machineCode = rrcf(instr);
+		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
 	}Catch(ex) {
 		TEST_ASSERT_EQUAL(EXTRA_OPERAND, ex);
 	}
@@ -1882,8 +2972,8 @@ void xtest_XORWF_xorwf_0x37_coma_F_coma_ACCESS_expect_0x1a37(void){
 	IntegerToken intToken = {TOKEN_INTEGER_TYPE,11,4,"0x37",0x37};
   OperatorToken opToken = {TOKEN_OPERATOR_TYPE, 15,1,","};
   IdentifierToken FToken = {TOKEN_IDENTIFIER_TYPE, 16,4,"F"};
-  OperatorToken op1Token = {TOKEN_OPERATOR_TYPE, 20,1,","};
-  IdentifierToken ACCESSToken = {TOKEN_IDENTIFIER_TYPE, 21,6,"ACCESS"};
+  OperatorToken op1Token = {TOKEN_OPERATOR_TYPE, 17,1,","};
+  IdentifierToken ACCESSToken = {TOKEN_IDENTIFIER_TYPE, 18,6,"ACCESS"};
 
 	initTokenizer_ExpectAndReturn(instr,tokenizer);
 	getToken_ExpectAndReturn(tokenizer, (Token *)&xorwfToken);//
@@ -1909,8 +2999,8 @@ void xtest_XORWF_xorwf_0x37_coma_F_coma_BANKED_expect_1b37(void){
 	IntegerToken intToken = {TOKEN_INTEGER_TYPE,11,4,"0x37",0x37};
   OperatorToken opToken = {TOKEN_OPERATOR_TYPE, 15,1,","};
   IdentifierToken FToken = {TOKEN_IDENTIFIER_TYPE, 16,4,"F"};
-  OperatorToken op1Token = {TOKEN_OPERATOR_TYPE, 20,1,","};
-  IdentifierToken BANKEDToken = {TOKEN_IDENTIFIER_TYPE, 21,6,"BANKED"};
+  OperatorToken op1Token = {TOKEN_OPERATOR_TYPE, 17,1,","};
+  IdentifierToken BANKEDToken = {TOKEN_IDENTIFIER_TYPE, 18,6,"BANKED"};
 
 	initTokenizer_ExpectAndReturn(instr,tokenizer);
 	getToken_ExpectAndReturn(tokenizer, (Token *)&xorwfToken);//
