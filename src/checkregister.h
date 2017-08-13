@@ -25,9 +25,13 @@ void handleB(Tokenizer *tokenizer ,OperandInfo *operandInfo);
 void fa(Tokenizer *tokenizer , OperandInfo *operandInfo);
 void ff(Tokenizer *tokenizer , OperandInfo *operandInfo , OperandInfo1 *operandInfo1);
 void k(Tokenizer *tokenizer , OperandInfo *operandInfo);
-void ks(Tokenizer *tokenizer , OperandInfo *operandInfo);
+void ks(Tokenizer *tokenizer , OperandInfo *operandInfo , OperandInfo1 *operandInfo1);
+int check2ndDigit(int data);
+int checkdataOdd(int data);
+int checkdataEven(int data);
 void handleS(Tokenizer *tokenizer ,OperandInfo *operandInfo);
 void n(Tokenizer *tokenizer , OperandInfo *operandInfo);
+void n1(Tokenizer *tokenizer , OperandInfo *operandInfo, OperandInfo1 *operandInfo1);
 
 //void fda(Tokenizer *tokenizer , OperandInfo *operandInfo);
 //void handleDirBank(Tokenizer *tokenizer ,OperandInfo *operandInfo);

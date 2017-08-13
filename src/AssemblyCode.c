@@ -294,6 +294,33 @@ int bov(char *instr) {
   }
 }
 
+int bra(char *instr) {
+  instr = touppercase(instr);
+  OperandInfo OperandInfo;
+  OperandInfo1 OperandInfo1;
+  Tokenizer *tokenizer = initTokenizer(instr);
+  Token *token = getToken(tokenizer);
+  IdentifierToken *idToken;
+  IntegerToken *intToken;
+  OperatorToken *opToken;
+
+  if (token->type == TOKEN_IDENTIFIER_TYPE) {
+    idToken = (IdentifierToken *)token;
+
+    if (strcmp(idToken->str, "BRA") == 0) {
+      n1(tokenizer, &OperandInfo, &OperandInfo1);
+      return 0xd0000000 + ((OperandInfo.value) << 16) +
+             ((OperandInfo.dirType) << 16) + ((OperandInfo.banktype) << 16) +
+             0x0000d000 + ((OperandInfo1.value1) >> 32) +
+             ((OperandInfo1.dirType1) >> 32) + ((OperandInfo1.banktype1) >> 32);
+    } else {
+      Throw(NOT_VALID_IDENTIFIER);
+    }
+  } else {
+    Throw(NOT_VALID_INSTRUCTION);
+  }
+}
+
 int bz(char *instr) {
   instr = touppercase(instr);
   OperandInfo OperandInfo;
@@ -425,6 +452,34 @@ int btg(char *instr) {
       fba(tokenizer, &OperandInfo);
       return 0x7000 + (OperandInfo.value) + (OperandInfo.dirType) +
              (OperandInfo.banktype);
+    } else {
+      Throw(NOT_VALID_IDENTIFIER);
+    }
+  } else {
+    Throw(NOT_VALID_INSTRUCTION);
+  }
+}
+
+int call(char *instr) {
+  instr = touppercase(instr);
+  OperandInfo OperandInfo;
+  OperandInfo1 OperandInfo1;
+  Tokenizer *tokenizer = initTokenizer(instr);
+  Token *token = getToken(tokenizer);
+  IdentifierToken *idToken;
+  IntegerToken *intToken;
+  OperatorToken *opToken;
+
+  if (token->type == TOKEN_IDENTIFIER_TYPE) {
+    idToken = (IdentifierToken *)token;
+
+    if (strcmp(idToken->str, "CALL") == 0) {
+      ks(tokenizer, &OperandInfo, &OperandInfo1);
+      return 0xec000000 + ((OperandInfo.value) << 16) +
+             ((OperandInfo.dirType) << 24) + ((OperandInfo.banktype) << 16) +
+             0x0000f000 + ((OperandInfo1.value1) >> 32) +
+             ((OperandInfo1.dirType1) >> 32) + ((OperandInfo1.banktype1) >> 32);
+
     } else {
       Throw(NOT_VALID_IDENTIFIER);
     }
@@ -655,6 +710,33 @@ int dcfsnz(char *instr) {
   }
 }
 
+int _goto(char *instr) {
+  instr = touppercase(instr);
+  OperandInfo OperandInfo;
+  OperandInfo1 OperandInfo1;
+  Tokenizer *tokenizer = initTokenizer(instr);
+  Token *token = getToken(tokenizer);
+  IdentifierToken *idToken;
+  IntegerToken *intToken;
+
+  if (token->type == TOKEN_IDENTIFIER_TYPE) {
+    idToken = (IdentifierToken *)token;
+
+    if (strcmp(idToken->str, "GOTO") == 0) {
+      n2(tokenizer, &OperandInfo, &OperandInfo1);
+      return 0xef000000 + ((OperandInfo.value) << 16) +
+             ((OperandInfo.dirType) << 16) + ((OperandInfo.banktype) << 16) +
+             0x0000f000 + ((OperandInfo1.value1) >> 32) +
+             ((OperandInfo1.dirType1) >> 32) + ((OperandInfo1.banktype1) >> 32);
+
+    } else {
+      Throw(NOT_VALID_IDENTIFIER);
+    }
+  } else {
+    Throw(NOT_VALID_INSTRUCTION);
+  }
+}
+
 int incf(char *instr) {
   OperandInfo OperandInfo;
   instr = touppercase(instr);
@@ -739,6 +821,30 @@ int iorlw(char *instr) {
     if (strcmp(idToken->str, "IORLW") == 0) {
       k(tokenizer, &OperandInfo);
       return 0x0900 + (OperandInfo.value) + (OperandInfo.dirType) +
+             (OperandInfo.banktype);
+    } else {
+      Throw(NOT_VALID_IDENTIFIER);
+    }
+  } else {
+    Throw(NOT_VALID_INSTRUCTION);
+  }
+}
+
+int movlb(char *instr) {
+  instr = touppercase(instr);
+  OperandInfo OperandInfo;
+  Tokenizer *tokenizer = initTokenizer(instr);
+  Token *token = getToken(tokenizer);
+  IdentifierToken *idToken;
+  IntegerToken *intToken;
+  OperatorToken *opToken;
+
+  if (token->type == TOKEN_IDENTIFIER_TYPE) {
+    idToken = (IdentifierToken *)token;
+
+    if (strcmp(idToken->str, "MOVLB") == 0) {
+      k(tokenizer, &OperandInfo);
+      return 0x0100 + ((OperandInfo.value)&0x0f) + (OperandInfo.dirType) +
              (OperandInfo.banktype);
     } else {
       Throw(NOT_VALID_IDENTIFIER);
@@ -952,6 +1058,30 @@ int push(char *instr) {
   }
 }
 
+int retlw(char *instr) {
+  instr = touppercase(instr);
+  OperandInfo OperandInfo;
+  Tokenizer *tokenizer = initTokenizer(instr);
+  Token *token = getToken(tokenizer);
+  IdentifierToken *idToken;
+  IntegerToken *intToken;
+  OperatorToken *opToken;
+
+  if (token->type == TOKEN_IDENTIFIER_TYPE) {
+    idToken = (IdentifierToken *)token;
+
+    if (strcmp(idToken->str, "RETLW") == 0) {
+      k(tokenizer, &OperandInfo);
+      return 0x0c00 + (OperandInfo.value) + (OperandInfo.dirType) +
+             (OperandInfo.banktype);
+    } else {
+      Throw(NOT_VALID_IDENTIFIER);
+    }
+  } else {
+    Throw(NOT_VALID_INSTRUCTION);
+  }
+}
+
 int reset(char *instr) {
   instr = touppercase(instr);
   Tokenizer *tokenizer = initTokenizer(instr);
@@ -963,6 +1093,54 @@ int reset(char *instr) {
     idToken = (IdentifierToken *)token;
     if (strcmp(idToken->str, "RESET") == 0) {
       return 0x00ff;
+    } else {
+      Throw(NOT_VALID_IDENTIFIER);
+    }
+  } else {
+    Throw(NOT_VALID_INSTRUCTION);
+  }
+}
+
+int retfie(char *instr) {
+  instr = touppercase(instr);
+  OperandInfo OperandInfo;
+  Tokenizer *tokenizer = initTokenizer(instr);
+  Token *token = getToken(tokenizer);
+  IdentifierToken *idToken;
+  IntegerToken *intToken;
+  OperatorToken *opToken;
+
+  if (token->type == TOKEN_IDENTIFIER_TYPE) {
+    idToken = (IdentifierToken *)token;
+
+    if (strcmp(idToken->str, "RETFIE") == 0) {
+      handleS(tokenizer, &OperandInfo);
+      return 0x0010 + (OperandInfo.dirType) +
+             (OperandInfo.banktype);
+    } else {
+      Throw(NOT_VALID_IDENTIFIER);
+    }
+  } else {
+    Throw(NOT_VALID_INSTRUCTION);
+  }
+}
+
+int _return(char *instr) {
+  instr = touppercase(instr);
+  OperandInfo OperandInfo;
+  Tokenizer *tokenizer = initTokenizer(instr);
+  Token *token = getToken(tokenizer);
+  IdentifierToken *idToken;
+  IntegerToken *intToken;
+  OperatorToken *opToken;
+
+  if (token->type == TOKEN_IDENTIFIER_TYPE) {
+    idToken = (IdentifierToken *)token;
+
+    if (strcmp(idToken->str, "RETURN") == 0) {
+      handleS(tokenizer, &OperandInfo);
+      return 0x0012 + (OperandInfo.dirType) +
+             (OperandInfo.banktype);
     } else {
       Throw(NOT_VALID_IDENTIFIER);
     }
@@ -1124,6 +1302,102 @@ int sublw(char *instr) {
     } else {
       Throw(NOT_VALID_IDENTIFIER);
     }
+  } else {
+    Throw(NOT_VALID_INSTRUCTION);
+  }
+}
+
+int subwf(char *instr) {
+  OperandInfo OperandInfo;
+  instr = touppercase(instr);
+  Tokenizer *tokenizer = initTokenizer(instr);
+  Token *token = getToken(tokenizer);
+  IdentifierToken *idToken;
+  IntegerToken *intToken;
+  OperatorToken *opToken;
+
+  if (token->type == TOKEN_IDENTIFIER_TYPE) {
+    idToken = (IdentifierToken *)token;
+    if (strcmp(idToken->str, "SUBWF") == 0) {
+      fda(tokenizer, &OperandInfo);
+      return 0x5c00 + (OperandInfo.value) + (OperandInfo.dirType) +
+             (OperandInfo.banktype);
+    } else {
+      Throw(NOT_VALID_IDENTIFIER);
+    }
+
+  } else {
+    Throw(NOT_VALID_INSTRUCTION);
+  }
+}
+
+int subwfb(char *instr) {
+  OperandInfo OperandInfo;
+  instr = touppercase(instr);
+  Tokenizer *tokenizer = initTokenizer(instr);
+  Token *token = getToken(tokenizer);
+  IdentifierToken *idToken;
+  IntegerToken *intToken;
+  OperatorToken *opToken;
+
+  if (token->type == TOKEN_IDENTIFIER_TYPE) {
+    idToken = (IdentifierToken *)token;
+    if (strcmp(idToken->str, "SUBWFB") == 0) {
+      fda(tokenizer, &OperandInfo);
+      return 0x5800 + (OperandInfo.value) + (OperandInfo.dirType) +
+             (OperandInfo.banktype);
+    } else {
+      Throw(NOT_VALID_IDENTIFIER);
+    }
+
+  } else {
+    Throw(NOT_VALID_INSTRUCTION);
+  }
+}
+
+int subfwb(char *instr) {
+  OperandInfo OperandInfo;
+  instr = touppercase(instr);
+  Tokenizer *tokenizer = initTokenizer(instr);
+  Token *token = getToken(tokenizer);
+  IdentifierToken *idToken;
+  IntegerToken *intToken;
+  OperatorToken *opToken;
+
+  if (token->type == TOKEN_IDENTIFIER_TYPE) {
+    idToken = (IdentifierToken *)token;
+    if (strcmp(idToken->str, "SUBFWB") == 0) {
+      fda(tokenizer, &OperandInfo);
+      return 0x5400 + (OperandInfo.value) + (OperandInfo.dirType) +
+             (OperandInfo.banktype);
+    } else {
+      Throw(NOT_VALID_IDENTIFIER);
+    }
+
+  } else {
+    Throw(NOT_VALID_INSTRUCTION);
+  }
+}
+
+int swapf(char *instr) {
+  OperandInfo OperandInfo;
+  instr = touppercase(instr);
+  Tokenizer *tokenizer = initTokenizer(instr);
+  Token *token = getToken(tokenizer);
+  IdentifierToken *idToken;
+  IntegerToken *intToken;
+  OperatorToken *opToken;
+
+  if (token->type == TOKEN_IDENTIFIER_TYPE) {
+    idToken = (IdentifierToken *)token;
+    if (strcmp(idToken->str, "SWAPF") == 0) {
+      fda(tokenizer, &OperandInfo);
+      return 0x3800 + (OperandInfo.value) + (OperandInfo.dirType) +
+             (OperandInfo.banktype);
+    } else {
+      Throw(NOT_VALID_IDENTIFIER);
+    }
+
   } else {
     Throw(NOT_VALID_INSTRUCTION);
   }
@@ -1372,6 +1646,30 @@ int tstfsz(char *instr) {
       Throw(NOT_VALID_IDENTIFIER);
     }
 
+  } else {
+    Throw(NOT_VALID_INSTRUCTION);
+  }
+}
+
+int xorlw(char *instr) {
+  instr = touppercase(instr);
+  OperandInfo OperandInfo;
+  Tokenizer *tokenizer = initTokenizer(instr);
+  Token *token = getToken(tokenizer);
+  IdentifierToken *idToken;
+  IntegerToken *intToken;
+  OperatorToken *opToken;
+
+  if (token->type == TOKEN_IDENTIFIER_TYPE) {
+    idToken = (IdentifierToken *)token;
+
+    if (strcmp(idToken->str, "XORLW") == 0) {
+      k(tokenizer, &OperandInfo);
+      return 0x0a00 + (OperandInfo.value) + (OperandInfo.dirType) +
+             (OperandInfo.banktype);
+    } else {
+      Throw(NOT_VALID_IDENTIFIER);
+    }
   } else {
     Throw(NOT_VALID_INSTRUCTION);
   }
