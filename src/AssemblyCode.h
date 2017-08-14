@@ -2,6 +2,10 @@
 #define _ASSEMBLYCODE_H
 #include "Tokenizer.h"
 #include "Token.h"
+#include "checkregister.h"
+
+
+
 
 int addlw(char *instr);
 int addwf(char *instr);
@@ -16,7 +20,7 @@ int bnov(char *instr);
 int bnz(char *instr);
 int bov(char *instr);
 int bra(char *instr);
-int bz(char *instr);
+int bz(char *instr);/*
 int bcf(char *instr);
 int bsf(char *instr);
 int btfsc(char *instr);
@@ -73,7 +77,7 @@ int tblwt_plus_star(char *instr);
 int tstfsz(char *instr);
 int xorlw(char *instr);
 int xorwf(char *instr);
-
+*/
 
 
 
