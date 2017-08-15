@@ -26,6 +26,7 @@ void test_fda_0xff1_expect_overflow_occur(void)
               fda(tokenizer ,&operandInfo);
             }Catch(ex) {
               dumpErrorMessage(ex, 1);
+              TEST_ASSERT_EQUAL(NOT_VALID_INTEGER,ex->errorCode);
             }
             freeException(ex);
           }
@@ -42,6 +43,7 @@ void test_fda_0x37_with_false_token_type_expect_INVALID_TOKEN_TYPE(void)
             fda(tokenizer ,&operandInfo);
           }Catch(ex) {
             dumpErrorMessage(ex, 1);
+            TEST_ASSERT_EQUAL(NOT_VALID_INTEGER,ex->errorCode);
           }
           freeException(ex);
         }
@@ -61,6 +63,7 @@ void test_handleDirBank_0x37_coma_with_false_token_type_expect_INVALID_TOKEN_TYP
           fda(tokenizer ,&operandInfo);
         }Catch(ex) {
           dumpErrorMessage(ex, 1);
+          TEST_ASSERT_EQUAL(NOT_VALID_OPERATOR,ex->errorCode);
         }
         freeException(ex);
       }
@@ -80,6 +83,7 @@ void test_handleDirBank_0x37_fullstop_expect_INVALID_OPERATOR_TYPE(void)
           fda(tokenizer ,&operandInfo);
         }Catch(ex) {
           dumpErrorMessage(ex, 1);
+          TEST_ASSERT_EQUAL(NOT_VALID_OPERATOR,ex->errorCode);
         }
         freeException(ex);
       }
@@ -101,6 +105,7 @@ void test_handleDirBank_0x37_coma_WREG_with_false_token_type_expect_INVALID_TOKE
         fda(tokenizer ,&operandInfo);
       }Catch(ex) {
         dumpErrorMessage(ex, 1);
+        TEST_ASSERT_EQUAL(NOT_VALID_IDENTIFIER,ex->errorCode);
       }
       freeException(ex);
     }
@@ -122,6 +127,7 @@ void test_handleDirBank_0x37_coma_D_expect_INVALID_IDENTIFIER_TYPE(void)
             fda(tokenizer ,&operandInfo);
           }Catch(ex) {
             dumpErrorMessage(ex, 1);
+            TEST_ASSERT_EQUAL(NOT_VALID_IDENTIFIER,ex->errorCode);
           }
           freeException(ex);
         }
@@ -145,6 +151,7 @@ void test_handleDirBank_0x37_coma_WREG_coma_with_false_token_type_expect_INVALID
       fda(tokenizer ,&operandInfo);
     }Catch(ex) {
       dumpErrorMessage(ex, 1);
+      TEST_ASSERT_EQUAL(NOT_VALID_OPERATOR,ex->errorCode);
     }
     freeException(ex);
   }
@@ -168,6 +175,7 @@ void test_handleDirBank_0x37_coma_WREG_fullstop__expect_INVALID_OPERATOR_TYPE(vo
         fda(tokenizer ,&operandInfo);
       }Catch(ex) {
         dumpErrorMessage(ex, 1);
+        TEST_ASSERT_EQUAL(NOT_VALID_OPERATOR,ex->errorCode);
       }
       freeException(ex);
     }
@@ -192,6 +200,7 @@ void test_handlebank_0x37_coma_WREG_coma_ACCESS_with_false_token_type_expect_INV
     fda(tokenizer ,&operandInfo);
   }Catch(ex) {
     dumpErrorMessage(ex, 1);
+    TEST_ASSERT_EQUAL(NOT_VALID_IDENTIFIER,ex->errorCode);
   }
   freeException(ex);
 }
@@ -216,6 +225,7 @@ void test_handlebank_0x37_coma_WREG_coma_ACCESS_expect_INVALID_IDENTIFIER_TYPE(v
     fda(tokenizer ,&operandInfo);
   }Catch(ex) {
     dumpErrorMessage(ex, 1);
+    TEST_ASSERT_EQUAL(NOT_VALID_IDENTIFIER,ex->errorCode);
   }
   freeException(ex);
 }
@@ -235,6 +245,7 @@ void test_fba_0x37_with_false_token_type_expect_INVALID_TOKEN_TYPE_(void){
 		fba(tokenizer ,&operandInfo);
 	}Catch(ex) {
 		dumpErrorMessage(ex, 1);
+    TEST_ASSERT_EQUAL(NOT_VALID_INTEGER,ex->errorCode);
 	}
 	freeException(ex);
 }
@@ -251,6 +262,7 @@ void test_fba_0xff1_expect_overflow_occur(void){
 		fba(tokenizer ,&operandInfo);
 	}Catch(ex) {
 		dumpErrorMessage(ex, 1);
+    TEST_ASSERT_EQUAL(NOT_VALID_INTEGER,ex->errorCode);
 	}
 	freeException(ex);
 }
@@ -270,6 +282,7 @@ void test_fba_0x37_coma_with_false_token_type_expect_INVALID_TOKEN_TYPE(void)
           fba(tokenizer ,&operandInfo);
         }Catch(ex) {
           dumpErrorMessage(ex, 1);
+          TEST_ASSERT_EQUAL(NOT_VALID_OPERATOR,ex->errorCode);
         }
         freeException(ex);
       }
@@ -288,6 +301,7 @@ void test_fba_0x37_fullstop_expect_INVALID_OPERATOR_TYPE(void){
           fba(tokenizer ,&operandInfo);
         }Catch(ex) {
           dumpErrorMessage(ex, 1);
+          TEST_ASSERT_EQUAL(NOT_VALID_OPERATOR,ex->errorCode);
         }
         freeException(ex);
 }
@@ -307,6 +321,7 @@ void test_handleb_0x37_coma_8_with_false_token_type_expect_INVALID_TOKEN_TYPE(vo
           fba(tokenizer ,&operandInfo);
         }Catch(ex) {
           dumpErrorMessage(ex, 1);
+          TEST_ASSERT_EQUAL(NOT_VALID_INTEGER,ex->errorCode);
         }
         freeException(ex);
 }
@@ -328,6 +343,7 @@ void test_handleb_0x37_coma_8_coma_with_false_token_type_expect_INVALID_TOKEN_TY
           fba(tokenizer ,&operandInfo);
         }Catch(ex) {
           dumpErrorMessage(ex, 1);
+          TEST_ASSERT_EQUAL(NOT_VALID_OPERATOR,ex->errorCode);
         }
         freeException(ex);
 }
@@ -351,6 +367,7 @@ void test_handleb_0x37_coma_8_coma_1_with_false_token_type_expect_INVALID_TOKEN_
           fba(tokenizer ,&operandInfo);
         }Catch(ex) {
           dumpErrorMessage(ex, 1);
+          TEST_ASSERT_EQUAL(NOT_VALID_IDENTIFIER,ex->errorCode);
         }
         freeException(ex);
 }
@@ -374,9 +391,11 @@ void test_handleb_0x37_coma_8_coma_D_expect__INVALID_IDENTIFIER_TYPE(void){
           fba(tokenizer ,&operandInfo);
         }Catch(ex) {
           dumpErrorMessage(ex, 1);
+          TEST_ASSERT_EQUAL(NOT_VALID_IDENTIFIER,ex->errorCode);
         }
         freeException(ex);
 }
+
 
 void test_fa_0x37_with_false_token_type_expect_INVALID_TOKEN_TYPE_(void){
 	CEXCEPTION_T ex;
@@ -391,6 +410,7 @@ void test_fa_0x37_with_false_token_type_expect_INVALID_TOKEN_TYPE_(void){
 		fa(tokenizer ,&operandInfo);
 	}Catch(ex) {
 		dumpErrorMessage(ex, 1);
+    TEST_ASSERT_EQUAL(NOT_VALID_INTEGER,ex->errorCode);
 	}
 	freeException(ex);
 }
@@ -407,6 +427,7 @@ void test_fa_0xff1_expect_overflow_occur(void){
 		fa(tokenizer ,&operandInfo);
 	}Catch(ex) {
 		dumpErrorMessage(ex, 1);
+    TEST_ASSERT_EQUAL(NOT_VALID_INTEGER,ex->errorCode);
 	}
 	freeException(ex);
 }
@@ -426,6 +447,7 @@ void test_fa_0x37_coma_with_false_token_type_expect_INVALID_TOKEN_TYPE(void)
           fa(tokenizer ,&operandInfo);
         }Catch(ex) {
           dumpErrorMessage(ex, 1);
+          TEST_ASSERT_EQUAL(NOT_VALID_OPERATOR,ex->errorCode);
         }
         freeException(ex);
       }
@@ -444,6 +466,7 @@ void test_fa_0x37_fullstop_expect_INVALID_OPERATOR_TYPE(void){
           fa(tokenizer ,&operandInfo);
         }Catch(ex) {
           dumpErrorMessage(ex, 1);
+          TEST_ASSERT_EQUAL(NOT_VALID_OPERATOR,ex->errorCode);
         }
         freeException(ex);
 }
@@ -451,6 +474,7 @@ void test_fa_0x37_fullstop_expect_INVALID_OPERATOR_TYPE(void){
 void test_ff_0xfff1_expect_overflow_occur(void){
 	CEXCEPTION_T ex;
 	OperandInfo operandInfo;
+  OperandInfo1 operandInfo1;
 	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
 	char *instr = "   0xfff1  ";
 	IntegerToken intToken = {TOKEN_INTEGER_TYPE,8,6,instr,"0xff1",0xfff1};
@@ -458,7 +482,7 @@ void test_ff_0xfff1_expect_overflow_occur(void){
 	getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
 
 	Try {
-		ff(tokenizer ,&operandInfo);
+		ff(tokenizer ,&operandInfo,&operandInfo1);
 	}Catch(ex) {
 		dumpErrorMessage(ex, 1);
 	}
@@ -467,6 +491,7 @@ void test_ff_0xfff1_expect_overflow_occur(void){
 void test_ff_0x37_with_false_token_type_expect_INVALID_TOKEN_TYPE_(void){
 	CEXCEPTION_T ex;
 	OperandInfo operandInfo;
+  OperandInfo1 operandInfo1;
 	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
 	char *instr = "   0x37  ";
 	IntegerToken intToken = {TOKEN_IDENTIFIER_TYPE,8,4,instr,"0x37",0x37};
@@ -474,7 +499,7 @@ void test_ff_0x37_with_false_token_type_expect_INVALID_TOKEN_TYPE_(void){
 	getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
 
 	Try {
-		ff(tokenizer ,&operandInfo);
+		ff(tokenizer ,&operandInfo,&operandInfo1);
 	}Catch(ex) {
 		dumpErrorMessage(ex, 1);
 	}
@@ -484,6 +509,7 @@ void test_ff_0x37_coma_with_false_token_type_expect_INVALID_TOKEN_TYPE(void)
       {
         CEXCEPTION_T ex;
         OperandInfo operandInfo;
+        OperandInfo1 operandInfo1;
         Tokenizer *tokenizer = (Tokenizer *)0x0badface;
         char *instr = "   0x37, ";
         IntegerToken intToken = {TOKEN_INTEGER_TYPE,3,4,instr,"0x37",0x37};
@@ -492,7 +518,7 @@ void test_ff_0x37_coma_with_false_token_type_expect_INVALID_TOKEN_TYPE(void)
         getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
         getToken_ExpectAndReturn(tokenizer,(Token *)&opToken);
         Try {
-          ff(tokenizer ,&operandInfo);
+          ff(tokenizer ,&operandInfo,&operandInfo1);
         }Catch(ex) {
           dumpErrorMessage(ex, 1);
         }
@@ -502,6 +528,7 @@ void test_ff_0x37_fullstop_expect_INVALID_OPERATOR_TYPE(void)
       {
         CEXCEPTION_T ex;
         OperandInfo operandInfo;
+        OperandInfo1 operandInfo1;
         Tokenizer *tokenizer = (Tokenizer *)0x0badface;
         char *instr = "   0x37, ";
         IntegerToken intToken = {TOKEN_INTEGER_TYPE,3,4,instr,"0x37",0x37};
@@ -510,7 +537,7 @@ void test_ff_0x37_fullstop_expect_INVALID_OPERATOR_TYPE(void)
         getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
         getToken_ExpectAndReturn(tokenizer,(Token *)&opToken);
         Try {
-          ff(tokenizer ,&operandInfo);
+          ff(tokenizer ,&operandInfo,&operandInfo1);
         }Catch(ex) {
           dumpErrorMessage(ex, 1);
         }
@@ -520,6 +547,7 @@ void test_ff_0x37_coma_0x37_with_false_token_type_expect_INVALID_TOKEN_TYPE(void
       {
         CEXCEPTION_T ex;
         OperandInfo operandInfo;
+        OperandInfo1 operandInfo1;
         Tokenizer *tokenizer = (Tokenizer *)0x0badface;
         char *instr = "   0x37,0x37 ";
         IntegerToken intToken = {TOKEN_INTEGER_TYPE,3,4,instr,"0x37",0x37};
@@ -530,7 +558,7 @@ void test_ff_0x37_coma_0x37_with_false_token_type_expect_INVALID_TOKEN_TYPE(void
         getToken_ExpectAndReturn(tokenizer,(Token *)&opToken);
         getToken_ExpectAndReturn(tokenizer, (Token *)&int1Token);
         Try {
-          ff(tokenizer ,&operandInfo);
+          ff(tokenizer ,&operandInfo,&operandInfo1);
         }Catch(ex) {
           dumpErrorMessage(ex, 1);
         }
@@ -540,6 +568,7 @@ void test_ff_0x37_coma_0xfff1_expect_overflow_occur(void)
       {
         CEXCEPTION_T ex;
         OperandInfo operandInfo;
+        OperandInfo1 operandInfo1;
         Tokenizer *tokenizer = (Tokenizer *)0x0badface;
         char *instr = "   0x37,0x37 ";
         IntegerToken intToken = {TOKEN_INTEGER_TYPE,3,4,instr,"0x37",0x37};
@@ -550,7 +579,7 @@ void test_ff_0x37_coma_0xfff1_expect_overflow_occur(void)
         getToken_ExpectAndReturn(tokenizer,(Token *)&opToken);
         getToken_ExpectAndReturn(tokenizer, (Token *)&int1Token);
         Try {
-          ff(tokenizer ,&operandInfo);
+          ff(tokenizer ,&operandInfo,&operandInfo1);
         }Catch(ex) {
           dumpErrorMessage(ex, 1);
         }
@@ -570,6 +599,7 @@ void test_k_0xfff1_expect_overflow_occur(void){
 		k(tokenizer ,&operandInfo);
 	}Catch(ex) {
 		dumpErrorMessage(ex, 1);
+    TEST_ASSERT_EQUAL(NOT_VALID_INTEGER,ex->errorCode);
 	}
 	freeException(ex);
 }
@@ -586,6 +616,7 @@ void test_k_0x37_with_false_token_type_expect_INVALID_TOKEN_TYPE_(void){
 		k(tokenizer ,&operandInfo);
 	}Catch(ex) {
 		dumpErrorMessage(ex, 1);
+    TEST_ASSERT_EQUAL(NOT_VALID_INTEGER,ex->errorCode);
 	}
 	freeException(ex);
 }
@@ -593,6 +624,7 @@ void test_k_0x37_with_false_token_type_expect_INVALID_TOKEN_TYPE_(void){
 void test_ks_0xfff1_expect_overflow_occur(void){
 	CEXCEPTION_T ex;
 	OperandInfo operandInfo;
+  OperandInfo1 operandInfo1;
 	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
 	char *instr = "   0xfff1  ";
 	IntegerToken intToken = {TOKEN_INTEGER_TYPE,3,6,instr,"0xfff1",0xfff1};
@@ -600,15 +632,17 @@ void test_ks_0xfff1_expect_overflow_occur(void){
 	getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
 
 	Try {
-		ks(tokenizer ,&operandInfo);
+		ks(tokenizer ,&operandInfo,&operandInfo1);
 	}Catch(ex) {
 		dumpErrorMessage(ex, 1);
+    TEST_ASSERT_EQUAL(NOT_VALID_INTEGER,ex->errorCode);
 	}
 	freeException(ex);
 }
 void test_ks_0x37_with_false_token_type_expect_INVALID_TOKEN_TYPE_(void){
 	CEXCEPTION_T ex;
 	OperandInfo operandInfo;
+  OperandInfo1 operandInfo1;
 	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
 	char *instr = "   0x37  ";
 	IntegerToken intToken = {TOKEN_IDENTIFIER_TYPE,3,4,instr,"0x37",0x37};
@@ -616,9 +650,10 @@ void test_ks_0x37_with_false_token_type_expect_INVALID_TOKEN_TYPE_(void){
 	getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
 
 	Try {
-		ks(tokenizer ,&operandInfo);
+		ks(tokenizer ,&operandInfo,&operandInfo1);
 	}Catch(ex) {
 		dumpErrorMessage(ex, 1);
+    TEST_ASSERT_EQUAL(NOT_VALID_INTEGER,ex->errorCode);
 	}
 	freeException(ex);
 }
@@ -636,6 +671,7 @@ void test_handleS_1_with_false_token_expect_INVALID_TOKEN_TYPE(void){
 		handleS(tokenizer ,&operandInfo);
 	}Catch(ex) {
 		dumpErrorMessage(ex, 1);
+    TEST_ASSERT_EQUAL(NOT_VALID_INTEGER,ex->errorCode);
 	}
 	freeException(ex);
 }
@@ -653,6 +689,7 @@ void test_n_0xff1_expect_overflow_occur(void){
 		n(tokenizer ,&operandInfo);
 	}Catch(ex) {
 		dumpErrorMessage(ex, 1);
+    TEST_ASSERT_EQUAL(NOT_VALID_INTEGER,ex->errorCode);
 	}
 	freeException(ex);
 }
@@ -669,6 +706,7 @@ void test_n_0x37_with_false_token_type_expect_INVALID_TOKEN_TYPE_(void){
 		n(tokenizer ,&operandInfo);
 	}Catch(ex) {
 		dumpErrorMessage(ex, 1);
+    TEST_ASSERT_EQUAL(NOT_VALID_INTEGER,ex->errorCode);
 	}
 	freeException(ex);
 }
@@ -676,6 +714,7 @@ void test_n_0x37_with_false_token_type_expect_INVALID_TOKEN_TYPE_(void){
 void test_n1_0x802_expect_overflow_occur(void){
 	CEXCEPTION_T ex;
 	OperandInfo operandInfo;
+  OperandInfo1 operandInfo1;
 	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
 	char *instr = "   0xff1  ";
 	IntegerToken intToken = {TOKEN_INTEGER_TYPE,3,5,instr,"0x802",0x802};
@@ -683,15 +722,17 @@ void test_n1_0x802_expect_overflow_occur(void){
 	getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
 
 	Try {
-		n1(tokenizer ,&operandInfo);
+		n1(tokenizer ,&operandInfo,&operandInfo1);
 	}Catch(ex) {
 		dumpErrorMessage(ex, 1);
+    TEST_ASSERT_EQUAL(NOT_VALID_INTEGER,ex->errorCode);
 	}
 	freeException(ex);
 }
 void test_n1_0x37_with_false_token_type_expect_INVALID_TOKEN_TYPE_(void){
 	CEXCEPTION_T ex;
 	OperandInfo operandInfo;
+  OperandInfo1 operandInfo1;
 	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
 	char *instr = "   0x37  ";
 	IntegerToken intToken = {TOKEN_IDENTIFIER_TYPE,3,4,instr,"0x37",0x37};
@@ -699,9 +740,10 @@ void test_n1_0x37_with_false_token_type_expect_INVALID_TOKEN_TYPE_(void){
 	getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
 
 	Try {
-		n1(tokenizer ,&operandInfo);
+		n1(tokenizer ,&operandInfo,&operandInfo1);
 	}Catch(ex) {
 		dumpErrorMessage(ex, 1);
+    TEST_ASSERT_EQUAL(NOT_VALID_INTEGER,ex->errorCode);
 	}
 	freeException(ex);
 }
@@ -709,6 +751,7 @@ void test_n1_0x37_with_false_token_type_expect_INVALID_TOKEN_TYPE_(void){
 void test_n2_0xfff1_expect_overflow_occur(void){
 	CEXCEPTION_T ex;
 	OperandInfo operandInfo;
+  OperandInfo1 operandInfo1;
 	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
 	char *instr = "   0xfff1  ";
 	IntegerToken intToken = {TOKEN_INTEGER_TYPE,3,6,instr,"0xfff1",0xfff1};
@@ -716,15 +759,17 @@ void test_n2_0xfff1_expect_overflow_occur(void){
 	getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
 
 	Try {
-		n2(tokenizer ,&operandInfo);
+		n2(tokenizer ,&operandInfo,&operandInfo1);
 	}Catch(ex) {
 		dumpErrorMessage(ex, 1);
+    TEST_ASSERT_EQUAL(NOT_VALID_INTEGER,ex->errorCode);
 	}
 	freeException(ex);
 }
 void test_n2_0x37_with_false_token_type_expect_INVALID_TOKEN_TYPE_(void){
 	CEXCEPTION_T ex;
 	OperandInfo operandInfo;
+  OperandInfo1 operandInfo1;
 	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
 	char *instr = "   0x37  ";
 	IntegerToken intToken = {TOKEN_IDENTIFIER_TYPE,3,4,instr,"0x37",0x37};
@@ -732,9 +777,10 @@ void test_n2_0x37_with_false_token_type_expect_INVALID_TOKEN_TYPE_(void){
 	getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
 
 	Try {
-		n2(tokenizer ,&operandInfo);
+		n2(tokenizer ,&operandInfo,&operandInfo1);
 	}Catch(ex) {
 		dumpErrorMessage(ex, 1);
+    TEST_ASSERT_EQUAL(NOT_VALID_INTEGER,ex->errorCode);
 	}
 	freeException(ex);
 }

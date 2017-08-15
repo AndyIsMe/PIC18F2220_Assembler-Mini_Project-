@@ -37,7 +37,6 @@ int addlw(char *instr) {
           }
 }
 
-
 int addwf(char *instr) {
   OperandInfo OperandInfo;
   instr = touppercase(instr);
@@ -122,7 +121,6 @@ int andlw(char *instr) {
         token->type);
           }
 }
-
 
 int andwf(char *instr) {
   OperandInfo OperandInfo;
@@ -636,6 +634,7 @@ int clrwdt(char *instr) {
           token->type);
          }
 }
+
 int comf(char *instr) {
   OperandInfo OperandInfo;
   instr = touppercase(instr);
@@ -780,24 +779,24 @@ int decf(char *instr) {
   IdentifierToken *idToken;
   IntegerToken *intToken;
   OperatorToken *opToken;
-if (token->type == TOKEN_IDENTIFIER_TYPE) {
-    idToken = (IdentifierToken *)token;
-      if (strcmp(idToken->str, "DECF") == 0) {
-        fda(tokenizer, &OperandInfo);
-        return 0x0400 + (OperandInfo.value) + (OperandInfo.dirType) +
-                 (OperandInfo.banktype);
+  if (token->type == TOKEN_IDENTIFIER_TYPE) {
+      idToken = (IdentifierToken *)token;
+        if (strcmp(idToken->str, "DECF") == 0) {
+          fda(tokenizer, &OperandInfo);
+          return 0x0400 + (OperandInfo.value) + (OperandInfo.dirType) +
+                   (OperandInfo.banktype);
+          }
+        else {
+            throwException(NOT_VALID_IDENTIFIER, (void *)idToken,
+             "Invalid identifier, expecting 'DECF', but received '%s'\n", \
+              idToken->str);
+              }
+                                              }
+  else {
+          throwException(NOT_VALID_IDENTIFIER, (void *)token,
+          "Invalid token type, expecting 'TOKEN_IDENTIFIER_TYPE', but received '%d'\n", \
+           token->type);
         }
-      else {
-          throwException(NOT_VALID_IDENTIFIER, (void *)idToken,
-           "Invalid identifier, expecting 'DECF', but received '%s'\n", \
-            idToken->str);
-            }
-                                            }
-else {
-        throwException(NOT_VALID_IDENTIFIER, (void *)token,
-        "Invalid token type, expecting 'TOKEN_IDENTIFIER_TYPE', but received '%d'\n", \
-         token->type);
-      }
 }
 
 int decfsz(char *instr) {
@@ -836,8 +835,8 @@ int dcfsnz(char *instr) {
   IdentifierToken *idToken;
   IntegerToken *intToken;
   OperatorToken *opToken;
-if (token->type == TOKEN_IDENTIFIER_TYPE) {
-    idToken = (IdentifierToken *)token;
+    if (token->type == TOKEN_IDENTIFIER_TYPE) {
+      idToken = (IdentifierToken *)token;
       if (strcmp(idToken->str, "DCFSNZ") == 0) {
         fda(tokenizer, &OperandInfo);
         return 0x4c00 + (OperandInfo.value) + (OperandInfo.dirType) +
@@ -849,11 +848,11 @@ if (token->type == TOKEN_IDENTIFIER_TYPE) {
             idToken->str);
             }
                                             }
-else {
+    else {
         throwException(NOT_VALID_IDENTIFIER, (void *)token,
         "Invalid token type, expecting 'TOKEN_IDENTIFIER_TYPE', but received '%d'\n", \
           token->type);
-      }
+        }
 }
 
 int _goto(char *instr) {
