@@ -32,11 +32,8 @@ int checkdataEven(int data);
 void handleS(Tokenizer *tokenizer ,OperandInfo *operandInfo);
 void n(Tokenizer *tokenizer , OperandInfo *operandInfo);
 void n1(Tokenizer *tokenizer , OperandInfo *operandInfo, OperandInfo1 *operandInfo1);
-
-//void fda(Tokenizer *tokenizer , OperandInfo *operandInfo);
-//void handleDirBank(Tokenizer *tokenizer ,OperandInfo *operandInfo);
-//void handleBank(Tokenizer *tokenizer ,OperandInfo *operandInfo);
-//void handleB(Tokenizer *tokenizer ,OperandInfo *operandInfo);
+void n2(Tokenizer *tokenizer, OperandInfo *operandInfo,
+        OperandInfo1 *operandInfo1);
 
 
 #endif // _CHECKREGISTER_H

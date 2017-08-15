@@ -20,12 +20,13 @@ int bnov(char *instr);
 int bnz(char *instr);
 int bov(char *instr);
 int bra(char *instr);
-int bz(char *instr);/*
+int bz(char *instr);
 int bcf(char *instr);
 int bsf(char *instr);
 int btfsc(char *instr);
 int btfss(char *instr);
 int btg(char *instr);
+int call(char *instr);
 int clrf(char *instr);
 int clrwdt(char *instr);
 int comf(char *instr);
@@ -77,7 +78,7 @@ int tblwt_plus_star(char *instr);
 int tstfsz(char *instr);
 int xorlw(char *instr);
 int xorwf(char *instr);
-*/
+
 
 
 
