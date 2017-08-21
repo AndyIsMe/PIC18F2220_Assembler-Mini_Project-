@@ -54,6 +54,14 @@ void fda(Tokenizer *tokenizer, OperandInfo *operandInfo) {
        token->type);
           }
 }
+//This function is used to check instruction with 3 registers that are f , d and a
+//For 'f',it will check whether the register is an integer type first
+//Then , it will check and make sure the value passed in is less than '0xff'
+//To avoid overflow from occuring
+//For 'd',it will check whether the result is stored in 'WREG' or 'w' or 'F'
+//and passed in the opcode according to the location of the result stored
+//For 'a',it will check the RAM access bit whether 'BANKED' or '1' is selected
+//or 'ACCESS' or '0' is selected
 
 void handleDirBank(Tokenizer *tokenizer, OperandInfo *operandInfo) {
   Token *token = getToken(tokenizer);
@@ -64,10 +72,10 @@ void handleDirBank(Tokenizer *tokenizer, OperandInfo *operandInfo) {
         if ((strcmp(idToken->str, "W") == 0) ||
           (strcmp(idToken->str, "WREG") == 0) || \
           (strcmp(idToken->str,"0")==0)){
-            operandInfo->dirType = 0x0000;
+            operandInfo->dirType = 0x00;
                                         }
         else if ((strcmp(idToken->str, "F") == 0) || (strcmp(idToken->str,"1")==0)){
-          operandInfo->dirType = 0x0200;
+          operandInfo->dirType = 0x02;
                                                                                   }
         else {
           throwException(
@@ -111,10 +119,10 @@ void handleBank(Tokenizer *tokenizer, OperandInfo *operandInfo) {
     if (token->type == TOKEN_IDENTIFIER_TYPE) {
       idToken = (IdentifierToken *)token;
         if ((strcmp(idToken->str, "ACCESS") == 0) || (strcmp(idToken->str,"0") == 0)) {
-          operandInfo->banktype = 0x0000;
+          operandInfo->banktype = 0x00;
                                                                                       }
         else if ((strcmp(idToken->str, "BANKED") ==0) ||(strcmp(idToken->str, "1")==0)) {
-                 operandInfo->banktype = 0x0100;
+                 operandInfo->banktype = 0x01;
                                                                                         }
         else {
           throwException(NOT_VALID_IDENTIFIER, (void *)idToken,
@@ -178,7 +186,15 @@ void fba(Tokenizer *tokenizer, OperandInfo *operandInfo) {
           token->type);
           }
 }
-
+//This function is used to check instruction with 3 registers that are f , b , a
+//For 'f' and 'a',it will do the exact same checking as funtion fda
+//For 'b' , it will check whether an integer is passed in before heading to the next step
+//A maximum of 7 bit is only allowed to be passed in for register 'b'
+//If a value of 8 is passed in for register 'b',the value return will be the same as when
+//a value of 0 is passed in for register 'b'
+//While a value of 9 will be the same as the value of 1 passed in for register 'b'
+//But when a value of 10 is passed in , it will be the exact same thing when value of 8 or 0
+//is passed in
 void handleB(Tokenizer *tokenizer, OperandInfo *operandInfo) {
   Token *token = getToken(tokenizer);
   IdentifierToken *idToken;
@@ -297,6 +313,7 @@ void fa(Tokenizer *tokenizer, OperandInfo *operandInfo) {
         token->type);
           }
 }
+//This function is used to check instruction with 2 registers that are f and a
 
 void ff(Tokenizer *tokenizer, OperandInfo *operandInfo,\
         OperandInfo1 *operandInfo1) {
@@ -630,8 +647,8 @@ void n(Tokenizer *tokenizer, OperandInfo *operandInfo) {
                                       }
         else {
           operandInfo->value = ((((IntegerToken *)token)->value) / 2) - 1;
-          operandInfo->dirType = 0x0000;
-          operandInfo->banktype = 0x0000;
+          operandInfo->dirType = 0x00;
+          operandInfo->banktype = 0x00;
               }
                                             }
     else {
@@ -679,6 +696,7 @@ void n1(Tokenizer *tokenizer, OperandInfo *operandInfo,\
         token->type);
           }
 }
+
 void n2(Tokenizer *tokenizer, OperandInfo *operandInfo,
         OperandInfo1 *operandInfo1) {
   Token *token = getToken(tokenizer);

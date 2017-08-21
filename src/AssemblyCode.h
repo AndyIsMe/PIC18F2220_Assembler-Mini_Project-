@@ -5,14 +5,13 @@
 #include "checkregister.h"
 
 
-
-
-int addlw(char *instr);
-int addwf(char *instr);
-int addwfc(char *instr);
-int andlw(char *instr);
-int andwf(char *instr);
-int bc(char *instr);
+int addlw(char *instr,char**memoryPtr);
+int addwf(char *instr,char**memoryPtr);
+int addwfc(char *instr,char**memoryPtr);
+int andlw(char *instr,char**memoryPtr);
+int andwf(char *instr,char**memoryPtr);
+int bc(char *instr,char**memoryPtr);
+/*
 int bn(char *instr);
 int bnc(char *instr);
 int bnn(char *instr);
@@ -76,7 +75,7 @@ int tblwt_plus_star(char *instr);
 int tstfsz(char *instr);
 int xorlw(char *instr);
 int xorwf(char *instr);
-
+*/
 
 
 
