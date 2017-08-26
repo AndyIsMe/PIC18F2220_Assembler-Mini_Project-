@@ -7,8 +7,7 @@
 #include "error.h"
 #include "Exception.h"
 #include "toupper.h"
-#define M (1024*1024)
-char flash[2*M];
+
 void setUp(void)
 {}
 
@@ -18,6 +17,7 @@ void tearDown(void)
   void test_ADDWF_addwf_0x37_coma_W_coma_ACCESS_expect_0x2437(void){
   	CEXCEPTION_T ex;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
+    uint8_t flash[4] = {0,0,0,0};
     char *memory = flash;
     char instr[] = "   AdDwF   0x37,W,ACCESS  ";
   	IdentifierToken addwfToken = {TOKEN_IDENTIFIER_TYPE, 3,5,instr,"ADDWF"};
@@ -37,6 +37,7 @@ void tearDown(void)
 
   	Try {
   		addwf(instr,&memory);
+      TEST_ASSERT_EQUAL_PTR(&flash[2],memory);
   		printf("\nthe instruction[   %s   ] opcode is 0x%02x%02x",instr,flash[0],flash[1]);
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
@@ -44,6 +45,7 @@ void tearDown(void)
   }
   void test_ADDWF_addwf_0x37_coma_W_coma_0_expect_0x2437(void){
   	CEXCEPTION_T ex;
+    uint8_t flash[4] = {0,0,0,0};
   	char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   AdDwF   0x37,W,0  ";
@@ -64,6 +66,7 @@ void tearDown(void)
 
   	Try {
   		addwf(instr,&memory);
+      TEST_ASSERT_EQUAL_PTR(&flash[2],memory);
   		printf("\nthe instruction[   %s   ] opcode is 0x%02x%02x",instr,flash[0],flash[1]);
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
@@ -71,6 +74,7 @@ void tearDown(void)
   }
   void test_ADDWF_addwf_0x37_coma_WREG_coma_ACCESS_expect_0x2437(void){
   	CEXCEPTION_T ex;
+    uint8_t flash[4] = {0,0,0,0};
   	char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   AdDwF   0x37,WREG,ACCESS  ";
@@ -91,6 +95,7 @@ void tearDown(void)
 
   	Try {
   		addwf(instr,&memory);
+      TEST_ASSERT_EQUAL_PTR(&flash[2],memory);
   		printf("\nthe instruction[   %s   ] opcode is 0x%02x%02x",instr,flash[0],flash[1]);
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
@@ -98,6 +103,7 @@ void tearDown(void)
   }
   void test_ADDWF_addwf_0x37_coma_WREG_coma_0_expect_0x2437(void){
   	CEXCEPTION_T ex;
+    uint8_t flash[4] = {0,0,0,0};
   	char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   AdDwF   0x37,WREG,0  ";
@@ -118,6 +124,7 @@ void tearDown(void)
 
   	Try {
   		addwf(instr,&memory);
+      TEST_ASSERT_EQUAL_PTR(&flash[2],memory);
   		printf("\nthe instruction[   %s   ] opcode is 0x%02x%02x",instr,flash[0],flash[1]);
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
@@ -125,6 +132,7 @@ void tearDown(void)
   }
   void test_ADDWF_addwf_0x37_coma_WREG_coma_BANKED_expect_0x2537(void){
   	CEXCEPTION_T ex;
+    uint8_t flash[4] = {0,0,0,0};
   	char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   AdDwF   0x37,WREG,ACCESS  ";
@@ -145,6 +153,7 @@ void tearDown(void)
 
   	Try {
   		addwf(instr,&memory);
+      TEST_ASSERT_EQUAL_PTR(&flash[2],memory);
   		printf("\nthe instruction[   %s   ] opcode is 0x%02x%02x",instr,flash[0],flash[1]);
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
@@ -152,6 +161,7 @@ void tearDown(void)
   }
   void test_ADDWF_addwf_0x37_coma_WREG_coma_1_expect_0x2537(void){
   	CEXCEPTION_T ex;
+    uint8_t flash[4] = {0,0,0,0};
   	char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   AdDwF   0x37,WREG,1  ";
@@ -172,6 +182,7 @@ void tearDown(void)
 
   	Try {
   		addwf(instr,&memory);
+      TEST_ASSERT_EQUAL_PTR(&flash[2],memory);
   		printf("\nthe instruction[   %s   ] opcode is 0x%02x%02x",instr,flash[0],flash[1]);
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
@@ -179,6 +190,7 @@ void tearDown(void)
   }
   void test_ADDWF_addwf_0x37_coma_F_coma_ACCESS_expect_0x2637(void){
   	CEXCEPTION_T ex;
+    uint8_t flash[4] = {0,0,0,0};
   	char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   AdDwF   0x37,f,ACCESS  ";
@@ -199,6 +211,7 @@ void tearDown(void)
 
   	Try {
   		addwf(instr,&memory);
+      TEST_ASSERT_EQUAL_PTR(&flash[2],memory);
   		printf("\nthe instruction[   %s   ] opcode is 0x%02x%02x",instr,flash[0],flash[1]);
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
@@ -206,6 +219,7 @@ void tearDown(void)
   }
   void test_ADDWF_addwf_0x37_coma_1_coma_ACCESS_expect_0x2637(void){
   	CEXCEPTION_T ex;
+    uint8_t flash[4] = {0,0,0,0};
   	char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   AdDwF   0x37,f,ACCESS  ";
@@ -226,6 +240,7 @@ void tearDown(void)
 
   	Try {
   		addwf(instr,&memory);
+      TEST_ASSERT_EQUAL_PTR(&flash[2],memory);
   		printf("\nthe instruction[   %s   ] opcode is 0x%02x%02x",instr,flash[0],flash[1]);
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
@@ -233,6 +248,7 @@ void tearDown(void)
   }
   void test_ADDWF_addwf_0x37_coma_F_coma_BANKED_expect_2737(void){
   	CEXCEPTION_T ex;
+    uint8_t flash[4] = {0,0,0,0};
   	char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   AdDwF   0x37,f,BaNkEd  ";
@@ -253,6 +269,7 @@ void tearDown(void)
 
   	Try {
   		addwf(instr,&memory);
+      TEST_ASSERT_EQUAL_PTR(&flash[2],memory);
   		printf("\nthe instruction[   %s   ] opcode is 0x%02x%02x",instr,flash[0],flash[1]);
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
@@ -260,6 +277,7 @@ void tearDown(void)
   }
   void test_ADDWF_addwf_0x37_coma_1_coma_BANKED_expect_2737(void){
   	CEXCEPTION_T ex;
+    uint8_t flash[4] = {0,0,0,0};
   	char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   AdDwF   0x37,f,BaNkEd  ";
@@ -280,6 +298,7 @@ void tearDown(void)
 
   	Try {
   		addwf(instr,&memory);
+      TEST_ASSERT_EQUAL_PTR(&flash[2],memory);
   		printf("\nthe instruction[   %s   ] opcode is 0x%02x%02x",instr,flash[0],flash[1]);
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
@@ -287,6 +306,7 @@ void tearDown(void)
   }
   void test_ADDWF_addwf_0x37_coma_0_coma_0_expect_0x2437(void){
   	CEXCEPTION_T ex;
+    uint8_t flash[4] = {0,0,0,0};
   	char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   AdDwF   0x37,0,0  ";
@@ -307,6 +327,7 @@ void tearDown(void)
 
   	Try {
   		addwf(instr,&memory);
+      TEST_ASSERT_EQUAL_PTR(&flash[2],memory);
   		printf("\nthe instruction[   %s   ] opcode is 0x%02x%02x",instr,flash[0],flash[1]);
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
@@ -314,6 +335,7 @@ void tearDown(void)
   }
   void test_ADDWF_addwf_0x37_coma_0_coma_1_expect_0x2537(void){
   	CEXCEPTION_T ex;
+    uint8_t flash[4] = {0,0,0,0};
   	char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   AdDwF   0x37,0,0  ";
@@ -334,6 +356,7 @@ void tearDown(void)
 
   	Try {
   		addwf(instr,&memory);
+      TEST_ASSERT_EQUAL_PTR(&flash[2],memory);
   		printf("\nthe instruction[   %s   ] opcode is 0x%02x%02x",instr,flash[0],flash[1]);
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
@@ -341,6 +364,7 @@ void tearDown(void)
   }
   void test_ADDWF_addwf_0x37_coma_1_coma_0_expect_0x2637(void){
   	CEXCEPTION_T ex;
+    uint8_t flash[4] = {0,0,0,0};
   	char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   AdDwF   0x37,1,0  ";
@@ -361,6 +385,7 @@ void tearDown(void)
 
   	Try {
   		addwf(instr,&memory);
+      TEST_ASSERT_EQUAL_PTR(&flash[2],memory);
   		printf("\nthe instruction[   %s   ] opcode is 0x%02x%02x",instr,flash[0],flash[1]);
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
@@ -368,6 +393,7 @@ void tearDown(void)
   }
   void test_ADDWF_addwf_0x37_coma_1_coma_1_expect_0x2737(void){
   	CEXCEPTION_T ex;
+    uint8_t flash[4] = {0,0,0,0};
   	char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   AdDwF   0x37,1,0  ";
@@ -388,6 +414,7 @@ void tearDown(void)
 
   	Try {
   		addwf(instr,&memory);
+      TEST_ASSERT_EQUAL_PTR(&flash[2],memory);
   		printf("\nthe instruction[   %s   ] opcode is 0x%02x%02x",instr,flash[0],flash[1]);
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
@@ -395,6 +422,7 @@ void tearDown(void)
   }
   void test_ADDWF_addvf_expect_NOT_VALID_IDENTIFIER(void){
   	CEXCEPTION_T ex;
+    uint8_t flash[4] = {0,0,0,0};
   	char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   AdDvF    ";
@@ -412,6 +440,7 @@ void tearDown(void)
   }
   void test_ADDWF_addwf_with_false_token_type_expect_INVALID_TOKEN_TYPE(void){
   	CEXCEPTION_T ex;
+    uint8_t flash[4] = {0,0,0,0};
   	char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   AdDwF    ";
@@ -430,6 +459,7 @@ void tearDown(void)
   }
   void test_ADDWF_addwf_0x37_with_false_token_type_expect_INVALID_TOKEN_TYPE(void){
   	CEXCEPTION_T ex;
+    uint8_t flash[4] = {0,0,0,0};
   	char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   AdDwF   0x37  ";
@@ -450,6 +480,7 @@ void tearDown(void)
   }
   void test_ADDWF_addwf_0xff_expect_overflow_occur(void){
   	CEXCEPTION_T ex;
+    uint8_t flash[4] = {0,0,0,0};
   	char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   AdDwF   0xff1  ";
@@ -470,6 +501,7 @@ void tearDown(void)
   }
   void test_ADDWF_addwf_0x37_coma_with_false_token_type_expect_INVALID_TOKEN_TYPE(void){
   	CEXCEPTION_T ex;
+    uint8_t flash[4] = {0,0,0,0};
   	char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   AdDwF   0x37,  ";
@@ -492,6 +524,7 @@ void tearDown(void)
   }
   void test_ADDWF_addwf_0x37_fullstop_expect_INVALID_OPERATOR_TYPE(void){
   	CEXCEPTION_T ex;
+    uint8_t flash[4] = {0,0,0,0};
   	char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   AdDwF   0x37.  ";
@@ -514,6 +547,7 @@ void tearDown(void)
   }
   void test_ADDWF_addwf_0x37_coma_F_with_false_token_type_expect_INVALID_TOKEN_TYPE(void){
   	CEXCEPTION_T ex;
+    uint8_t flash[4] = {0,0,0,0};
   	char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   AdDwF   0x37,F  ";
@@ -537,6 +571,7 @@ void tearDown(void)
   }
   void test_ADDWF_addwf_0x37_coma_D_expect_INVALID_IDENTIFIER_TYPE(void){
   	CEXCEPTION_T ex;
+    uint8_t flash[4] = {0,0,0,0};
   	char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   AdDwF   0x37,D  ";
@@ -560,6 +595,7 @@ void tearDown(void)
   }
   void test_ADDWF_addwf_0x37_coma_F_coma_with_false_token_type_expect_INVALID_TOKEN_TYPE(void){
   	CEXCEPTION_T ex;
+    uint8_t flash[4] = {0,0,0,0};
   	char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   AdDwF   0x37,F,  ";
@@ -585,6 +621,7 @@ void tearDown(void)
   }
   void test_ADDWF_addwf_0x37_coma_F_coma_BANKED_with_false_token_type_expect_INVALID_TOKEN_TYPE(void){
   	CEXCEPTION_T ex;
+    uint8_t flash[4] = {0,0,0,0};
   	char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   AdDwF   0x37,F,BANKED  ";

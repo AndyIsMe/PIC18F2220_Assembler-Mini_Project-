@@ -16,7 +16,8 @@ void tearDown(void)
 
   void test_SETF_setf_0x37_coma_0_expect_0x6837(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   Setf   0x37,0  ";
   	IdentifierToken setfToken = {TOKEN_IDENTIFIER_TYPE, 3,4,instr,"SETF"};
@@ -31,15 +32,18 @@ void tearDown(void)
     getToken_ExpectAndReturn(tokenizer, (Token *)&ACCESSToken);
 
   	Try {
-  		machineCode = setf(instr);
-  		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+  		setf(instr,&memory);
+      TEST_ASSERT_EQUAL_PTR(&flash[2],memory);
+      printf("\nthe instruction[   %s   ] opcode is 0x%02x%02x",instr,flash[0],flash[1]);
+
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
   	}
   }
   void test_SETF_setf_0x37_coma_ACCESS_expect_0x6837(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   Setf   0x37,ACCESS  ";
   	IdentifierToken setfToken = {TOKEN_IDENTIFIER_TYPE, 3,4,instr,"SETF"};
@@ -54,15 +58,18 @@ void tearDown(void)
     getToken_ExpectAndReturn(tokenizer, (Token *)&ACCESSToken);
 
   	Try {
-  		machineCode = setf(instr);
-  		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+  		setf(instr,&memory);
+      TEST_ASSERT_EQUAL_PTR(&flash[2],memory);
+      printf("\nthe instruction[   %s   ] opcode is 0x%02x%02x",instr,flash[0],flash[1]);
+
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
   	}
   }
   void test_SETF_setf_0x37_coma_BANKED_expect_0x6937(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   Setf   0x37,BANKED  ";
   	IdentifierToken setfToken = {TOKEN_IDENTIFIER_TYPE, 3,5,instr,"SETF"};
@@ -77,15 +84,18 @@ void tearDown(void)
     getToken_ExpectAndReturn(tokenizer, (Token *)&BANKEDToken);
 
   	Try {
-  		machineCode = setf(instr);
-  		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+  		setf(instr,&memory);
+      TEST_ASSERT_EQUAL_PTR(&flash[2],memory);
+      printf("\nthe instruction[   %s   ] opcode is 0x%02x%02x",instr,flash[0],flash[1]);
+
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
   	}
   }
   void test_SETF_setf_0x37_coma_1_expect_0x6937(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   Setf   0x37,1  ";
   	IdentifierToken setfToken = {TOKEN_IDENTIFIER_TYPE, 3,5,instr,"SETF"};
@@ -100,15 +110,18 @@ void tearDown(void)
     getToken_ExpectAndReturn(tokenizer, (Token *)&BANKEDToken);
 
   	Try {
-  		machineCode = setf(instr);
-  		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+  		setf(instr,&memory);
+      TEST_ASSERT_EQUAL_PTR(&flash[2],memory);
+      printf("\nthe instruction[   %s   ] opcode is 0x%02x%02x",instr,flash[0],flash[1]);
+
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
   	}
   }
   void test_SETF_seft_expect_NOT_VALID_IDENTIFIER(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   SEfT    ";
   	IdentifierToken setfToken = {TOKEN_IDENTIFIER_TYPE, 3,4,instr,"SEFT"};
@@ -117,7 +130,7 @@ void tearDown(void)
   	getToken_ExpectAndReturn(tokenizer, (Token *)&setfToken);//
 
   	Try {
-  		setf(instr);
+  		setf(instr,&memory);
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
       TEST_ASSERT_EQUAL(NOT_VALID_IDENTIFIER,ex->errorCode);
@@ -126,7 +139,8 @@ void tearDown(void)
   }
   void test_SETF_setf_with_false_token_type_expect_INVALID_TOKEN_TYPE_(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   sEtF      ";
   	IdentifierToken setfToken = {TOKEN_OPERATOR_TYPE, 3,4,instr,"SETF"};
@@ -134,7 +148,7 @@ void tearDown(void)
   	initTokenizer_ExpectAndReturn(instr,tokenizer);
   	getToken_ExpectAndReturn(tokenizer, (Token *)&setfToken);//
   	Try {
-   		setf(instr);
+   		setf(instr,&memory);
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
       TEST_ASSERT_EQUAL(NOT_VALID_IDENTIFIER,ex->errorCode);

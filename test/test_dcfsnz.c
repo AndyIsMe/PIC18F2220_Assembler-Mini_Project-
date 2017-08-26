@@ -16,7 +16,8 @@ void tearDown(void)
 
   void test_DCFSNZ_dcfsnz_0x37_coma_0_coma_ACCESS_expect_0x4c37(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   dcFsnZ  0x37,0,ACCESS  ";
   	IdentifierToken dcfsnzToken = {TOKEN_IDENTIFIER_TYPE, 3,6,instr,"DCFSNZ"};
@@ -35,15 +36,18 @@ void tearDown(void)
     getToken_ExpectAndReturn(tokenizer, (Token *)&ACCESSToken);
 
   	Try {
-  		machineCode = dcfsnz(instr);
-  		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+  		dcfsnz(instr,&memory);
+      TEST_ASSERT_EQUAL_PTR(&flash[2],memory);
+      printf("\nthe instruction[   %s   ] opcode is 0x%02x%02x",instr,flash[0],flash[1]);
+
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
   	}
   }
   void test_DCFSNZ_dcfsnz_0x37_coma_WREG_coma_ACCESS_expect_0x4c37(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   dcFsnZ  0x37,WREG,ACCESS  ";
   	IdentifierToken dcfsnzToken = {TOKEN_IDENTIFIER_TYPE, 3,6,instr,"DCFSNZ"};
@@ -62,15 +66,18 @@ void tearDown(void)
     getToken_ExpectAndReturn(tokenizer, (Token *)&ACCESSToken);
 
   	Try {
-  		machineCode = dcfsnz(instr);
-  		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+  		dcfsnz(instr,&memory);
+      TEST_ASSERT_EQUAL_PTR(&flash[2],memory);
+      printf("\nthe instruction[   %s   ] opcode is 0x%02x%02x",instr,flash[0],flash[1]);
+
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
   	}
   }
   void test_DCFSNZ_dcfsnz_0x37_coma_WREG_coma_BANKED_expect_0x4d37(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   dcFsNz  0x37,WREG,BANKED  ";
   	IdentifierToken dcfsnzToken = {TOKEN_IDENTIFIER_TYPE, 3,6,instr,"DCFSNZ"};
@@ -89,15 +96,18 @@ void tearDown(void)
     getToken_ExpectAndReturn(tokenizer, (Token *)&BANKEDToken);
 
   	Try {
-  		machineCode = dcfsnz(instr);
-  		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+  		dcfsnz(instr,&memory);
+      TEST_ASSERT_EQUAL_PTR(&flash[2],memory);
+      printf("\nthe instruction[   %s   ] opcode is 0x%02x%02x",instr,flash[0],flash[1]);
+
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
   	}
   }
   void test_DCFSNZ_dcfsnz_0x37_coma_F_coma_ACCESS_expect_0x4e37(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   dcFsNz  0x37,F,ACCESS  ";
   	IdentifierToken dcfsnzToken = {TOKEN_IDENTIFIER_TYPE, 3,6,instr,"DCFSNZ"};
@@ -116,15 +126,18 @@ void tearDown(void)
     getToken_ExpectAndReturn(tokenizer, (Token *)&ACCESSToken);
 
   	Try {
-  		machineCode = dcfsnz(instr);
-  		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+  		dcfsnz(instr,&memory);
+      TEST_ASSERT_EQUAL_PTR(&flash[2],memory);
+      printf("\nthe instruction[   %s   ] opcode is 0x%02x%02x",instr,flash[0],flash[1]);
+
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
   	}
   }
   void test_DCFSNZ_dcfsnz_0x37_coma_F_coma_BANKED_expect_0x4f37(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   dcFsnZ  0x37,F,BANKED  ";
   	IdentifierToken dcfsnzToken = {TOKEN_IDENTIFIER_TYPE, 3,6,instr,"DCFSNZ"};
@@ -143,15 +156,18 @@ void tearDown(void)
     getToken_ExpectAndReturn(tokenizer, (Token *)&BANKEDToken);
 
   	Try {
-  		machineCode = dcfsnz(instr);
-  		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+  		dcfsnz(instr,&memory);
+      TEST_ASSERT_EQUAL_PTR(&flash[2],memory);
+      printf("\nthe instruction[   %s   ] opcode is 0x%02x%02x",instr,flash[0],flash[1]);
+
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
   	}
   }
   void test_DCFSNZ_dcfsnz_0x37_coma_F_coma_1_expect_0x4f37(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   dcFsnZ  0x37,F,1  ";
   	IdentifierToken dcfsnzToken = {TOKEN_IDENTIFIER_TYPE, 3,6,instr,"DCFSNZ"};
@@ -170,15 +186,18 @@ void tearDown(void)
     getToken_ExpectAndReturn(tokenizer, (Token *)&BANKEDToken);
 
   	Try {
-  		machineCode = dcfsnz(instr);
-  		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+  		dcfsnz(instr,&memory);
+      TEST_ASSERT_EQUAL_PTR(&flash[2],memory);
+      printf("\nthe instruction[   %s   ] opcode is 0x%02x%02x",instr,flash[0],flash[1]);
+
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
   	}
   }
   void test_DCFSNZ_dcfsnz_0x37_coma_1_coma_1_expect_0x4f37(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   dcFsnZ  0x37,1,1  ";
   	IdentifierToken dcfsnzToken = {TOKEN_IDENTIFIER_TYPE, 3,6,instr,"DCFSNZ"};
@@ -197,15 +216,18 @@ void tearDown(void)
     getToken_ExpectAndReturn(tokenizer, (Token *)&BANKEDToken);
 
   	Try {
-  		machineCode = dcfsnz(instr);
-  		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+  		dcfsnz(instr,&memory);
+      TEST_ASSERT_EQUAL_PTR(&flash[2],memory);
+      printf("\nthe instruction[   %s   ] opcode is 0x%02x%02x",instr,flash[0],flash[1]);
+
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
   	}
   }
   void test_DCFSNZ_dcdsnz_expect_NOT_VALID_IDENTIFIER(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   DCdsnZ    ";
   	IdentifierToken dcfsnzToken = {TOKEN_IDENTIFIER_TYPE, 3,6,instr,"DCDSNZ"};
@@ -214,8 +236,8 @@ void tearDown(void)
   	getToken_ExpectAndReturn(tokenizer, (Token *)&dcfsnzToken);//
 
   	Try {
-  		machineCode = dcfsnz(instr);
-  		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+  		dcfsnz(instr,&memory);
+
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
       TEST_ASSERT_EQUAL(NOT_VALID_IDENTIFIER,ex->errorCode);
@@ -224,7 +246,8 @@ void tearDown(void)
   }
   void test_DCFSNZ_dcfsnz_with_false_token_type_expect_INVALID_TOKEN_TYPE_(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   DCFsnZ      ";
   	IdentifierToken dcfsnzToken = {TOKEN_OPERATOR_TYPE, 3,6,instr,"DCFSNZ"};
@@ -232,7 +255,7 @@ void tearDown(void)
   	initTokenizer_ExpectAndReturn(instr,tokenizer);
   	getToken_ExpectAndReturn(tokenizer, (Token *)&dcfsnzToken);//
   	Try {
-   		dcfsnz(instr);
+   		dcfsnz(instr,&memory);
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
       TEST_ASSERT_EQUAL(NOT_VALID_IDENTIFIER,ex->errorCode);

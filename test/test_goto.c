@@ -17,7 +17,8 @@ void tearDown(void)
 
   void test_GOTO_goto_0xbff_expect_0xeffff005(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
   	char instr[] = "   goTO   0xbff  ";
   	IdentifierToken gotoToken = {TOKEN_IDENTIFIER_TYPE, 3,4,instr,"GOTO"};
@@ -30,15 +31,18 @@ void tearDown(void)
 
 
   	Try {
-  		machineCode = _goto(instr);
-  		printf("\nthe instruction[   %s   ] opcode is %#8x",instr,machineCode);
+  		_goto(instr,&memory);
+      TEST_ASSERT_EQUAL_PTR(&flash[4],memory);
+      printf("\nthe instruction[   %s   ] opcode is 0x%02x%02x 0x%02x%02x",instr,flash[0],flash[1],flash[2],flash[3]);
+
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
   	}
   }
   void test_GOTO_goto_0xfe_expect_0xef7ff000(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
   	char instr[] = "   goTO   0xfe  ";
   	IdentifierToken gotoToken = {TOKEN_IDENTIFIER_TYPE, 3,4,instr,"GOTO"};
@@ -50,15 +54,18 @@ void tearDown(void)
   	getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
 
   	Try {
-  		machineCode = _goto(instr);
-  		printf("\nthe instruction[   %s   ] opcode is %#8x",instr,machineCode);
+  		_goto(instr,&memory);
+      TEST_ASSERT_EQUAL_PTR(&flash[4],memory);
+      printf("\nthe instruction[   %s   ] opcode is 0x%02x%02x 0x%02x%02x",instr,flash[0],flash[1],flash[2],flash[3]);
+
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
   	}
   }
   void test_GOTO_goto_0xf_expect_0xef07f000(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
   	char instr[] = "   goTO   0xf  ";
   	IdentifierToken gotoToken = {TOKEN_IDENTIFIER_TYPE, 3,4,instr,"GOTO"};
@@ -69,15 +76,18 @@ void tearDown(void)
   	getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
 
   	Try {
-  		machineCode = _goto(instr);
-  		printf("\nthe instruction[   %s   ] opcode is %#8x",instr,machineCode);
+  		_goto(instr,&memory);
+      TEST_ASSERT_EQUAL_PTR(&flash[4],memory);
+      printf("\nthe instruction[   %s   ] opcode is 0x%02x%02x 0x%02x%02x",instr,flash[0],flash[1],flash[2],flash[3]);
+
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
   	}
   }
   void test_GOTO_goto_0x0_expect_0xef00f000(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
   	char instr[] = "   goTO   0x0  ";
   	IdentifierToken gotoToken = {TOKEN_IDENTIFIER_TYPE, 3,4,instr,"GOTO"};
@@ -88,15 +98,18 @@ void tearDown(void)
   	getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
 
   	Try {
-  		machineCode = _goto(instr);
-  		printf("\nthe instruction[   %s   ] opcode is %#8x",instr,machineCode);
+  		_goto(instr,&memory);
+      TEST_ASSERT_EQUAL_PTR(&flash[4],memory);
+      printf("\nthe instruction[   %s   ] opcode is 0x%02x%02x 0x%02x%02x",instr,flash[0],flash[1],flash[2],flash[3]);
+
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
   	}
   }
   void test_GOTO_gotd_expect_NOT_VALID_IDENTIFIER(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   gOtD    ";
   	IdentifierToken gotoToken = {TOKEN_IDENTIFIER_TYPE, 3,4,instr,"GOTD"};
@@ -105,8 +118,10 @@ void tearDown(void)
   	getToken_ExpectAndReturn(tokenizer, (Token *)&gotoToken);//
 
   	Try {
-  		machineCode = _goto(instr);
-  		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+  		_goto(instr,&memory);
+      TEST_ASSERT_EQUAL_PTR(&flash[2],memory);
+      printf("\nthe instruction[   %s   ] opcode is 0x%02x%02x",instr,flash[0],flash[1]);
+
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
       TEST_ASSERT_EQUAL(NOT_VALID_IDENTIFIER,ex->errorCode);
@@ -115,7 +130,8 @@ void tearDown(void)
   }
   void test_GOTO_goto_with_false_token_type_expect_INVALID_TOKEN_TYPE_(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   GoTo      ";
   	IdentifierToken gotoToken = {TOKEN_OPERATOR_TYPE, 3,4,instr,"GOTO"};
@@ -123,7 +139,7 @@ void tearDown(void)
   	initTokenizer_ExpectAndReturn(instr,tokenizer);
   	getToken_ExpectAndReturn(tokenizer, (Token *)&gotoToken);//
   	Try {
-   		_goto(instr);
+   		_goto(instr,&memory);
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
       TEST_ASSERT_EQUAL(NOT_VALID_IDENTIFIER,ex->errorCode);

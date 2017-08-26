@@ -17,7 +17,8 @@ void tearDown(void)
   void test_BCF_bcf_0x37_4_ACCESS_expect_0x9837(void){
     CEXCEPTION_T ex;
     int machineCode;
-    //OperandInfo operandInfo;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
     Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   bCf   0x37,4,ACCESS  ";
     IdentifierToken bcfToken = {TOKEN_IDENTIFIER_TYPE,3,3,instr,"BCF"};
@@ -36,8 +37,9 @@ void tearDown(void)
     getToken_ExpectAndReturn(tokenizer, (Token *)&ACCESSToken);
 
     Try {
-      machineCode = bcf(instr);
-  		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+      bcf(instr,&memory);
+      TEST_ASSERT_EQUAL_PTR(&flash[2],memory);
+  		printf("\nthe instruction[   %s   ] opcode is 0x%02x%02x",instr,flash[0],flash[1]);
 
     }Catch(ex) {
       dumpErrorMessage(ex, 1);
@@ -45,7 +47,8 @@ void tearDown(void)
   }
   void test_BCF_bcf_0x37_4_0_expect_0x9837(void){
     CEXCEPTION_T ex;
-    int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
     Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   bCf   0x37,4,0  ";
     IdentifierToken bcfToken = {TOKEN_IDENTIFIER_TYPE,3,3,instr,"BCF"};
@@ -64,8 +67,9 @@ void tearDown(void)
     getToken_ExpectAndReturn(tokenizer, (Token *)&ACCESSToken);
 
     Try {
-      machineCode = bcf(instr);
-  		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+      bcf(instr,&memory);
+      TEST_ASSERT_EQUAL_PTR(&flash[2],memory);
+      printf("\nthe instruction[   %s   ] opcode is 0x%02x%02x",instr,flash[0],flash[1]);
 
     }Catch(ex) {
       dumpErrorMessage(ex, 1);
@@ -74,7 +78,8 @@ void tearDown(void)
   void test_BCF_bcf_0x37_4_BANKED_expect_0x9937(void){
     CEXCEPTION_T ex;
     OperandInfo operandInfo;
-    int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
     Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   bCf   0x37,4,BANKED  ";
     IdentifierToken bcfToken = {TOKEN_IDENTIFIER_TYPE,3,3,instr,"BCF"};
@@ -93,8 +98,10 @@ void tearDown(void)
     getToken_ExpectAndReturn(tokenizer, (Token *)&BANKEDToken);
 
     Try {
-      machineCode = bcf(instr);
-  		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+      bcf(instr,&memory);
+      TEST_ASSERT_EQUAL_PTR(&flash[2],memory);
+      printf("\nthe instruction[   %s   ] opcode is 0x%02x%02x",instr,flash[0],flash[1]);
+
     }Catch(ex) {
       dumpErrorMessage(ex, 1);
     }
@@ -102,7 +109,8 @@ void tearDown(void)
   void test_BCF_bcf_0x37_4_1_expect_0x9937(void){
     CEXCEPTION_T ex;
     OperandInfo operandInfo;
-    int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
     Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   bCf   0x37,4,1  ";
     IdentifierToken bcfToken = {TOKEN_IDENTIFIER_TYPE,3,3,instr,"BCF"};
@@ -120,8 +128,9 @@ void tearDown(void)
     getToken_ExpectAndReturn(tokenizer, (Token *)&op1Token);
     getToken_ExpectAndReturn(tokenizer, (Token *)&BANKEDToken);
     Try {
-      machineCode = bcf(instr);
-  		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+      bcf(instr,&memory);
+      TEST_ASSERT_EQUAL_PTR(&flash[2],memory);
+      printf("\nthe instruction[   %s   ] opcode is 0x%02x%02x",instr,flash[0],flash[1]);
 
     }Catch(ex) {
       dumpErrorMessage(ex, 1);
@@ -130,7 +139,8 @@ void tearDown(void)
   void test_BCF_bcf_0x37_8_1_expect_0x9137(void){
     CEXCEPTION_T ex;
     OperandInfo operandInfo;
-    int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
     Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   bCf   0x37,8,1  ";
     IdentifierToken bcfToken = {TOKEN_IDENTIFIER_TYPE,3,3,instr,"BCF"};
@@ -148,8 +158,9 @@ void tearDown(void)
     getToken_ExpectAndReturn(tokenizer, (Token *)&op1Token);
     getToken_ExpectAndReturn(tokenizer, (Token *)&BANKEDToken);
     Try {
-      machineCode = bcf(instr);
-  		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+      bcf(instr,&memory);
+      TEST_ASSERT_EQUAL_PTR(&flash[2],memory);
+      printf("\nthe instruction[   %s   ] opcode is 0x%02x%02x",instr,flash[0],flash[1]);
 
     }Catch(ex) {
       dumpErrorMessage(ex, 1);
@@ -158,7 +169,8 @@ void tearDown(void)
   void test_BCF_bcf_0x37_9_1_expect_0x9337(void){
     CEXCEPTION_T ex;
     OperandInfo operandInfo;
-    int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
     Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   bCf   0x37,9,1  ";
     IdentifierToken bcfToken = {TOKEN_IDENTIFIER_TYPE,3,3,instr,"BCF"};
@@ -176,8 +188,9 @@ void tearDown(void)
     getToken_ExpectAndReturn(tokenizer, (Token *)&op1Token);
     getToken_ExpectAndReturn(tokenizer, (Token *)&BANKEDToken);
     Try {
-      machineCode = bcf(instr);
-  		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+      bcf(instr,&memory);
+      TEST_ASSERT_EQUAL_PTR(&flash[2],memory);
+      printf("\nthe instruction[   %s   ] opcode is 0x%02x%02x",instr,flash[0],flash[1]);
 
     }Catch(ex) {
       dumpErrorMessage(ex, 1);
@@ -186,7 +199,8 @@ void tearDown(void)
   void test_BCF_bcf_0x37_10_1_expect_0x9137(void){
     CEXCEPTION_T ex;
     OperandInfo operandInfo;
-    int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
     Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   bCf   0x37,10,1  ";
     IdentifierToken bcfToken = {TOKEN_IDENTIFIER_TYPE,3,3,instr,"BCF"};
@@ -204,8 +218,9 @@ void tearDown(void)
     getToken_ExpectAndReturn(tokenizer, (Token *)&op1Token);
     getToken_ExpectAndReturn(tokenizer, (Token *)&BANKEDToken);
     Try {
-      machineCode = bcf(instr);
-  		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+      bcf(instr,&memory);
+      TEST_ASSERT_EQUAL_PTR(&flash[2],memory);
+      printf("\nthe instruction[   %s   ] opcode is 0x%02x%02x",instr,flash[0],flash[1]);
 
     }Catch(ex) {
       dumpErrorMessage(ex, 1);
@@ -213,7 +228,8 @@ void tearDown(void)
   }
   void test_BCF_bcd_expect_NOT_VALID_IDENTIFIER(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   BcD    ";
   	IdentifierToken bcfToken = {TOKEN_IDENTIFIER_TYPE, 3,3,instr,"BCD"};
@@ -222,7 +238,7 @@ void tearDown(void)
   	getToken_ExpectAndReturn(tokenizer, (Token *)&bcfToken);//
 
   	Try {
-  		bcf(instr);
+  		bcf(instr,&memory);
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
       TEST_ASSERT_EQUAL(NOT_VALID_IDENTIFIER,ex->errorCode);
@@ -231,7 +247,8 @@ void tearDown(void)
   }
   void test_BCF_bcf_with_false_token_type_expect_INVALID_TOKEN_TYPE_(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   bCf      ";
   	IdentifierToken bcfToken = {TOKEN_OPERATOR_TYPE, 3,3,instr,"BCF"};
@@ -239,7 +256,7 @@ void tearDown(void)
   	initTokenizer_ExpectAndReturn(instr,tokenizer);
   	getToken_ExpectAndReturn(tokenizer, (Token *)&bcfToken);//
   	Try {
-   		bcf(instr);
+   		bcf(instr,&memory);
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
       TEST_ASSERT_EQUAL(NOT_VALID_IDENTIFIER,ex->errorCode);
@@ -248,7 +265,8 @@ void tearDown(void)
   }
   void test_BCF_bcf_0x37_with_false_token_type_expect_INVALID_TOKEN_TYPE_(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
   	char instr[] = "   bCf  0x37  ";
   	IdentifierToken bcfToken = {TOKEN_IDENTIFIER_TYPE, 3,3,instr,"BCF"};
@@ -259,7 +277,7 @@ void tearDown(void)
   	getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
 
   	Try {
-  		bcf(instr);
+  		bcf(instr,&memory);
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
       TEST_ASSERT_EQUAL(NOT_VALID_INTEGER,ex->errorCode);
@@ -268,7 +286,8 @@ void tearDown(void)
   }
   void test_BCF_bcf_0xff1_expect_overflow_occur(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
   	char instr[] = "   bCf  0xff1  ";
   	IdentifierToken bcfToken = {TOKEN_IDENTIFIER_TYPE, 3,3,instr,"BCF"};
@@ -279,7 +298,7 @@ void tearDown(void)
   	getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
 
   	Try {
-  		bcf(instr);
+  		bcf(instr,&memory);
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
       TEST_ASSERT_EQUAL(NOT_VALID_INTEGER,ex->errorCode);

@@ -13,9 +13,10 @@ void setUp(void)
 
 void tearDown(void)
 {}
-  void test_PUSH_push_expect_exception(void){
+  void test_PUSH_push_expect_0x0005(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
   	char instr[] = "   PUSH  ";
   	IdentifierToken pushToken = {TOKEN_IDENTIFIER_TYPE, 3,4,instr,"PUSH"};
@@ -24,15 +25,18 @@ void tearDown(void)
   	getToken_ExpectAndReturn(tokenizer, (Token *)&pushToken);//
 
   	Try {
-  		machineCode = push(instr);
-  		printf("\nthe instruction opcode is %#4x",machineCode);
+  		push(instr,&memory);
+      TEST_ASSERT_EQUAL_PTR(&flash[2],memory);
+      printf("\nthe instruction[   %s   ] opcode is 0x%02x%02x",instr,flash[0],flash[1]);
+
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
   	}
   }
   void test_PUSH_puhs_expect_NOT_VALID_IDENTIFIER(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   pUhS    ";
   	IdentifierToken pushToken = {TOKEN_IDENTIFIER_TYPE, 3,4,instr,"PUHS"};
@@ -41,7 +45,7 @@ void tearDown(void)
   	getToken_ExpectAndReturn(tokenizer, (Token *)&pushToken);//
 
   	Try {
-  		push(instr);
+  		push(instr,&memory);
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
   	}
@@ -49,7 +53,8 @@ void tearDown(void)
   }
   void test_PUSH_push_with_false_token_type_expect_INVALID_TOKEN_TYPE_(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   pUsH      ";
   	IdentifierToken pushToken = {TOKEN_OPERATOR_TYPE, 3,4,instr,"PUSH"};
@@ -57,7 +62,7 @@ void tearDown(void)
   	initTokenizer_ExpectAndReturn(instr,tokenizer);
   	getToken_ExpectAndReturn(tokenizer, (Token *)&pushToken);//
   	Try {
-   		push(instr);
+   		push(instr,&memory);
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
   	}

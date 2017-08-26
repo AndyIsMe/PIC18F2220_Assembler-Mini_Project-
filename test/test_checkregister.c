@@ -714,7 +714,6 @@ void test_n_0x37_with_false_token_type_expect_INVALID_TOKEN_TYPE_(void){
 void test_n1_0x802_expect_overflow_occur(void){
 	CEXCEPTION_T ex;
 	OperandInfo operandInfo;
-  OperandInfo1 operandInfo1;
 	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
 	char *instr = "   0xff1  ";
 	IntegerToken intToken = {TOKEN_INTEGER_TYPE,3,5,instr,"0x802",0x802};
@@ -722,7 +721,7 @@ void test_n1_0x802_expect_overflow_occur(void){
 	getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
 
 	Try {
-		n1(tokenizer ,&operandInfo,&operandInfo1);
+		n1(tokenizer ,&operandInfo);
 	}Catch(ex) {
 		dumpErrorMessage(ex, 1);
     TEST_ASSERT_EQUAL(NOT_VALID_INTEGER,ex->errorCode);
@@ -732,7 +731,6 @@ void test_n1_0x802_expect_overflow_occur(void){
 void test_n1_0x37_with_false_token_type_expect_INVALID_TOKEN_TYPE_(void){
 	CEXCEPTION_T ex;
 	OperandInfo operandInfo;
-  OperandInfo1 operandInfo1;
 	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
 	char *instr = "   0x37  ";
 	IntegerToken intToken = {TOKEN_IDENTIFIER_TYPE,3,4,instr,"0x37",0x37};
@@ -740,7 +738,7 @@ void test_n1_0x37_with_false_token_type_expect_INVALID_TOKEN_TYPE_(void){
 	getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
 
 	Try {
-		n1(tokenizer ,&operandInfo,&operandInfo1);
+		n1(tokenizer ,&operandInfo);
 	}Catch(ex) {
 		dumpErrorMessage(ex, 1);
     TEST_ASSERT_EQUAL(NOT_VALID_INTEGER,ex->errorCode);

@@ -16,7 +16,8 @@ void tearDown(void)
 
   void test_RLCF_rlcf_0x37_coma_WREG_coma_0_expect_0x3437(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   RlcF    0x37,0,ACCESS  ";
   	IdentifierToken rlcfToken = {TOKEN_IDENTIFIER_TYPE, 3,4,instr,"RLCF"};
@@ -35,15 +36,18 @@ void tearDown(void)
     getToken_ExpectAndReturn(tokenizer, (Token *)&ACCESSToken);
 
   	Try {
-  		machineCode = rlcf(instr);
-  		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+  		rlcf(instr,&memory);
+      TEST_ASSERT_EQUAL_PTR(&flash[2],memory);
+      printf("\nthe instruction[   %s   ] opcode is 0x%02x%02x",instr,flash[0],flash[1]);
+
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
   	}
   }
   void test_RLCF_rlcf_0x37_coma_WREG_coma_ACCESS_expect_0x3437(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   RlcF    0x37,WREG,ACCESS  ";
   	IdentifierToken rlcfToken = {TOKEN_IDENTIFIER_TYPE, 3,4,instr,"RLCF"};
@@ -62,15 +66,17 @@ void tearDown(void)
     getToken_ExpectAndReturn(tokenizer, (Token *)&ACCESSToken);
 
   	Try {
-  		machineCode = rlcf(instr);
-  		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+  		rlcf(instr,&memory);
+      TEST_ASSERT_EQUAL_PTR(&flash[2],memory);
+      printf("\nthe instruction[   %s   ] opcode is 0x%02x%02x",instr,flash[0],flash[1]);
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
   	}
   }
   void test_RLCF_rlcf_0x37_coma_WREG_coma_BANKED_expect_0x3537(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   RlcF    0x37,WREG,BANKED  ";
   	IdentifierToken rlcfToken = {TOKEN_IDENTIFIER_TYPE, 3,4,instr,"RLCF"};
@@ -89,15 +95,17 @@ void tearDown(void)
     getToken_ExpectAndReturn(tokenizer, (Token *)&BANKEDToken);
 
   	Try {
-  		machineCode = rlcf(instr);
-  		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+  		rlcf(instr,&memory);
+      TEST_ASSERT_EQUAL_PTR(&flash[2],memory);
+      printf("\nthe instruction[   %s   ] opcode is 0x%02x%02x",instr,flash[0],flash[1]);
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
   	}
   }
   void test_RLCF_rlcf_0x37_coma_F_coma_ACCESS_expect_0x3637(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   RlcF    0x37,F,ACCESS  ";
   	IdentifierToken rlcfToken = {TOKEN_IDENTIFIER_TYPE, 3,4,instr,"RLCF"};
@@ -116,15 +124,17 @@ void tearDown(void)
     getToken_ExpectAndReturn(tokenizer, (Token *)&ACCESSToken);
 
   	Try {
-  		machineCode = rlcf(instr);
-  		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+  		rlcf(instr,&memory);
+      TEST_ASSERT_EQUAL_PTR(&flash[2],memory);
+      printf("\nthe instruction[   %s   ] opcode is 0x%02x%02x",instr,flash[0],flash[1]);
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
   	}
   }
   void test_RLCF_rlcf_0x37_coma_F_coma_BANKED_expect_0x3737(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   RlcF    0x37,F,BANKED  ";
   	IdentifierToken rlcfToken = {TOKEN_IDENTIFIER_TYPE, 3,4,instr,"RLCF"};
@@ -143,15 +153,17 @@ void tearDown(void)
     getToken_ExpectAndReturn(tokenizer, (Token *)&BANKEDToken);
 
   	Try {
-  		machineCode = rlcf(instr);
-  		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+  		rlcf(instr,&memory);
+      TEST_ASSERT_EQUAL_PTR(&flash[2],memory);
+      printf("\nthe instruction[   %s   ] opcode is 0x%02x%02x",instr,flash[0],flash[1]);
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
   	}
   }
   void test_RLCF_rlcf_0x37_coma_F_coma_1_expect_0x3737(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   RlcF    0x37,F,1  ";
   	IdentifierToken rlcfToken = {TOKEN_IDENTIFIER_TYPE, 3,4,instr,"RLCF"};
@@ -170,15 +182,17 @@ void tearDown(void)
     getToken_ExpectAndReturn(tokenizer, (Token *)&BANKEDToken);
 
   	Try {
-  		machineCode = rlcf(instr);
-  		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+  		rlcf(instr,&memory);
+      TEST_ASSERT_EQUAL_PTR(&flash[2],memory);
+      printf("\nthe instruction[   %s   ] opcode is 0x%02x%02x",instr,flash[0],flash[1]);
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
   	}
   }
   void test_RLCF_rlcf_0x37_coma_1_coma_1_expect_0x3737(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   RlcF    0x37,1,1  ";
   	IdentifierToken rlcfToken = {TOKEN_IDENTIFIER_TYPE, 3,4,instr,"RLCF"};
@@ -197,15 +211,17 @@ void tearDown(void)
     getToken_ExpectAndReturn(tokenizer, (Token *)&BANKEDToken);
 
   	Try {
-  		machineCode = rlcf(instr);
-  		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+  		rlcf(instr,&memory);
+      TEST_ASSERT_EQUAL_PTR(&flash[2],memory);
+      printf("\nthe instruction[   %s   ] opcode is 0x%02x%02x",instr,flash[0],flash[1]);
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
   	}
   }
   void test_RLCF_rlfc_expect_NOT_VALID_IDENTIFIER(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   RLfC    ";
   	IdentifierToken rlfcToken = {TOKEN_IDENTIFIER_TYPE, 3,4,instr,"RLFC"};
@@ -214,7 +230,7 @@ void tearDown(void)
   	getToken_ExpectAndReturn(tokenizer, (Token *)&rlfcToken);//
 
   	Try {
-  		rlcf(instr);
+  		rlcf(instr,&memory);
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
       TEST_ASSERT_EQUAL(NOT_VALID_IDENTIFIER,ex->errorCode);
@@ -223,7 +239,8 @@ void tearDown(void)
   }
   void test_RLCF_rlcf_with_false_token_type_expect_INVALID_TOKEN_TYPE_(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   RlCf      ";
   	IdentifierToken rlcfToken = {TOKEN_OPERATOR_TYPE, 3,4,instr,"RLCF"};
@@ -231,7 +248,7 @@ void tearDown(void)
   	initTokenizer_ExpectAndReturn(instr,tokenizer);
   	getToken_ExpectAndReturn(tokenizer, (Token *)&rlcfToken);//
   	Try {
-   		rlcf(instr);
+   		rlcf(instr,&memory);
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
       TEST_ASSERT_EQUAL(NOT_VALID_IDENTIFIER,ex->errorCode);

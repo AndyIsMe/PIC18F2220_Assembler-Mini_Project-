@@ -54,7 +54,7 @@ void fda(Tokenizer *tokenizer, OperandInfo *operandInfo) {
        token->type);
           }
 }
-//This function is used to check instruction with 3 registers that are f , d and a
+//This function is used to check instructions with 3 registers that are f , d and a
 //For 'f',it will check whether the register is an integer type first
 //Then , it will check and make sure the value passed in is less than '0xff'
 //To avoid overflow from occuring
@@ -186,8 +186,8 @@ void fba(Tokenizer *tokenizer, OperandInfo *operandInfo) {
           token->type);
           }
 }
-//This function is used to check instruction with 3 registers that are f , b , a
-//For 'f' and 'a',it will do the exact same checking as funtion fda
+//This function is used to check instructions with 3 registers that are f , b , a
+//For 'f' and 'a',it will do the exact same checking as funtion fda that was explained above
 //For 'b' , it will check whether an integer is passed in before heading to the next step
 //A maximum of 7 bit is only allowed to be passed in for register 'b'
 //If a value of 8 is passed in for register 'b',the value return will be the same as when
@@ -203,19 +203,16 @@ void handleB(Tokenizer *tokenizer, OperandInfo *operandInfo) {
     if (token->type == TOKEN_INTEGER_TYPE) {
       IntegerToken *intToken = (IntegerToken *)token;
         if (intToken->value == 0x8) {
-          operandInfo->dirType = 0x0000;
+          operandInfo->dirType = 0x00;
                                     }
         else if(intToken->value == 0x9){
           operandInfo->dirType = ((IntegerToken *)token)->value - 0x8;
-          operandInfo->dirType = (operandInfo->dirType) << 9;
                                         }
         else if(intToken->value >= 0xa){
           operandInfo->dirType = ((IntegerToken *)token)->value - 0xa;
-          operandInfo->dirType = (operandInfo->dirType) << 9;
                                         }
         else {
           operandInfo->dirType = ((IntegerToken *)token)->value;
-          operandInfo->dirType = (operandInfo->dirType) << 9;
               }
                                             }
     else {
@@ -228,7 +225,7 @@ void handleB(Tokenizer *tokenizer, OperandInfo *operandInfo) {
     if (token->type == TOKEN_OPERATOR_TYPE) {
       opToken = (OperatorToken *)token;
         if (opToken->str == NULL) {
-          operandInfo->banktype = 0x0000;
+          operandInfo->banktype = 0x00;
                                   }
         else if (strcmp(opToken->str, ",") == 0) {
           Token *token = getToken(tokenizer);
@@ -236,13 +233,13 @@ void handleB(Tokenizer *tokenizer, OperandInfo *operandInfo) {
             if (token->type == TOKEN_IDENTIFIER_TYPE) {
               idToken = (IdentifierToken *)token;
                 if ((strcmp(idToken->str, "ACCESS") == 0) || (strcmp(idToken->str,"0")==0)) {
-                  operandInfo->dirType = operandInfo->dirType + 0x0000;
-                  operandInfo->banktype = 0x0000;
+                  operandInfo->dirType = operandInfo->dirType ;
+                  operandInfo->banktype = 0x00;
                                                                                             }
                 else if ((strcmp(idToken->str, "BANKED") == 0) ||
                    (strcmp(idToken->str,"1")==0)) {
-                     operandInfo->dirType = operandInfo->dirType + 0x0100;
-                     operandInfo->banktype = 0x0000;
+                     operandInfo->dirType = operandInfo->dirType ;
+                     operandInfo->banktype = 0x01;
                                                   }
                 else {
                   throwException(NOT_VALID_IDENTIFIER, (void *)idToken,
@@ -313,8 +310,8 @@ void fa(Tokenizer *tokenizer, OperandInfo *operandInfo) {
         token->type);
           }
 }
-//This function is used to check instruction with 2 registers that are f and a
-
+//This function is used to check instructions with 2 registers that are f and a
+//For 'f' and 'a',it will do the exact same checking as funtion fda that was explained above
 void ff(Tokenizer *tokenizer, OperandInfo *operandInfo,\
         OperandInfo1 *operandInfo1) {
   Token *token = getToken(tokenizer);
@@ -387,7 +384,10 @@ void ff(Tokenizer *tokenizer, OperandInfo *operandInfo,\
        token->type);
           }
 }
-
+//This function is used to check instruction with 2 registers that are f and f
+//Basically for both f's,it will check and make sure both the registers are integer type
+//After that, it will check and make sure both values are less than '0xff'
+//to avoid overflow from occuring
 void k(Tokenizer *tokenizer, OperandInfo *operandInfo) {
   Token *token = getToken(tokenizer);
   IntegerToken *intToken;
@@ -413,7 +413,10 @@ void k(Tokenizer *tokenizer, OperandInfo *operandInfo) {
        token->type);
           }
 }
-
+//This function is used to check instructions with 1 register that is k
+//For 'k',it will check and make sure this register is an integer type
+//After that , it will do a 2nd checking to make sure that the value passed in is less than '0xff'
+//to avoid overflow from occuring
 void ks(Tokenizer *tokenizer, OperandInfo *operandInfo,\
         OperandInfo1 *operandInfo1) {
   Token *token = getToken(tokenizer);
@@ -484,7 +487,12 @@ void ks(Tokenizer *tokenizer, OperandInfo *operandInfo,\
         token->type);
           }
 }
-
+//This function is used to check instructions with 2 registers that are 'k' and 's'
+//For 'k',it will do the exact same thing as the function stated above
+//While for 's',it will check and make sure that is an integer type
+//and check whether the value is an even number or odd number
+//If it is even , the value of 's' will be 1
+//If it is odd , the value of 's' will be 0
 int check2ndDigit(int data) {
   int temp1;
   int value;
@@ -659,8 +667,7 @@ void n(Tokenizer *tokenizer, OperandInfo *operandInfo) {
           }
 }
 
-void n1(Tokenizer *tokenizer, OperandInfo *operandInfo,\
-        OperandInfo1 *operandInfo1) {
+void n1(Tokenizer *tokenizer, OperandInfo *operandInfo) {
   Token *token = getToken(tokenizer);
   IntegerToken *intToken;
     if (token->type == TOKEN_INTEGER_TYPE) {
@@ -673,20 +680,15 @@ void n1(Tokenizer *tokenizer, OperandInfo *operandInfo,\
             intToken->value);
                                       }
         else if (intToken->value <= 0x1) {
-          operandInfo->value = 0x7ff;
-          operandInfo->dirType = 0x0000;
-          operandInfo->banktype = 0x0000;
-          operandInfo1->value1 = 0x7ff;
-          operandInfo1->dirType1 = 0x0000;
-          operandInfo1->banktype1 = 0x0000;
+          operandInfo->value = 0x07;
+          operandInfo->dirType = 0xff;
+          operandInfo->banktype = 0x00;
                                           }
         else {
-          operandInfo->value = ((((IntegerToken *)token)->value) / 2) - 1;
-          operandInfo->dirType = 0x0000;
-          operandInfo->banktype = 0x0000;
-          operandInfo1->value1 = 0x7ff;
-          operandInfo1->dirType1 = 0x0000;
-          operandInfo1->banktype1 = 0x0000;
+          operandInfo->value = ((((((IntegerToken *)token)->value) / 2) - 1)&0xf00)>>8;
+          operandInfo->dirType = (((((IntegerToken *)token)->value) / 2) - 1)&0x0ff;
+          operandInfo->banktype = 0x00;
+
             }
                                             }
     else {

@@ -31,7 +31,7 @@ int checkdataOdd(int data);
 int checkdataEven(int data);
 void handleS(Tokenizer *tokenizer ,OperandInfo *operandInfo);
 void n(Tokenizer *tokenizer , OperandInfo *operandInfo);
-void n1(Tokenizer *tokenizer , OperandInfo *operandInfo, OperandInfo1 *operandInfo1);
+void n1(Tokenizer *tokenizer , OperandInfo *operandInfo);
 void n2(Tokenizer *tokenizer, OperandInfo *operandInfo,
         OperandInfo1 *operandInfo1);
 

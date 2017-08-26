@@ -17,7 +17,8 @@ void tearDown(void)
 
   void test_CLRF_clrf_0x37_coma_ACCESS_expect_0x6a37(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   cLrF   0x37,ACCESS  ";
   	IdentifierToken clrfToken = {TOKEN_IDENTIFIER_TYPE, 3,4,instr,"CLRF"};
@@ -32,15 +33,18 @@ void tearDown(void)
     getToken_ExpectAndReturn(tokenizer, (Token *)&ACCESSToken);
 
   	Try {
-  		machineCode = clrf(instr);
-  		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+  		clrf(instr,&memory);
+      TEST_ASSERT_EQUAL_PTR(&flash[2],memory);
+      printf("\nthe instruction[   %s   ] opcode is 0x%02x%02x",instr,flash[0],flash[1]);
+
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
   	}
   }
   void test_CLRF_clrf_0x37_coma_0_expect_0x6a37(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   cLrF   0x37,0  ";
   	IdentifierToken clrfToken = {TOKEN_IDENTIFIER_TYPE, 3,4,instr,"CLRF"};
@@ -55,15 +59,18 @@ void tearDown(void)
     getToken_ExpectAndReturn(tokenizer, (Token *)&ACCESSToken);
 
   	Try {
-  		machineCode = clrf(instr);
-  		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+  		clrf(instr,&memory);
+      TEST_ASSERT_EQUAL_PTR(&flash[2],memory);
+      printf("\nthe instruction[   %s   ] opcode is 0x%02x%02x",instr,flash[0],flash[1]);
+
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
   	}
   }
   void test_CLRF_clrf_0x37_coma_BANKED_expect_0x6b37(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   cLrF   0x37,BANKED  ";
   	IdentifierToken clrfToken = {TOKEN_IDENTIFIER_TYPE, 3,4,instr,"CLRF"};
@@ -78,15 +85,18 @@ void tearDown(void)
     getToken_ExpectAndReturn(tokenizer, (Token *)&BANKEDToken);
 
   	Try {
-  		machineCode = clrf(instr);
-  		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+  		clrf(instr,&memory);
+      TEST_ASSERT_EQUAL_PTR(&flash[2],memory);
+      printf("\nthe instruction[   %s   ] opcode is 0x%02x%02x",instr,flash[0],flash[1]);
+
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
   	}
   }
   void test_CLRF_clrf_0x37_coma_1_expect_0x6b37(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   cLrF   0x37,1  ";
   	IdentifierToken clrfToken = {TOKEN_IDENTIFIER_TYPE, 3,4,instr,"CLRF"};
@@ -101,15 +111,18 @@ void tearDown(void)
     getToken_ExpectAndReturn(tokenizer, (Token *)&ACCESSToken);
 
   	Try {
-  		machineCode = clrf(instr);
-  		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+  		clrf(instr,&memory);
+      TEST_ASSERT_EQUAL_PTR(&flash[2],memory);
+      printf("\nthe instruction[   %s   ] opcode is 0x%02x%02x",instr,flash[0],flash[1]);
+
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
   	}
   }
   void test_CLRF_clrr_expect_NOT_VALID_IDENTIFIER(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   CLrr    ";
   	IdentifierToken clrfToken = {TOKEN_IDENTIFIER_TYPE, 3,4,instr,"CLRR"};
@@ -118,7 +131,7 @@ void tearDown(void)
   	getToken_ExpectAndReturn(tokenizer, (Token *)&clrfToken);//
 
   	Try {
-  		clrf(instr);
+  		clrf(instr,&memory);
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
       TEST_ASSERT_EQUAL(NOT_VALID_IDENTIFIER,ex->errorCode);
@@ -127,7 +140,8 @@ void tearDown(void)
   }
   void test_CLRF_clrf_with_false_token_type_expect_INVALID_TOKEN_TYPE_(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   cLrF      ";
   	IdentifierToken clrfToken = {TOKEN_OPERATOR_TYPE, 3,4,instr,"CLRF"};
@@ -135,7 +149,7 @@ void tearDown(void)
   	initTokenizer_ExpectAndReturn(instr,tokenizer);
   	getToken_ExpectAndReturn(tokenizer, (Token *)&clrfToken);//
   	Try {
-   		clrf(instr);
+   		clrf(instr,&memory);
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
       TEST_ASSERT_EQUAL(NOT_VALID_IDENTIFIER,ex->errorCode);
@@ -144,7 +158,8 @@ void tearDown(void)
   }
   void test_CLRF_clrf_0x37_with_false_token_type_expect_INVALID_TOKEN_TYPE_(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   cLrF      ";
   	IdentifierToken clrfToken = {TOKEN_IDENTIFIER_TYPE, 3,4,instr,"CLRF"};
@@ -154,7 +169,7 @@ void tearDown(void)
   	getToken_ExpectAndReturn(tokenizer, (Token *)&clrfToken);//
   	getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
   	Try {
-   		clrf(instr);
+   		clrf(instr,&memory);
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
       TEST_ASSERT_EQUAL(NOT_VALID_INTEGER,ex->errorCode);
@@ -163,7 +178,8 @@ void tearDown(void)
   }
   void test_CLRF_clrf_0x37_fullstop_expect_INVALID_OPERATOR_TYPE_(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   cLrF  0x37.      ";
   	IdentifierToken clrfToken = {TOKEN_IDENTIFIER_TYPE, 3,4,instr,"CLRF"};
@@ -175,7 +191,7 @@ void tearDown(void)
   	getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
   	getToken_ExpectAndReturn(tokenizer, (Token *)&opToken);
   	Try {
-   		clrf(instr);
+   		clrf(instr,&memory);
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
       TEST_ASSERT_EQUAL(NOT_VALID_OPERATOR,ex->errorCode);
@@ -184,7 +200,8 @@ void tearDown(void)
   }
   void test_CLRF_clrf_0x37_coma_with_false_token_type_expect_INVALID_TOKEN_TYPE_(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
   	char instr[] = "   ClRf  0x37,  ";
   	IdentifierToken clrfToken = {TOKEN_IDENTIFIER_TYPE, 3,4,instr,"CLRF"};
@@ -196,7 +213,7 @@ void tearDown(void)
   	getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
   	getToken_ExpectAndReturn(tokenizer, (Token *)&opToken);
   	Try {
-  		clrf(instr);
+  		clrf(instr,&memory);
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
       TEST_ASSERT_EQUAL(NOT_VALID_OPERATOR,ex->errorCode);
@@ -205,7 +222,8 @@ void tearDown(void)
   }
   void test_CLRF_clrf_0x37_coma_1_with_false_token_type_expect_INVALID_TOKEN_TYPE_(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
   	char instr[] = "   ClRf  0x37,  ";
   	IdentifierToken clrfToken = {TOKEN_IDENTIFIER_TYPE, 3,4,instr,"CLRF"};
@@ -219,7 +237,7 @@ void tearDown(void)
   	getToken_ExpectAndReturn(tokenizer, (Token *)&opToken);
   	getToken_ExpectAndReturn(tokenizer, (Token *)&BANKEDToken);//
   	Try {
-  		clrf(instr);
+  		clrf(instr,&memory);
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
       TEST_ASSERT_EQUAL(NOT_VALID_IDENTIFIER,ex->errorCode);
@@ -228,7 +246,8 @@ void tearDown(void)
   }
   void test_CLRF_clrf_0xfff1_expect_overflow_occur(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
   	char instr[] = "   cLrf  0xff1  ";
   	IdentifierToken clrfToken = {TOKEN_IDENTIFIER_TYPE, 3,4,instr,"CLRF"};
@@ -238,7 +257,7 @@ void tearDown(void)
   	getToken_ExpectAndReturn(tokenizer, (Token *)&clrfToken);//
   	getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
   	Try {
-  		clrf(instr);
+  		clrf(instr,&memory);
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
       TEST_ASSERT_EQUAL(NOT_VALID_INTEGER,ex->errorCode);

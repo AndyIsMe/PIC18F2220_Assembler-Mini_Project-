@@ -15,7 +15,8 @@ void tearDown(void)
 {}
   void test_MOVFF_movff_0x222_coma_movff_0xff_expect_0xc222_0xf0ff(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   MoVfF   0x222,0xff  ";
   	IdentifierToken movwfToken = {TOKEN_IDENTIFIER_TYPE, 3,5,instr,"MOVFF"};
@@ -30,15 +31,18 @@ void tearDown(void)
     getToken_ExpectAndReturn(tokenizer, (Token *)&int1Token);
 
   	Try {
-  		machineCode = movff(instr);
-  		printf("\nthe instruction[   %s   ] opcode is %#8x",instr,machineCode);
+  		movff(instr,&memory);
+      TEST_ASSERT_EQUAL_PTR(&flash[4],memory);
+      printf("\nthe instruction[   %s   ] opcode is 0x%02x%02x 0x%02x%02x",instr,flash[0],flash[1],flash[2],flash[3]);
+
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
   	}
   }
   void test_MOVFF_movft_expect_NOT_VALID_IDENTIFIER(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   mOvfT    ";
   	IdentifierToken movffToken = {TOKEN_IDENTIFIER_TYPE, 3,5,instr,"MOVFT"};
@@ -47,7 +51,7 @@ void tearDown(void)
   	getToken_ExpectAndReturn(tokenizer, (Token *)&movffToken);//
 
   	Try {
-  		movff(instr);
+  		movff(instr,&memory);
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
   	}
@@ -55,7 +59,8 @@ void tearDown(void)
   }
   void test_MOVFF_movff_with_false_token_type_expect_INVALID_TOKEN_TYPE_(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   moVff      ";
   	IdentifierToken movffToken = {TOKEN_OPERATOR_TYPE, 3,5,instr,"MOVFF"};
@@ -63,7 +68,7 @@ void tearDown(void)
   	initTokenizer_ExpectAndReturn(instr,tokenizer);
   	getToken_ExpectAndReturn(tokenizer, (Token *)&movffToken);//
   	Try {
-   		movff(instr);
+   		movff(instr,&memory);
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
   	}

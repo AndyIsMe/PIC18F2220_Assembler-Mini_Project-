@@ -14,9 +14,10 @@ void setUp(void)
 void tearDown(void)
 {}
 
-  void test_BRA_bra_0x801_expect_0xd39ad7ff(void){
+  void test_BRA_bra_0x801_expect_0xd3ff(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
   	char instr[] = "   brA   0x801  ";
   	IdentifierToken braToken = {TOKEN_IDENTIFIER_TYPE, 3,3,instr,"BRA"};
@@ -27,15 +28,18 @@ void tearDown(void)
   	getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
 
   	Try {
-  		machineCode = bra(instr);
-  		printf("\nthe instruction[   %s   ] opcode is %#8x",instr,machineCode);
+  		bra(instr,&memory);
+      TEST_ASSERT_EQUAL_PTR(&flash[2],memory);
+      printf("\nthe instruction[   %s   ] opcode is 0x%02x%02x",instr,flash[0],flash[1]);
+
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
   	}
   }
-  void test_BRA_bra_0x37_expect_0xdo1ad7ff(void){
+  void test_BRA_bra_0x37_expect_0xdo1a(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
   	char instr[] = "   brA   0x37  ";
   	IdentifierToken braToken = {TOKEN_IDENTIFIER_TYPE, 3,3,instr,"BRA"};
@@ -46,15 +50,18 @@ void tearDown(void)
   	getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
 
   	Try {
-  		machineCode = bra(instr);
-  		printf("\nthe instruction[   %s   ] opcode is %#8x",instr,machineCode);
+  		bra(instr,&memory);
+      TEST_ASSERT_EQUAL_PTR(&flash[2],memory);
+      printf("\nthe instruction[   %s   ] opcode is 0x%02x%02x",instr,flash[0],flash[1]);
+
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
   	}
   }
-  void test_BRA_bra_0x1_expect_0xd7ffd7ff(void){
+  void test_BRA_bra_0x1_expect_0xd7ff(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
   	char instr[] = "   brA   0x1  ";
   	IdentifierToken braToken = {TOKEN_IDENTIFIER_TYPE, 3,3,instr,"BRA"};
@@ -65,15 +72,18 @@ void tearDown(void)
   	getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
 
   	Try {
-  		machineCode = bra(instr);
-  		printf("\nthe instruction[   %s   ] opcode is %#8x",instr,machineCode);
+  		bra(instr,&memory);
+      TEST_ASSERT_EQUAL_PTR(&flash[2],memory);
+      printf("\nthe instruction[   %s   ] opcode is 0x%02x%02x",instr,flash[0],flash[1]);
+
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
   	}
   }
   void test_BRA_brb_expect_NOT_VALID_IDENTIFIER(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   Brb    ";
   	IdentifierToken braToken = {TOKEN_IDENTIFIER_TYPE, 3,3,instr,"BRB"};
@@ -82,8 +92,10 @@ void tearDown(void)
   	getToken_ExpectAndReturn(tokenizer, (Token *)&braToken);//
 
   	Try {
-  		machineCode = bra(instr);
-  		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+  		bra(instr,&memory);
+      TEST_ASSERT_EQUAL_PTR(&flash[2],memory);
+      printf("\nthe instruction[   %s   ] opcode is 0x%02x%02x",instr,flash[0],flash[1]);
+
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
       TEST_ASSERT_EQUAL(NOT_VALID_IDENTIFIER,ex->errorCode);
@@ -92,7 +104,8 @@ void tearDown(void)
   }
   void test_BRA_bra_with_false_token_type_expect_INVALID_TOKEN_TYPE_(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   brA      ";
   	IdentifierToken braToken = {TOKEN_OPERATOR_TYPE, 3,3,instr,"BRA"};
@@ -100,7 +113,7 @@ void tearDown(void)
   	initTokenizer_ExpectAndReturn(instr,tokenizer);
   	getToken_ExpectAndReturn(tokenizer, (Token *)&braToken);//
   	Try {
-   		bra(instr);
+   		bra(instr,&memory);
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
       TEST_ASSERT_EQUAL(NOT_VALID_IDENTIFIER,ex->errorCode);
@@ -109,7 +122,8 @@ void tearDown(void)
   }
   void test_BRA_bra_0x37_with_false_token_type_expect_INVALID_TOKEN_TYPE_(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
   	char instr[] = "   brA 0x37  ";
   	IdentifierToken braToken = {TOKEN_IDENTIFIER_TYPE, 3,3,instr,"BRA"};
@@ -120,7 +134,7 @@ void tearDown(void)
   	getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
 
   	Try {
-  		bra(instr);
+  		bra(instr,&memory);
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
       TEST_ASSERT_EQUAL(NOT_VALID_INTEGER,ex->errorCode);
@@ -129,7 +143,8 @@ void tearDown(void)
   }
   void test_BRA_bra_0xff1_expect_overflow_occur(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
   	char instr[] = "   brA 0xff1  ";
   	IdentifierToken braToken = {TOKEN_IDENTIFIER_TYPE, 3,3,instr,"BRA"};
@@ -140,7 +155,7 @@ void tearDown(void)
   	getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
 
   	Try {
-  		bra(instr);
+  		bra(instr,&memory);
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
       TEST_ASSERT_EQUAL(NOT_VALID_INTEGER,ex->errorCode);

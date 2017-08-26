@@ -7,8 +7,7 @@
 #include "error.h"
 #include "Exception.h"
 #include "toupper.h"
-#define M (1024*1024)
-char flash[2*M];
+
 void setUp(void)
 {}
 
@@ -17,6 +16,7 @@ void tearDown(void)
 
   void test_ANDLW_addlw_0x37_expect_0xb37(void){
   	CEXCEPTION_T ex;
+    uint8_t flash[4] = {0,0,0,0};
   	char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
   	char instr[] = "   aNdLw   0x37  ";
@@ -29,6 +29,7 @@ void tearDown(void)
 
   	Try {
   		andlw(instr,&memory);
+      TEST_ASSERT_EQUAL_PTR(&flash[2],memory);
   		printf("\nthe instruction[   %s   ] opcode is 0x%02x%02x",instr,flash[0],flash[1]);
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
@@ -36,6 +37,7 @@ void tearDown(void)
   }
   void test_ANDLW_anddw_expect_NOT_VALID_IDENTIFIER(void){
   	CEXCEPTION_T ex;
+    uint8_t flash[4] = {0,0,0,0};
   	char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   ANDwW    ";
@@ -56,6 +58,7 @@ void tearDown(void)
   }
   void test_ANDLW_andlw_with_false_token_type_expect_INVALID_TOKEN_TYPE_(void){
   	CEXCEPTION_T ex;
+    uint8_t flash[4] = {0,0,0,0};
   	char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   AnDlW       ";
@@ -74,6 +77,7 @@ void tearDown(void)
   }
   void test_ANDLW_andlw_0x37_with_false_token_type_expect_INVALID_TOKEN_TYPE_(void){
   	CEXCEPTION_T ex;
+    uint8_t flash[4] = {0,0,0,0};
   	char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
   	char instr[] = "   aNdLw   0x37  ";
@@ -94,6 +98,7 @@ void tearDown(void)
   }
   void test_ANDLW_andlw_0xff1_expect_overflow_occur(void){
   	CEXCEPTION_T ex;
+    uint8_t flash[4] = {0,0,0,0};
   	char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
   	char instr[] = "   aNdLw   0xff1  ";

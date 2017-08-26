@@ -16,7 +16,8 @@ void tearDown(void)
 
   void test_RETURN_return_0_expect_0x0012(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
   	char instr[] = "   rETuRn   0  ";
   	IdentifierToken returnToken = {TOKEN_IDENTIFIER_TYPE, 3,6,instr,"RETURN"};
@@ -27,15 +28,18 @@ void tearDown(void)
   	getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
 
   	Try {
-  		machineCode = _return(instr);
-  		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+  		_return(instr,&memory);
+      TEST_ASSERT_EQUAL_PTR(&flash[2],memory);
+      printf("\nthe instruction[   %s   ] opcode is 0x%02x%02x",instr,flash[0],flash[1]);
+
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
   	}
   }
   void test_RETURN_return_1_expect_0x0013(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
   	char instr[] = "   rETuRn   1  ";
   	IdentifierToken returnToken = {TOKEN_IDENTIFIER_TYPE, 3,6,instr,"RETURN"};
@@ -46,15 +50,18 @@ void tearDown(void)
   	getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
 
   	Try {
-  		machineCode = _return(instr);
-  		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+  		_return(instr,&memory);
+      TEST_ASSERT_EQUAL_PTR(&flash[2],memory);
+      printf("\nthe instruction[   %s   ] opcode is 0x%02x%02x",instr,flash[0],flash[1]);
+
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
   	}
   }
   void test_RETURN_return_2_expect_0x0012(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
   	char instr[] = "   rETuRn   2  ";
   	IdentifierToken returnToken = {TOKEN_IDENTIFIER_TYPE, 3,6,instr,"RETURN"};
@@ -65,15 +72,18 @@ void tearDown(void)
   	getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
 
   	Try {
-  		machineCode = _return(instr);
-  		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+  		_return(instr,&memory);
+      TEST_ASSERT_EQUAL_PTR(&flash[2],memory);
+      printf("\nthe instruction[   %s   ] opcode is 0x%02x%02x",instr,flash[0],flash[1]);
+
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
   	}
   }
   void test_RETURN_retunr_expect_NOT_VALID_IDENTIFIER(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   REtunr    ";
   	IdentifierToken returnToken = {TOKEN_IDENTIFIER_TYPE,3 ,6,instr,"RETUNR"};
@@ -82,7 +92,7 @@ void tearDown(void)
   	getToken_ExpectAndReturn(tokenizer, (Token *)&returnToken);//
 
   	Try {
-  		_return(instr);
+  		_return(instr,&memory);
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
       TEST_ASSERT_EQUAL(NOT_VALID_IDENTIFIER,ex->errorCode);
@@ -91,7 +101,8 @@ void tearDown(void)
   }
   void test_RETURN_return_with_false_token_type_expect_INVALID_TOKEN_TYPE_(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   ReTuRn      ";
   	IdentifierToken returnToken = {TOKEN_OPERATOR_TYPE, 3,6,instr,"RETURN"};
@@ -99,7 +110,7 @@ void tearDown(void)
   	initTokenizer_ExpectAndReturn(instr,tokenizer);
   	getToken_ExpectAndReturn(tokenizer, (Token *)&returnToken);//
   	Try {
-   		_return(instr);
+   		_return(instr,&memory);
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
       TEST_ASSERT_EQUAL(NOT_VALID_IDENTIFIER,ex->errorCode);

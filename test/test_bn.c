@@ -16,7 +16,8 @@ void tearDown(void)
 
   void test_BN_bn_0x37_expect_0xe61a(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
   	char instr[] = "   bN   0x37  ";
   	IdentifierToken bnToken = {TOKEN_IDENTIFIER_TYPE, 3,2,instr,"BN"};
@@ -27,25 +28,26 @@ void tearDown(void)
   	getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
 
   	Try {
-  		machineCode = bn(instr);
-  		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+  		bn(instr,&memory);
+      TEST_ASSERT_EQUAL_PTR(&flash[2],memory);
+      printf("\nthe instruction[   %s   ] opcode is 0x%02x%02x",instr,flash[0],flash[1]);
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
   	}
   }
   void test_BN_bd_expect_NOT_VALID_IDENTIFIER(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   Bd    ";
   	IdentifierToken bnToken = {TOKEN_IDENTIFIER_TYPE, 3,2,instr,"BD"};
-
 
   	initTokenizer_ExpectAndReturn(instr,tokenizer);
   	getToken_ExpectAndReturn(tokenizer, (Token *)&bnToken);//
 
   	Try {
-  		bn(instr);
+  		bn(instr,&memory);
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
       TEST_ASSERT_EQUAL(NOT_VALID_IDENTIFIER,ex->errorCode);
@@ -54,7 +56,8 @@ void tearDown(void)
   }
   void test_BN_bn_with_false_token_type_expect_INVALID_TOKEN_TYPE_(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   bN      ";
   	IdentifierToken bnToken = {TOKEN_OPERATOR_TYPE, 3,2,instr,"BN"};
@@ -62,7 +65,7 @@ void tearDown(void)
   	initTokenizer_ExpectAndReturn(instr,tokenizer);
   	getToken_ExpectAndReturn(tokenizer, (Token *)&bnToken);//
   	Try {
-   		bn(instr);
+   		bn(instr,&memory);
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
       TEST_ASSERT_EQUAL(NOT_VALID_IDENTIFIER,ex->errorCode);
@@ -71,7 +74,8 @@ void tearDown(void)
   }
   void test_BN_bn_0x37_with_false_token_type_expect_INVALID_TOKEN_TYPE_(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
   	char instr[] = "   bN   0x37  ";
   	IdentifierToken bnToken = {TOKEN_IDENTIFIER_TYPE, 3,2,instr,"BN"};
@@ -82,7 +86,7 @@ void tearDown(void)
   	getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
 
   	Try {
-  		bn(instr);
+  		bn(instr,&memory);
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
       TEST_ASSERT_EQUAL(NOT_VALID_INTEGER,ex->errorCode);
@@ -91,7 +95,8 @@ void tearDown(void)
   }
   void test_BN_bn_0xff1_expect_overflow_occur(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
   	char instr[] = "   bN   0xff1  ";
   	IdentifierToken bnToken = {TOKEN_IDENTIFIER_TYPE, 3,2,instr,"BN"};
@@ -102,7 +107,7 @@ void tearDown(void)
   	getToken_ExpectAndReturn(tokenizer, (Token *)&intToken);//
 
   	Try {
-  		bn(instr);
+  		bn(instr,&memory);
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
       TEST_ASSERT_EQUAL(NOT_VALID_INTEGER,ex->errorCode);

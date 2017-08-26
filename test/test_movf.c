@@ -15,7 +15,8 @@ void tearDown(void)
 {}
   void test_MOVF_movf_0x37_coma_WREG_coma_0_expect_0x5037(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   mOvF   0x37,WREG,0  ";
   	IdentifierToken movfToken = {TOKEN_IDENTIFIER_TYPE, 3,5,instr,"MOVF"};
@@ -34,15 +35,18 @@ void tearDown(void)
     getToken_ExpectAndReturn(tokenizer, (Token *)&ACCESSToken);
 
   	Try {
-  		machineCode = movf(instr);
-  		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+  		movf(instr,&memory);
+      TEST_ASSERT_EQUAL_PTR(&flash[2],memory);
+      printf("\nthe instruction[   %s   ] opcode is 0x%02x%02x",instr,flash[0],flash[1]);
+
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
   	}
   }
   void test_MOVF_movf_0x37_coma_WREG_coma_ACCESS_expect_0x5037(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   mOvF   0x37,WREG,ACCESS  ";
   	IdentifierToken movfToken = {TOKEN_IDENTIFIER_TYPE, 3,5,instr,"MOVF"};
@@ -61,15 +65,18 @@ void tearDown(void)
     getToken_ExpectAndReturn(tokenizer, (Token *)&ACCESSToken);
 
   	Try {
-  		machineCode = movf(instr);
-  		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+  	  movf(instr,&memory);
+      TEST_ASSERT_EQUAL_PTR(&flash[2],memory);
+      printf("\nthe instruction[   %s   ] opcode is 0x%02x%02x",instr,flash[0],flash[1]);
+
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
   	}
   }
   void test_MOVF_movf_0x37_coma_WREG_coma_BANKED_expect_0x5137(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   mOvF   0x37,WREG,BANKED  ";
   	IdentifierToken movfToken = {TOKEN_IDENTIFIER_TYPE, 3,5,instr,"MOVF"};
@@ -88,15 +95,18 @@ void tearDown(void)
     getToken_ExpectAndReturn(tokenizer, (Token *)&BANKEDToken);
 
   	Try {
-  		machineCode = movf(instr);
-  		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+  		movf(instr,&memory);
+      TEST_ASSERT_EQUAL_PTR(&flash[2],memory);
+      printf("\nthe instruction[   %s   ] opcode is 0x%02x%02x",instr,flash[0],flash[1]);
+
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
   	}
   }
   void test_MOVF_movf_0x37_coma_F_coma_ACCESS_expect_0x5237(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   mOvF    0x37,F,ACCESS  ";
   	IdentifierToken movfToken = {TOKEN_IDENTIFIER_TYPE, 3,5,instr,"MOVF"};
@@ -115,15 +125,18 @@ void tearDown(void)
     getToken_ExpectAndReturn(tokenizer, (Token *)&ACCESSToken);
 
   	Try {
-  		machineCode = movf(instr);
-  		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+  		movf(instr,&memory);
+      TEST_ASSERT_EQUAL_PTR(&flash[2],memory);
+      printf("\nthe instruction[   %s   ] opcode is 0x%02x%02x",instr,flash[0],flash[1]);
+
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
   	}
   }
   void test_MOVF_movf_0x37_coma_F_coma_BANKED_expect_0x5337(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   mOvF    0x37,F,BANKED  ";
   	IdentifierToken movfToken = {TOKEN_IDENTIFIER_TYPE, 3,5,instr,"MOVF"};
@@ -142,15 +155,18 @@ void tearDown(void)
     getToken_ExpectAndReturn(tokenizer, (Token *)&BANKEDToken);
 
   	Try {
-  		machineCode = movf(instr);
-  		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+  		movf(instr,&memory);
+      TEST_ASSERT_EQUAL_PTR(&flash[2],memory);
+      printf("\nthe instruction[   %s   ] opcode is 0x%02x%02x",instr,flash[0],flash[1]);
+
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
   	}
   }
   void test_MOVF_movf_0x37_coma_F_coma_1_expect_0x5337(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   mOvF    0x37,F,1  ";
   	IdentifierToken movfToken = {TOKEN_IDENTIFIER_TYPE, 3,5,instr,"MOVF"};
@@ -169,15 +185,18 @@ void tearDown(void)
     getToken_ExpectAndReturn(tokenizer, (Token *)&BANKEDToken);
 
   	Try {
-  		machineCode = movf(instr);
-  		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+  		movf(instr,&memory);
+      TEST_ASSERT_EQUAL_PTR(&flash[2],memory);
+      printf("\nthe instruction[   %s   ] opcode is 0x%02x%02x",instr,flash[0],flash[1]);
+
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
   	}
   }
   void test_MOVF_movf_0x37_coma_1_coma_1_expect_0x5337(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   mOvF    0x37,1,1  ";
   	IdentifierToken movfToken = {TOKEN_IDENTIFIER_TYPE, 3,5,instr,"MOVF"};
@@ -196,15 +215,18 @@ void tearDown(void)
     getToken_ExpectAndReturn(tokenizer, (Token *)&BANKEDToken);
 
   	Try {
-  		machineCode = movf(instr);
-  		printf("\nthe instruction[   %s   ] opcode is %#4x",instr,machineCode);
+  		movf(instr,&memory);
+      TEST_ASSERT_EQUAL_PTR(&flash[2],memory);
+      printf("\nthe instruction[   %s   ] opcode is 0x%02x%02x",instr,flash[0],flash[1]);
+
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
   	}
   }
   void test_MOVF_movd_expect_NOT_VALID_IDENTIFIER(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   mOvD    ";
   	IdentifierToken movfToken = {TOKEN_IDENTIFIER_TYPE, 3,4,instr,"MOVD"};
@@ -213,7 +235,7 @@ void tearDown(void)
   	getToken_ExpectAndReturn(tokenizer, (Token *)&movfToken);//
 
   	Try {
-  		movf(instr);
+  		movf(instr,&memory);
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
   	}
@@ -221,7 +243,8 @@ void tearDown(void)
   }
   void test_MOVF_movf_with_false_token_type_expect_INVALID_TOKEN_TYPE_(void){
   	CEXCEPTION_T ex;
-  	int machineCode;
+    uint8_t flash[4] = {0,0,0,0};
+    char *memory = flash;
   	Tokenizer *tokenizer = (Tokenizer *)0x0badface;
     char instr[] = "   moVf      ";
   	IdentifierToken movfToken = {TOKEN_OPERATOR_TYPE, 3,4,instr,"MOVF"};
@@ -229,7 +252,7 @@ void tearDown(void)
   	initTokenizer_ExpectAndReturn(instr,tokenizer);
   	getToken_ExpectAndReturn(tokenizer, (Token *)&movfToken);//
   	Try {
-   		movf(instr);
+   		movf(instr,&memory);
   	}Catch(ex) {
   		dumpErrorMessage(ex, 1);
   	}

@@ -25,7 +25,7 @@ int addlw(char *instr,char**memoryPtr) {
           code[0] = 0x0f;
           code[1] = (OperandInfo.value) + (OperandInfo.dirType) +
                  (OperandInfo.banktype);
-        return 2;
+        *memoryPtr+=2;
                                               }
       else {
         throwException(NOT_VALID_IDENTIFIER, (void *)idToken,
@@ -56,8 +56,7 @@ int addwf(char *instr,char**memoryPtr) {
         code[0] = 0x24+(OperandInfo.dirType) +
                (OperandInfo.banktype);
         code[1] = (OperandInfo.value);
-
-        return 2;
+        *memoryPtr += 2;
                                               }
       else {
         throwException(NOT_VALID_IDENTIFIER, (void *)idToken,
@@ -89,6 +88,7 @@ int addwfc(char *instr,char**memoryPtr) {
         code[0] = 0x20+(OperandInfo.dirType) +
                (OperandInfo.banktype);
         code[1] = (OperandInfo.value);
+        *memoryPtr+=2;
                                                 }
       else {
         throwException(NOT_VALID_IDENTIFIER, (void *)idToken,
@@ -119,7 +119,7 @@ int andlw(char *instr,char**memoryPtr) {
         code[0] = 0x0b;
         code[1] = (OperandInfo.value) + (OperandInfo.dirType) +
                (OperandInfo.banktype);
-      return 2;
+      *memoryPtr+=2;
                                               }
       else {
         throwException(NOT_VALID_IDENTIFIER, (void *)idToken,
@@ -150,6 +150,7 @@ int andwf(char *instr,char**memoryPtr) {
         code[0] = 0x14+(OperandInfo.dirType) +
                (OperandInfo.banktype);
         code[1] = (OperandInfo.value);
+        *memoryPtr+=2;
                                               }
       else {
         throwException(NOT_VALID_IDENTIFIER, (void *)idToken,
@@ -177,13 +178,10 @@ int bc(char *instr,char**memoryPtr) {
       idToken = (IdentifierToken *)token;
         if (strcmp(idToken->str, "BC") == 0) {
           n(tokenizer, &OperandInfo);
-          printf("value %x\n",OperandInfo.value);
-          printf("dir %x\n",OperandInfo.dirType);
-          printf("bank %x\n",OperandInfo.banktype);
           code[0] = 0xe2;
           code[1] = (OperandInfo.value) + (OperandInfo.dirType) +
-               (OperandInfo.banktype);
-          return 2;
+                    (OperandInfo.banktype);
+          *memoryPtr+=2;
                                               }
         else {
         throwException(NOT_VALID_IDENTIFIER, (void *)idToken,
@@ -197,8 +195,9 @@ int bc(char *instr,char**memoryPtr) {
         token->type);
           }
 }
-/*
-int bn(char *instr) {
+
+//
+int bn(char *instr,char**memoryPtr) {
   instr = touppercase(instr);
   OperandInfo OperandInfo;
   Tokenizer *tokenizer = initTokenizer(instr);
@@ -206,12 +205,15 @@ int bn(char *instr) {
   IdentifierToken *idToken;
   IntegerToken *intToken;
   OperatorToken *opToken;
+  uint8_t *code = *memoryPtr;
     if (token->type == TOKEN_IDENTIFIER_TYPE) {
       idToken = (IdentifierToken *)token;
         if (strcmp(idToken->str, "BN") == 0) {
           n(tokenizer, &OperandInfo);
-          return 0xe600 + (OperandInfo.value) + (OperandInfo.dirType) +
-                 (OperandInfo.banktype);
+          code[0] = 0xe6;
+          code[1] = (OperandInfo.value) + (OperandInfo.dirType) +
+                    (OperandInfo.banktype);
+          *memoryPtr+=2;
         }
         else {
           throwException(NOT_VALID_IDENTIFIER, (void *)idToken,
@@ -225,8 +227,8 @@ int bn(char *instr) {
           token->type);
           }
 }
-
-int bnc(char *instr) {
+//
+int bnc(char *instr,char**memoryPtr) {
   instr = touppercase(instr);
   OperandInfo OperandInfo;
   Tokenizer *tokenizer = initTokenizer(instr);
@@ -234,12 +236,15 @@ int bnc(char *instr) {
   IdentifierToken *idToken;
   IntegerToken *intToken;
   OperatorToken *opToken;
+  uint8_t *code = *memoryPtr;
     if (token->type == TOKEN_IDENTIFIER_TYPE) {
       idToken = (IdentifierToken *)token;
         if (strcmp(idToken->str, "BNC") == 0) {
           n(tokenizer, &OperandInfo);
-          return 0xe300 + (OperandInfo.value) + (OperandInfo.dirType) +
-                 (OperandInfo.banktype);
+          code[0] = 0xe3;
+          code[1] = (OperandInfo.value) + (OperandInfo.dirType) +
+                    (OperandInfo.banktype);
+          *memoryPtr+=2;
                                               }
         else {
           throwException(NOT_VALID_IDENTIFIER, (void *)idToken,
@@ -254,7 +259,7 @@ int bnc(char *instr) {
           }
   }
 
-int bnn(char *instr) {
+int bnn(char *instr,char**memoryPtr) {
   instr = touppercase(instr);
   OperandInfo OperandInfo;
   Tokenizer *tokenizer = initTokenizer(instr);
@@ -262,12 +267,15 @@ int bnn(char *instr) {
   IdentifierToken *idToken;
   IntegerToken *intToken;
   OperatorToken *opToken;
+  uint8_t *code = *memoryPtr;
     if (token->type == TOKEN_IDENTIFIER_TYPE) {
       idToken = (IdentifierToken *)token;
         if (strcmp(idToken->str, "BNN") == 0) {
           n(tokenizer, &OperandInfo);
-          return 0xe700 + (OperandInfo.value) + (OperandInfo.dirType) +
-                 (OperandInfo.banktype);
+          code[0] = 0xe7;
+          code[1] = (OperandInfo.value) + (OperandInfo.dirType) +
+                    (OperandInfo.banktype);
+          *memoryPtr+=2;
                                               }
         else {
           throwException(NOT_VALID_IDENTIFIER, (void *)idToken,
@@ -282,7 +290,7 @@ int bnn(char *instr) {
           }
 }
 
-int bnov(char *instr) {
+int bnov(char *instr,char**memoryPtr) {
   instr = touppercase(instr);
   OperandInfo OperandInfo;
   Tokenizer *tokenizer = initTokenizer(instr);
@@ -290,12 +298,15 @@ int bnov(char *instr) {
   IdentifierToken *idToken;
   IntegerToken *intToken;
   OperatorToken *opToken;
+  uint8_t *code = *memoryPtr;
     if (token->type == TOKEN_IDENTIFIER_TYPE) {
       idToken = (IdentifierToken *)token;
         if (strcmp(idToken->str, "BNOV") == 0) {
           n(tokenizer, &OperandInfo);
-          return 0xe500 + (OperandInfo.value) + (OperandInfo.dirType) +
-                 (OperandInfo.banktype);
+          code[0] = 0xe5;
+          code[1] = (OperandInfo.value) + (OperandInfo.dirType) +
+                    (OperandInfo.banktype);
+          *memoryPtr+=2;
                                                 }
         else {
           throwException(NOT_VALID_IDENTIFIER, (void *)idToken,
@@ -310,7 +321,7 @@ int bnov(char *instr) {
           }
 }
 
-int bnz(char *instr) {
+int bnz(char *instr,char**memoryPtr) {
   instr = touppercase(instr);
   OperandInfo OperandInfo;
   Tokenizer *tokenizer = initTokenizer(instr);
@@ -318,12 +329,15 @@ int bnz(char *instr) {
   IdentifierToken *idToken;
   IntegerToken *intToken;
   OperatorToken *opToken;
+  uint8_t *code = *memoryPtr;
     if (token->type == TOKEN_IDENTIFIER_TYPE) {
       idToken = (IdentifierToken *)token;
         if (strcmp(idToken->str, "BNZ") == 0) {
           n(tokenizer, &OperandInfo);
-          return 0xe100 + (OperandInfo.value) + (OperandInfo.dirType) +
-                 (OperandInfo.banktype);
+          code[0] = 0xe1;
+          code[1] = (OperandInfo.value) + (OperandInfo.dirType) +
+                    (OperandInfo.banktype);
+          *memoryPtr+=2;
                                               }
         else {
           throwException(NOT_VALID_IDENTIFIER, (void *)idToken,
@@ -338,7 +352,7 @@ int bnz(char *instr) {
           }
 }
 
-int bov(char *instr) {
+int bov(char *instr,char**memoryPtr) {
   instr = touppercase(instr);
   OperandInfo OperandInfo;
   Tokenizer *tokenizer = initTokenizer(instr);
@@ -346,12 +360,15 @@ int bov(char *instr) {
   IdentifierToken *idToken;
   IntegerToken *intToken;
   OperatorToken *opToken;
+  uint8_t *code = *memoryPtr;
     if (token->type == TOKEN_IDENTIFIER_TYPE) {
       idToken = (IdentifierToken *)token;
         if (strcmp(idToken->str, "BOV") == 0) {
           n(tokenizer, &OperandInfo);
-          return 0xe400 + (OperandInfo.value) + (OperandInfo.dirType) +
-                 (OperandInfo.banktype);
+          code[0] = 0xe4;
+          code[1] = (OperandInfo.value) + (OperandInfo.dirType) +
+                    (OperandInfo.banktype);
+          *memoryPtr+=2;
                                               }
         else {
           throwException(NOT_VALID_IDENTIFIER, (void *)idToken,
@@ -366,7 +383,7 @@ int bov(char *instr) {
           }
 }
 
-int bra(char *instr) {
+int bra(char *instr,char**memoryPtr) {
   instr = touppercase(instr);
   OperandInfo OperandInfo;
   OperandInfo1 OperandInfo1;
@@ -375,17 +392,16 @@ int bra(char *instr) {
   IdentifierToken *idToken;
   IntegerToken *intToken;
   OperatorToken *opToken;
+  uint8_t *code = *memoryPtr;
     if (token->type == TOKEN_IDENTIFIER_TYPE) {
       idToken = (IdentifierToken *)token;
         if (strcmp(idToken->str, "BRA") == 0) {
-          n1(tokenizer, &OperandInfo, &OperandInfo1);
-          return 0xd0000000 + ((OperandInfo.value) << 16) +
-                 ((OperandInfo.dirType) << 16) +
-                 ((OperandInfo.banktype) << 16) +
-                 0x0000d000 +
-                 ((OperandInfo1.value1) >> 32) +
-                 ((OperandInfo1.dirType1) >> 32) +
-                 ((OperandInfo1.banktype1) >> 32);
+          n1(tokenizer, &OperandInfo);
+          code[0] = 0xd0 + (OperandInfo.value);
+          code[1] = (OperandInfo.dirType) +
+                    (OperandInfo.banktype);
+          *memoryPtr+=2;
+
                                                 }
         else {
           throwException(NOT_VALID_IDENTIFIER, (void *)idToken,
@@ -400,7 +416,7 @@ int bra(char *instr) {
           }
 }
 
-int bz(char *instr) {
+int bz(char *instr,char**memoryPtr) {
   instr = touppercase(instr);
   OperandInfo OperandInfo;
   Tokenizer *tokenizer = initTokenizer(instr);
@@ -408,12 +424,15 @@ int bz(char *instr) {
   IdentifierToken *idToken;
   IntegerToken *intToken;
   OperatorToken *opToken;
+  uint8_t *code = *memoryPtr;
     if (token->type == TOKEN_IDENTIFIER_TYPE) {
       idToken = (IdentifierToken *)token;
         if (strcmp(idToken->str, "BZ") == 0) {
           n(tokenizer, &OperandInfo);
-          return 0xe000 + (OperandInfo.value) + (OperandInfo.dirType) +
-                 (OperandInfo.banktype);
+          code[0] = 0xe0;
+          code[1] = (OperandInfo.value) + (OperandInfo.dirType) +
+                    (OperandInfo.banktype);
+          *memoryPtr+=2;
         }
         else {
           throwException(NOT_VALID_IDENTIFIER, (void *)idToken,
@@ -428,7 +447,7 @@ int bz(char *instr) {
           }
 }
 
-int bcf(char *instr) {
+int bcf(char *instr,char**memoryPtr) {
   OperandInfo OperandInfo;
   instr = touppercase(instr);
   Tokenizer *tokenizer = initTokenizer(instr);
@@ -436,12 +455,15 @@ int bcf(char *instr) {
   IdentifierToken *idToken;
   IntegerToken *intToken;
   OperatorToken *opToken;
+  uint8_t *code = *memoryPtr;
     if (token->type == TOKEN_IDENTIFIER_TYPE) {
       idToken = (IdentifierToken *)token;
         if (strcmp(idToken->str, "BCF") == 0) {
           fba(tokenizer, &OperandInfo);
-          return 0x9000 + (OperandInfo.value) + (OperandInfo.dirType) +
-                 (OperandInfo.banktype);
+          code[0] = 0x90+((OperandInfo.dirType)<<1) +
+                    (OperandInfo.banktype);
+          code[1] = (OperandInfo.value);
+          *memoryPtr+=2;
         }
         else {
           throwException(NOT_VALID_IDENTIFIER, (void *)idToken,
@@ -456,7 +478,7 @@ int bcf(char *instr) {
           }
 }
 
-int bsf(char *instr) {
+int bsf(char *instr,char**memoryPtr) {
   OperandInfo OperandInfo;
   instr = touppercase(instr);
   Tokenizer *tokenizer = initTokenizer(instr);
@@ -464,12 +486,15 @@ int bsf(char *instr) {
   IdentifierToken *idToken;
   IntegerToken *intToken;
   OperatorToken *opToken;
+  uint8_t *code = *memoryPtr;
     if (token->type == TOKEN_IDENTIFIER_TYPE) {
       idToken = (IdentifierToken *)token;
         if (strcmp(idToken->str, "BSF") == 0) {
           fba(tokenizer, &OperandInfo);
-          return 0x8000 + (OperandInfo.value) + (OperandInfo.dirType) +
-                 (OperandInfo.banktype);
+          code[0] = 0x80+((OperandInfo.dirType)<<1) +
+                    (OperandInfo.banktype);
+          code[1] = (OperandInfo.value);
+          *memoryPtr+=2;
         }
         else {
           throwException(NOT_VALID_IDENTIFIER, (void *)idToken,
@@ -484,7 +509,7 @@ int bsf(char *instr) {
             }
 }
 
-int btfsc(char *instr) {
+int btfsc(char *instr,char**memoryPtr) {
   OperandInfo OperandInfo;
   instr = touppercase(instr);
   Tokenizer *tokenizer = initTokenizer(instr);
@@ -492,12 +517,15 @@ int btfsc(char *instr) {
   IdentifierToken *idToken;
   IntegerToken *intToken;
   OperatorToken *opToken;
+  uint8_t *code = *memoryPtr;
     if (token->type == TOKEN_IDENTIFIER_TYPE) {
       idToken = (IdentifierToken *)token;
         if (strcmp(idToken->str, "BTFSC") == 0) {
           fba(tokenizer, &OperandInfo);
-          return 0xb000 + (OperandInfo.value) + (OperandInfo.dirType) +
-                 (OperandInfo.banktype);
+          code[0] = 0xb0+((OperandInfo.dirType)<<1) +
+                    (OperandInfo.banktype);
+          code[1] = (OperandInfo.value);
+          *memoryPtr+=2;
         }
         else {
           throwException(NOT_VALID_IDENTIFIER, (void *)idToken,
@@ -512,7 +540,7 @@ int btfsc(char *instr) {
           }
 }
 
-int btfss(char *instr) {
+int btfss(char *instr,char**memoryPtr) {
   OperandInfo OperandInfo;
   instr = touppercase(instr);
   Tokenizer *tokenizer = initTokenizer(instr);
@@ -520,12 +548,15 @@ int btfss(char *instr) {
   IdentifierToken *idToken;
   IntegerToken *intToken;
   OperatorToken *opToken;
+  uint8_t *code = *memoryPtr;
     if (token->type == TOKEN_IDENTIFIER_TYPE) {
       idToken = (IdentifierToken *)token;
         if (strcmp(idToken->str, "BTFSS") == 0) {
           fba(tokenizer, &OperandInfo);
-          return 0xa000 + (OperandInfo.value) + (OperandInfo.dirType) +
-                 (OperandInfo.banktype);
+          code[0] = 0xa0+((OperandInfo.dirType)<<1) +
+                    (OperandInfo.banktype);
+          code[1] = (OperandInfo.value);
+          *memoryPtr+=2;
         }
         else {
           throwException(NOT_VALID_IDENTIFIER, (void *)idToken,
@@ -540,7 +571,7 @@ int btfss(char *instr) {
         }
 }
 
-int btg(char *instr) {
+int btg(char *instr,char**memoryPtr) {
   OperandInfo OperandInfo;
   instr = touppercase(instr);
   Tokenizer *tokenizer = initTokenizer(instr);
@@ -548,12 +579,15 @@ int btg(char *instr) {
   IdentifierToken *idToken;
   IntegerToken *intToken;
   OperatorToken *opToken;
+  uint8_t *code = *memoryPtr;
     if (token->type == TOKEN_IDENTIFIER_TYPE) {
       idToken = (IdentifierToken *)token;
         if (strcmp(idToken->str, "BTG") == 0) {
           fba(tokenizer, &OperandInfo);
-          return 0x7000 + (OperandInfo.value) + (OperandInfo.dirType) +
-                 (OperandInfo.banktype);
+          code[0] = 0x70+((OperandInfo.dirType)<<1) +
+                    (OperandInfo.banktype);
+          code[1] = (OperandInfo.value);
+          *memoryPtr+=2;
         }
         else {
           throwException(NOT_VALID_IDENTIFIER, (void *)idToken,
@@ -568,7 +602,7 @@ int btg(char *instr) {
           }
 }
 
-int call(char *instr) {
+int call(char *instr,char**memoryPtr) {
   instr = touppercase(instr);
   OperandInfo OperandInfo;
   OperandInfo1 OperandInfo1;
@@ -577,17 +611,18 @@ int call(char *instr) {
   IdentifierToken *idToken;
   IntegerToken *intToken;
   OperatorToken *opToken;
+  uint8_t *code = *memoryPtr;
     if (token->type == TOKEN_IDENTIFIER_TYPE) {
       idToken = (IdentifierToken *)token;
         if (strcmp(idToken->str, "CALL") == 0) {
           ks(tokenizer, &OperandInfo, &OperandInfo1);
-          return 0xec000000 + ((OperandInfo.value) << 16) +
-                 ((OperandInfo.dirType) << 24) +
-                 ((OperandInfo.banktype) << 16) +
-                 0x0000f000 +
-                 ((OperandInfo1.value1) >> 32) +
-                 ((OperandInfo1.dirType1) >> 32) +
-                 ((OperandInfo1.banktype1) >> 32);
+          code[0] = 0xec + (OperandInfo.dirType);
+          code[1] = (OperandInfo.value) +
+                    (OperandInfo.banktype);
+          code[2] = 0xf0;
+          code[3] = (OperandInfo1.value1) + (OperandInfo1.dirType1) +
+                    (OperandInfo1.banktype1);
+          *memoryPtr+=4;
 
         }
         else {
@@ -603,7 +638,7 @@ int call(char *instr) {
         }
 }
 
-int clrf(char *instr) {
+int clrf(char *instr,char**memoryPtr) {
   OperandInfo OperandInfo;
   instr = touppercase(instr);
   Tokenizer *tokenizer = initTokenizer(instr);
@@ -611,12 +646,14 @@ int clrf(char *instr) {
   IdentifierToken *idToken;
   IntegerToken *intToken;
   OperatorToken *opToken;
+  uint8_t *code = *memoryPtr;
     if (token->type == TOKEN_IDENTIFIER_TYPE) {
       idToken = (IdentifierToken *)token;
         if (strcmp(idToken->str, "CLRF") == 0) {
           fa(tokenizer, &OperandInfo);
-          return 0x6a00 + (OperandInfo.value) + (OperandInfo.dirType) +
-                 (OperandInfo.banktype);
+          code[0] = 0x6a+(OperandInfo.banktype);
+          code[1] = (OperandInfo.value) + (OperandInfo.dirType) ;
+          *memoryPtr+=2;
         }
         else {
           throwException(NOT_VALID_IDENTIFIER, (void *)idToken,
@@ -631,16 +668,19 @@ int clrf(char *instr) {
          }
 }
 
-int clrwdt(char *instr) {
+int clrwdt(char *instr,char**memoryPtr) {
   instr = touppercase(instr);
   Tokenizer *tokenizer = initTokenizer(instr);
   Token *token = getToken(tokenizer);
   IdentifierToken *idToken;
   OperatorToken *opToken;
+  uint8_t *code = *memoryPtr;
     if (token->type == TOKEN_IDENTIFIER_TYPE) {
       idToken = (IdentifierToken *)token;
         if (strcmp(idToken->str, "CLRWDT") == 0) {
-          return 0x0004;
+          code[0] = 0x00;
+          code[1] = 0x04;
+          *memoryPtr+=2;
         }
         else {
           throwException(NOT_VALID_IDENTIFIER, (void *)idToken,
@@ -655,7 +695,7 @@ int clrwdt(char *instr) {
          }
 }
 
-int comf(char *instr) {
+int comf(char *instr,char**memoryPtr) {
   OperandInfo OperandInfo;
   instr = touppercase(instr);
   Tokenizer *tokenizer = initTokenizer(instr);
@@ -663,12 +703,15 @@ int comf(char *instr) {
   IdentifierToken *idToken;
   IntegerToken *intToken;
   OperatorToken *opToken;
+  uint8_t *code = *memoryPtr;
     if (token->type == TOKEN_IDENTIFIER_TYPE) {
       idToken = (IdentifierToken *)token;
        if (strcmp(idToken->str, "COMF") == 0) {
         fda(tokenizer, &OperandInfo);
-        return 0x1c00 + (OperandInfo.value) + (OperandInfo.dirType) +
-                 (OperandInfo.banktype);
+        code[0] = 0x1c+ (OperandInfo.dirType) +
+                  (OperandInfo.banktype);
+        code[1] = (OperandInfo.value);
+        *memoryPtr+=2;
         }
         else {
           throwException(NOT_VALID_IDENTIFIER, (void *)idToken,
@@ -683,7 +726,7 @@ int comf(char *instr) {
        }
 }
 
-int cpfseq(char *instr) {
+int cpfseq(char *instr,char**memoryPtr) {
   OperandInfo OperandInfo;
   instr = touppercase(instr);
   Tokenizer *tokenizer = initTokenizer(instr);
@@ -691,12 +734,14 @@ int cpfseq(char *instr) {
   IdentifierToken *idToken;
   IntegerToken *intToken;
   OperatorToken *opToken;
+  uint8_t *code = *memoryPtr;
       if (token->type == TOKEN_IDENTIFIER_TYPE) {
         idToken = (IdentifierToken *)token;
         if (strcmp(idToken->str, "CPFSEQ") == 0) {
           fa(tokenizer, &OperandInfo);
-          return 0x6200 + (OperandInfo.value) + (OperandInfo.dirType) +
-                 (OperandInfo.banktype);
+          code[0] = 0x62 + (OperandInfo.banktype);
+          code[1] = (OperandInfo.value) + (OperandInfo.dirType);
+          *memoryPtr+=2;
         }
         else {
           throwException(NOT_VALID_IDENTIFIER, (void *)idToken,
@@ -711,7 +756,7 @@ int cpfseq(char *instr) {
            }
 }
 
-int cpfsgt(char *instr) {
+int cpfsgt(char *instr,char**memoryPtr) {
   OperandInfo OperandInfo;
   instr = touppercase(instr);
   Tokenizer *tokenizer = initTokenizer(instr);
@@ -719,12 +764,14 @@ int cpfsgt(char *instr) {
   IdentifierToken *idToken;
   IntegerToken *intToken;
   OperatorToken *opToken;
+  uint8_t *code = *memoryPtr;
     if (token->type == TOKEN_IDENTIFIER_TYPE) {
       idToken = (IdentifierToken *)token;
       if (strcmp(idToken->str, "CPFSGT") == 0) {
         fa(tokenizer, &OperandInfo);
-        return 0x6400 + (OperandInfo.value) + (OperandInfo.dirType) +
-                 (OperandInfo.banktype);
+        code[0] = 0x64+(OperandInfo.banktype);
+        code[1] = (OperandInfo.value) + (OperandInfo.dirType) ;
+        *memoryPtr+=2;
         }
       else {
           throwException(NOT_VALID_IDENTIFIER, (void *)idToken,
@@ -739,7 +786,7 @@ int cpfsgt(char *instr) {
          }
 }
 
-int cpfslt(char *instr) {
+int cpfslt(char *instr,char**memoryPtr) {
   OperandInfo OperandInfo;
   instr = touppercase(instr);
   Tokenizer *tokenizer = initTokenizer(instr);
@@ -747,12 +794,14 @@ int cpfslt(char *instr) {
   IdentifierToken *idToken;
   IntegerToken *intToken;
   OperatorToken *opToken;
+  uint8_t *code = *memoryPtr;
     if (token->type == TOKEN_IDENTIFIER_TYPE) {
       idToken = (IdentifierToken *)token;
       if (strcmp(idToken->str, "CPFSLT") == 0) {
         fa(tokenizer, &OperandInfo);
-        return 0x6000 + (OperandInfo.value) + (OperandInfo.dirType) +
-                 (OperandInfo.banktype);
+        code[0] = 0x60+(OperandInfo.banktype);
+        code[1] = (OperandInfo.value) + (OperandInfo.dirType) ;
+        *memoryPtr+=2;
         }
       else {
           throwException(NOT_VALID_IDENTIFIER, (void *)idToken,
@@ -767,16 +816,19 @@ int cpfslt(char *instr) {
         }
 }
 
-int daw(char *instr) {
+int daw(char *instr,char**memoryPtr) {
   instr = touppercase(instr);
   Tokenizer *tokenizer = initTokenizer(instr);
   Token *token = getToken(tokenizer);
   IdentifierToken *idToken;
   OperatorToken *opToken;
+  uint8_t *code = *memoryPtr;
     if (token->type == TOKEN_IDENTIFIER_TYPE) {
       idToken = (IdentifierToken *)token;
       if (strcmp(idToken->str, "DAW") == 0) {
-        return 0x0007;
+        code[0] = 0x00;
+        code[1] = 0x07;
+        *memoryPtr+=2;
         }
       else {
           throwException(NOT_VALID_IDENTIFIER, (void *)idToken,
@@ -791,7 +843,7 @@ int daw(char *instr) {
           }
 }
 
-int decf(char *instr) {
+int decf(char *instr,char**memoryPtr) {
   OperandInfo OperandInfo;
   instr = touppercase(instr);
   Tokenizer *tokenizer = initTokenizer(instr);
@@ -799,12 +851,15 @@ int decf(char *instr) {
   IdentifierToken *idToken;
   IntegerToken *intToken;
   OperatorToken *opToken;
+  uint8_t *code = *memoryPtr;
   if (token->type == TOKEN_IDENTIFIER_TYPE) {
       idToken = (IdentifierToken *)token;
         if (strcmp(idToken->str, "DECF") == 0) {
           fda(tokenizer, &OperandInfo);
-          return 0x0400 + (OperandInfo.value) + (OperandInfo.dirType) +
-                   (OperandInfo.banktype);
+          code[0] = 0x04+ (OperandInfo.dirType) +
+                    (OperandInfo.banktype);
+          code[1] = (OperandInfo.value);
+          *memoryPtr+=2;
           }
         else {
             throwException(NOT_VALID_IDENTIFIER, (void *)idToken,
@@ -819,7 +874,7 @@ int decf(char *instr) {
         }
 }
 
-int decfsz(char *instr) {
+int decfsz(char *instr,char**memoryPtr) {
   OperandInfo OperandInfo;
   instr = touppercase(instr);
   Tokenizer *tokenizer = initTokenizer(instr);
@@ -827,12 +882,15 @@ int decfsz(char *instr) {
   IdentifierToken *idToken;
   IntegerToken *intToken;
   OperatorToken *opToken;
+  uint8_t *code = *memoryPtr;
     if (token->type == TOKEN_IDENTIFIER_TYPE) {
       idToken = (IdentifierToken *)token;
       if (strcmp(idToken->str, "DECFSZ") == 0) {
         fda(tokenizer, &OperandInfo);
-        return 0x2c00 + (OperandInfo.value) + (OperandInfo.dirType) +
-                 (OperandInfo.banktype);
+        code[0] = 0x2c+ (OperandInfo.dirType) +
+                  (OperandInfo.banktype);
+        code[1] = (OperandInfo.value);
+        *memoryPtr+=2;
                                               }
       else {
           throwException(NOT_VALID_IDENTIFIER, (void *)idToken,
@@ -847,7 +905,7 @@ int decfsz(char *instr) {
        }
 }
 
-int dcfsnz(char *instr) {
+int dcfsnz(char *instr,char**memoryPtr) {
   OperandInfo OperandInfo;
   instr = touppercase(instr);
   Tokenizer *tokenizer = initTokenizer(instr);
@@ -855,12 +913,15 @@ int dcfsnz(char *instr) {
   IdentifierToken *idToken;
   IntegerToken *intToken;
   OperatorToken *opToken;
+  uint8_t *code = *memoryPtr;
     if (token->type == TOKEN_IDENTIFIER_TYPE) {
       idToken = (IdentifierToken *)token;
       if (strcmp(idToken->str, "DCFSNZ") == 0) {
         fda(tokenizer, &OperandInfo);
-        return 0x4c00 + (OperandInfo.value) + (OperandInfo.dirType) +
-                 (OperandInfo.banktype);
+        code[0] = 0x4c+ (OperandInfo.dirType) +
+                  (OperandInfo.banktype);
+        code[1] = (OperandInfo.value);
+        *memoryPtr+=2;
                                               }
        else {
           throwException(NOT_VALID_IDENTIFIER, (void *)idToken,
@@ -875,7 +936,7 @@ int dcfsnz(char *instr) {
         }
 }
 
-int _goto(char *instr) {
+int _goto(char *instr,char**memoryPtr) {
     instr = touppercase(instr);
     OperandInfo OperandInfo;
     OperandInfo1 OperandInfo1;
@@ -883,17 +944,18 @@ int _goto(char *instr) {
     Token *token = getToken(tokenizer);
     IdentifierToken *idToken;
     IntegerToken *intToken;
+    uint8_t *code = *memoryPtr;
       if (token->type == TOKEN_IDENTIFIER_TYPE) {
         idToken = (IdentifierToken *)token;
         if (strcmp(idToken->str, "GOTO") == 0) {
           n2(tokenizer, &OperandInfo, &OperandInfo1);
-          return 0xef000000 + ((OperandInfo.value) << 16) +
-                 ((OperandInfo.dirType) << 16) +
-                 ((OperandInfo.banktype) << 16) +
-                 0x0000f000 +
-                 ((OperandInfo1.value1) >> 32) +
-                 ((OperandInfo1.dirType1) >> 32) +
-                 ((OperandInfo1.banktype1) >> 32);
+          code[0] = 0xef;
+          code[1] = (OperandInfo.value) + (OperandInfo.dirType) +
+                    (OperandInfo.banktype);
+          code[2] = 0xf0;
+          code[3] = (OperandInfo1.value1) + (OperandInfo1.dirType1) +
+                    (OperandInfo1.banktype1);
+          *memoryPtr+=4;
 
         }
         else {
@@ -909,7 +971,7 @@ int _goto(char *instr) {
           }
 }
 
-int incf(char *instr) {
+int incf(char *instr,char**memoryPtr) {
   OperandInfo OperandInfo;
   instr = touppercase(instr);
   Tokenizer *tokenizer = initTokenizer(instr);
@@ -917,12 +979,15 @@ int incf(char *instr) {
   IdentifierToken *idToken;
   IntegerToken *intToken;
   OperatorToken *opToken;
+  uint8_t *code = *memoryPtr;
     if (token->type == TOKEN_IDENTIFIER_TYPE) {
       idToken = (IdentifierToken *)token;
         if (strcmp(idToken->str, "INCF") == 0) {
           fda(tokenizer, &OperandInfo);
-          return 0x2800 + (OperandInfo.value) + (OperandInfo.dirType) +
-                 (OperandInfo.banktype);
+          code[0] = 0x28+ (OperandInfo.dirType) +
+                    (OperandInfo.banktype);
+          code[1] = (OperandInfo.value);
+          *memoryPtr+=2;
                                               }
         else {
           throwException(NOT_VALID_IDENTIFIER, (void *)idToken,
@@ -937,7 +1002,7 @@ int incf(char *instr) {
           }
 }
 
-int incfsz(char *instr) {
+int incfsz(char *instr,char**memoryPtr) {
   OperandInfo OperandInfo;
   instr = touppercase(instr);
   Tokenizer *tokenizer = initTokenizer(instr);
@@ -945,12 +1010,15 @@ int incfsz(char *instr) {
   IdentifierToken *idToken;
   IntegerToken *intToken;
   OperatorToken *opToken;
+  uint8_t *code = *memoryPtr;
     if (token->type == TOKEN_IDENTIFIER_TYPE) {
       idToken = (IdentifierToken *)token;
         if (strcmp(idToken->str, "INCFSZ") == 0) {
           fda(tokenizer, &OperandInfo);
-          return 0x3c00 + (OperandInfo.value) + (OperandInfo.dirType) +
-                 (OperandInfo.banktype);
+          code[0] = 0x3c+ (OperandInfo.dirType) +
+                    (OperandInfo.banktype);
+          code[1] = (OperandInfo.value);
+          *memoryPtr+=2;
                                                 }
         else {
           throwException(NOT_VALID_IDENTIFIER, (void *)idToken,
@@ -965,7 +1033,7 @@ int incfsz(char *instr) {
             }
 }
 
-int infsnz(char *instr) {
+int infsnz(char *instr,char**memoryPtr) {
   OperandInfo OperandInfo;
   instr = touppercase(instr);
   Tokenizer *tokenizer = initTokenizer(instr);
@@ -973,12 +1041,15 @@ int infsnz(char *instr) {
   IdentifierToken *idToken;
   IntegerToken *intToken;
   OperatorToken *opToken;
+  uint8_t *code = *memoryPtr;
     if (token->type == TOKEN_IDENTIFIER_TYPE) {
       idToken = (IdentifierToken *)token;
         if (strcmp(idToken->str, "INFSNZ") == 0) {
           fda(tokenizer, &OperandInfo);
-          return 0x4800 + (OperandInfo.value) + (OperandInfo.dirType) +
-                 (OperandInfo.banktype);
+          code[0] = 0x48+ (OperandInfo.dirType) +
+                    (OperandInfo.banktype);
+          code[1] = (OperandInfo.value);
+          *memoryPtr+=2;
                                                 }
         else {
           throwException(NOT_VALID_IDENTIFIER, (void *)idToken,
@@ -993,7 +1064,7 @@ int infsnz(char *instr) {
           }
 }
 
-int iorlw(char *instr) {
+int iorlw(char *instr,char**memoryPtr) {
   instr = touppercase(instr);
   OperandInfo OperandInfo;
   Tokenizer *tokenizer = initTokenizer(instr);
@@ -1001,12 +1072,15 @@ int iorlw(char *instr) {
   IdentifierToken *idToken;
   IntegerToken *intToken;
   OperatorToken *opToken;
+  uint8_t *code = *memoryPtr;
     if (token->type == TOKEN_IDENTIFIER_TYPE) {
       idToken = (IdentifierToken *)token;
         if (strcmp(idToken->str, "IORLW") == 0) {
           k(tokenizer, &OperandInfo);
-          return 0x0900 + (OperandInfo.value) + (OperandInfo.dirType) +
-                 (OperandInfo.banktype);
+          code[0] = 0x09;
+          code[1] = (OperandInfo.value) + (OperandInfo.dirType) +
+                    (OperandInfo.banktype);
+          *memoryPtr+=2;
                                                 }
         else {
           throwException(NOT_VALID_IDENTIFIER, (void *)idToken,
@@ -1021,7 +1095,7 @@ int iorlw(char *instr) {
         }
 }
 
-int movlb(char *instr) {
+int movlb(char *instr,char**memoryPtr) {
   instr = touppercase(instr);
   OperandInfo OperandInfo;
   Tokenizer *tokenizer = initTokenizer(instr);
@@ -1029,12 +1103,18 @@ int movlb(char *instr) {
   IdentifierToken *idToken;
   IntegerToken *intToken;
   OperatorToken *opToken;
+  uint8_t *code = *memoryPtr;
     if (token->type == TOKEN_IDENTIFIER_TYPE) {
       idToken = (IdentifierToken *)token;
         if (strcmp(idToken->str, "MOVLB") == 0) {
           k(tokenizer, &OperandInfo);
-          return 0x0100 + ((OperandInfo.value) & 0x0f) + (OperandInfo.dirType) +
-                 (OperandInfo.banktype);
+          printf("value %x\n",OperandInfo.value);
+          printf("dir %x\n",OperandInfo.dirType);
+          printf("bank %x\n",OperandInfo.banktype);
+          code[0] = 0x01;
+          code[1] = 0x00 + ((OperandInfo.value) & 0x0f) + (OperandInfo.dirType) +
+                    (OperandInfo.banktype);
+          *memoryPtr+=2;
                                                 }
         else {
           throwException(NOT_VALID_IDENTIFIER, (void *)idToken,
@@ -1049,7 +1129,7 @@ int movlb(char *instr) {
             }
 }
 
-int movlw(char *instr) {
+int movlw(char *instr,char**memoryPtr) {
   instr = touppercase(instr);
   OperandInfo OperandInfo;
   Tokenizer *tokenizer = initTokenizer(instr);
@@ -1057,12 +1137,15 @@ int movlw(char *instr) {
   IdentifierToken *idToken;
   IntegerToken *intToken;
   OperatorToken *opToken;
+  uint8_t *code = *memoryPtr;
     if (token->type == TOKEN_IDENTIFIER_TYPE) {
       idToken = (IdentifierToken *)token;
         if (strcmp(idToken->str, "MOVLW") == 0) {
           k(tokenizer, &OperandInfo);
-          return 0x0e00 + (OperandInfo.value) + (OperandInfo.dirType) +
-                 (OperandInfo.banktype);
+          code[0] = 0x0e;
+          code[1] = (OperandInfo.value) + (OperandInfo.dirType) +
+                    (OperandInfo.banktype);
+          *memoryPtr+=2;
                                                 }
         else {
           throwException(NOT_VALID_IDENTIFIER, (void *)idToken,
@@ -1077,7 +1160,7 @@ int movlw(char *instr) {
             }
 }
 
-int movwf(char *instr) {
+int movwf(char *instr,char**memoryPtr) {
   OperandInfo OperandInfo;
   instr = touppercase(instr);
   Tokenizer *tokenizer = initTokenizer(instr);
@@ -1085,12 +1168,14 @@ int movwf(char *instr) {
   IdentifierToken *idToken;
   IntegerToken *intToken;
   OperatorToken *opToken;
+  uint8_t *code = *memoryPtr;
     if (token->type == TOKEN_IDENTIFIER_TYPE) {
       idToken = (IdentifierToken *)token;
         if (strcmp(idToken->str, "MOVWF") == 0) {
           fa(tokenizer, &OperandInfo);
-          return 0x6e00 + (OperandInfo.value) + (OperandInfo.dirType) +
-                 (OperandInfo.banktype);
+          code[0] = 0x6e + (OperandInfo.banktype);
+          code[1] = (OperandInfo.value) + (OperandInfo.dirType);
+          *memoryPtr+=2;
                                                 }
         else {
           throwException(NOT_VALID_IDENTIFIER, (void *)idToken,
@@ -1105,7 +1190,7 @@ int movwf(char *instr) {
             }
 }
 
-int movf(char *instr) {
+int movf(char *instr,char**memoryPtr) {
   OperandInfo OperandInfo;
   instr = touppercase(instr);
   Tokenizer *tokenizer = initTokenizer(instr);
@@ -1113,12 +1198,15 @@ int movf(char *instr) {
   IdentifierToken *idToken;
   IntegerToken *intToken;
   OperatorToken *opToken;
+  uint8_t *code = *memoryPtr;
     if (token->type == TOKEN_IDENTIFIER_TYPE) {
       idToken = (IdentifierToken *)token;
         if (strcmp(idToken->str, "MOVF") == 0) {
           fda(tokenizer, &OperandInfo);
-          return 0x5000 + (OperandInfo.value) + (OperandInfo.dirType) +
-                 (OperandInfo.banktype);
+          code[0] = 0x50+ (OperandInfo.dirType) +
+                    (OperandInfo.banktype);
+          code[1] = (OperandInfo.value);
+          *memoryPtr+=2;
                                                 }
         else {
           throwException(NOT_VALID_IDENTIFIER, (void *)idToken,
@@ -1133,7 +1221,7 @@ int movf(char *instr) {
             }
 }
 
-int movff(char *instr) {
+int movff(char *instr,char**memoryPtr) {
   OperandInfo OperandInfo;
   OperandInfo1 OperandInfo1;
   instr = touppercase(instr);
@@ -1142,17 +1230,18 @@ int movff(char *instr) {
   IdentifierToken *idToken;
   IntegerToken *intToken;
   OperatorToken *opToken;
+  uint8_t *code = *memoryPtr;
     if (token->type == TOKEN_IDENTIFIER_TYPE) {
       idToken = (IdentifierToken *)token;
         if (strcmp(idToken->str, "MOVFF") == 0) {
           ff(tokenizer, &OperandInfo, &OperandInfo1);
-          return 0xc0000000 + ((OperandInfo.value) << 16) +
-                 ((OperandInfo.dirType) << 16) +
-                 ((OperandInfo.banktype) << 16) +
-                 0x0000f000 +
-                 ((OperandInfo1.value1) >> 32) +
-                 ((OperandInfo1.dirType1) >> 32) +
-                 ((OperandInfo1.banktype1) >> 32);
+          code[0] = 0xc0;
+          code[1] = (OperandInfo.value) + (OperandInfo.dirType) +
+                    (OperandInfo.banktype);
+          code[2] = 0xf0;
+          code[3] = (OperandInfo1.value1) + (OperandInfo1.dirType1) +
+                    (OperandInfo1.banktype1);
+          *memoryPtr+=4;
                                                   }
         else {
           throwException(NOT_VALID_IDENTIFIER, (void *)idToken,
@@ -1167,7 +1256,7 @@ int movff(char *instr) {
           }
 }
 
-int mullw(char *instr) {
+int mullw(char *instr,char**memoryPtr) {
   instr = touppercase(instr);
   OperandInfo OperandInfo;
   Tokenizer *tokenizer = initTokenizer(instr);
@@ -1175,12 +1264,15 @@ int mullw(char *instr) {
   IdentifierToken *idToken;
   IntegerToken *intToken;
   OperatorToken *opToken;
+  uint8_t *code = *memoryPtr;
     if (token->type == TOKEN_IDENTIFIER_TYPE) {
       idToken = (IdentifierToken *)token;
         if (strcmp(idToken->str, "MULLW") == 0) {
           k(tokenizer, &OperandInfo);
-          return 0x0d00 + (OperandInfo.value) + (OperandInfo.dirType) +
-                 (OperandInfo.banktype);
+          code[0] = 0x0d;
+          code[1] = (OperandInfo.value) + (OperandInfo.dirType) +
+                    (OperandInfo.banktype);
+          *memoryPtr+=2;
                                                 }
         else {
           throwException(NOT_VALID_IDENTIFIER, (void *)idToken,
@@ -1195,7 +1287,7 @@ int mullw(char *instr) {
             }
 }
 
-int mulwf(char *instr) {
+int mulwf(char *instr,char**memoryPtr) {
   OperandInfo OperandInfo;
   instr = touppercase(instr);
   Tokenizer *tokenizer = initTokenizer(instr);
@@ -1203,12 +1295,14 @@ int mulwf(char *instr) {
   IdentifierToken *idToken;
   IntegerToken *intToken;
   OperatorToken *opToken;
+  uint8_t *code = *memoryPtr;
     if (token->type == TOKEN_IDENTIFIER_TYPE) {
       idToken = (IdentifierToken *)token;
         if (strcmp(idToken->str, "MULWF") == 0) {
           fa(tokenizer, &OperandInfo);
-          return 0x0200 + (OperandInfo.value) + (OperandInfo.dirType) +
-                 (OperandInfo.banktype);
+          code[0] = 0x02+(OperandInfo.banktype);
+          code[1] = (OperandInfo.value) + (OperandInfo.dirType);
+          *memoryPtr+=2;
                                                 }
         else {
           throwException(NOT_VALID_IDENTIFIER, (void *)idToken,
@@ -1223,7 +1317,7 @@ int mulwf(char *instr) {
           }
 }
 
-int negf(char *instr) {
+int negf(char *instr,char**memoryPtr) {
   OperandInfo OperandInfo;
   instr = touppercase(instr);
   Tokenizer *tokenizer = initTokenizer(instr);
@@ -1231,12 +1325,14 @@ int negf(char *instr) {
   IdentifierToken *idToken;
   IntegerToken *intToken;
   OperatorToken *opToken;
+  uint8_t *code = *memoryPtr;
     if (token->type == TOKEN_IDENTIFIER_TYPE) {
       idToken = (IdentifierToken *)token;
         if (strcmp(idToken->str, "NEGF") == 0) {
           fa(tokenizer, &OperandInfo);
-          return 0x6c00 + (OperandInfo.value) + (OperandInfo.dirType) +
-                 (OperandInfo.banktype);
+          code[0] = 0x6c+(OperandInfo.banktype);
+          code[1] = (OperandInfo.value) + (OperandInfo.dirType);
+          *memoryPtr+=2;
                                                 }
         else {
           throwException(NOT_VALID_IDENTIFIER, (void *)idToken,
@@ -1251,16 +1347,19 @@ int negf(char *instr) {
             }
 }
 
-int pop(char *instr) {
+int pop(char *instr,char**memoryPtr) {
   instr = touppercase(instr);
   Tokenizer *tokenizer = initTokenizer(instr);
   Token *token = getToken(tokenizer);
   IdentifierToken *idToken;
   OperatorToken *opToken;
+  uint8_t *code = *memoryPtr;
     if (token->type == TOKEN_IDENTIFIER_TYPE) {
       idToken = (IdentifierToken *)token;
         if (strcmp(idToken->str, "POP") == 0) {
-          return 0x0006;
+          code[0] = 0x00;
+          code[1] = 0x06;
+          *memoryPtr+=2;
                                               }
         else {
           throwException(NOT_VALID_IDENTIFIER, (void *)idToken,
@@ -1275,16 +1374,19 @@ int pop(char *instr) {
           }
 }
 
-int push(char *instr) {
+int push(char *instr,char**memoryPtr) {
   instr = touppercase(instr);
   Tokenizer *tokenizer = initTokenizer(instr);
   Token *token = getToken(tokenizer);
   IdentifierToken *idToken;
   OperatorToken *opToken;
+  uint8_t *code = *memoryPtr;
     if (token->type == TOKEN_IDENTIFIER_TYPE) {
       idToken = (IdentifierToken *)token;
         if (strcmp(idToken->str, "PUSH") == 0) {
-          return 0x0005;
+          code[0] = 0x00;
+          code[1] = 0x05;
+          *memoryPtr+=2;
                                                 }
         else {
           throwException(NOT_VALID_IDENTIFIER, (void *)idToken,
@@ -1299,7 +1401,7 @@ int push(char *instr) {
             }
 }
 
-int retlw(char *instr) {
+int retlw(char *instr,char**memoryPtr) {
   instr = touppercase(instr);
   OperandInfo OperandInfo;
   Tokenizer *tokenizer = initTokenizer(instr);
@@ -1307,12 +1409,15 @@ int retlw(char *instr) {
   IdentifierToken *idToken;
   IntegerToken *intToken;
   OperatorToken *opToken;
+  uint8_t *code = *memoryPtr;
     if (token->type == TOKEN_IDENTIFIER_TYPE) {
       idToken = (IdentifierToken *)token;
         if (strcmp(idToken->str, "RETLW") == 0) {
           k(tokenizer, &OperandInfo);
-          return 0x0c00 + (OperandInfo.value) + (OperandInfo.dirType) +
-                 (OperandInfo.banktype);
+          code[0] = 0x0c;
+          code[1] = (OperandInfo.value) + (OperandInfo.dirType) +
+                    (OperandInfo.banktype);
+          *memoryPtr+=2;
                                                 }
         else {
           throwException(NOT_VALID_IDENTIFIER, (void *)idToken,
@@ -1327,16 +1432,19 @@ int retlw(char *instr) {
           }
 }
 
-int reset(char *instr) {
+int reset(char *instr,char**memoryPtr) {
   instr = touppercase(instr);
   Tokenizer *tokenizer = initTokenizer(instr);
   Token *token = getToken(tokenizer);
   IdentifierToken *idToken;
   OperatorToken *opToken;
+  uint8_t *code = *memoryPtr;
     if (token->type == TOKEN_IDENTIFIER_TYPE) {
       idToken = (IdentifierToken *)token;
         if (strcmp(idToken->str, "RESET") == 0) {
-          return 0x00ff;
+          code[0] = 0x00;
+          code[1] = 0xff;
+          *memoryPtr+=2;
                                                 }
         else {
           throwException(NOT_VALID_IDENTIFIER, (void *)idToken,
@@ -1351,7 +1459,7 @@ int reset(char *instr) {
           }
 }
 
-int retfie(char *instr) {
+int retfie(char *instr,char**memoryPtr) {
   instr = touppercase(instr);
   OperandInfo OperandInfo;
   Tokenizer *tokenizer = initTokenizer(instr);
@@ -1359,11 +1467,15 @@ int retfie(char *instr) {
   IdentifierToken *idToken;
   IntegerToken *intToken;
   OperatorToken *opToken;
+  uint8_t *code = *memoryPtr;
     if (token->type == TOKEN_IDENTIFIER_TYPE) {
       idToken = (IdentifierToken *)token;
         if (strcmp(idToken->str, "RETFIE") == 0) {
           handleS(tokenizer, &OperandInfo);
-          return 0x0010 + (OperandInfo.dirType) + (OperandInfo.banktype);
+          code[0] = 0x00;
+          code[1] = 0x10 +(OperandInfo.dirType) +
+                    (OperandInfo.banktype);
+          *memoryPtr+=2;
                                                   }
         else {
           throwException(NOT_VALID_IDENTIFIER, (void *)idToken,
@@ -1378,7 +1490,7 @@ int retfie(char *instr) {
           }
 }
 
-int _return(char *instr) {
+int _return(char *instr,char**memoryPtr) {
   instr = touppercase(instr);
   OperandInfo OperandInfo;
   Tokenizer *tokenizer = initTokenizer(instr);
@@ -1386,11 +1498,15 @@ int _return(char *instr) {
   IdentifierToken *idToken;
   IntegerToken *intToken;
   OperatorToken *opToken;
+  uint8_t *code = *memoryPtr;
     if (token->type == TOKEN_IDENTIFIER_TYPE) {
       idToken = (IdentifierToken *)token;
         if (strcmp(idToken->str, "RETURN") == 0) {
           handleS(tokenizer, &OperandInfo);
-          return 0x0012 + (OperandInfo.dirType) + (OperandInfo.banktype);
+          code[0] = 0x00;
+          code[1] = 0x12 +(OperandInfo.dirType) +
+                    (OperandInfo.banktype);
+          *memoryPtr+=2;
         }
         else {
           throwException(NOT_VALID_IDENTIFIER, (void *)idToken,
@@ -1405,7 +1521,7 @@ int _return(char *instr) {
             }
 }
 
-int rlcf(char *instr) {
+int rlcf(char *instr,char**memoryPtr) {
   OperandInfo OperandInfo;
   instr = touppercase(instr);
   Tokenizer *tokenizer = initTokenizer(instr);
@@ -1413,12 +1529,15 @@ int rlcf(char *instr) {
   IdentifierToken *idToken;
   IntegerToken *intToken;
   OperatorToken *opToken;
+  uint8_t *code = *memoryPtr;
     if (token->type == TOKEN_IDENTIFIER_TYPE) {
       idToken = (IdentifierToken *)token;
         if (strcmp(idToken->str, "RLCF") == 0) {
           fda(tokenizer, &OperandInfo);
-          return 0x3400 + (OperandInfo.value) + (OperandInfo.dirType) +
-                 (OperandInfo.banktype);
+          code[0] = 0x34+ (OperandInfo.dirType) +
+                    (OperandInfo.banktype);
+          code[1] = (OperandInfo.value);
+          *memoryPtr+=2;
                                                 }
         else {
           throwException(NOT_VALID_IDENTIFIER, (void *)idToken,
@@ -1433,7 +1552,7 @@ int rlcf(char *instr) {
           }
 }
 
-int rlncf(char *instr) {
+int rlncf(char *instr,char**memoryPtr) {
   OperandInfo OperandInfo;
   instr = touppercase(instr);
   Tokenizer *tokenizer = initTokenizer(instr);
@@ -1441,12 +1560,15 @@ int rlncf(char *instr) {
   IdentifierToken *idToken;
   IntegerToken *intToken;
   OperatorToken *opToken;
+  uint8_t *code = *memoryPtr;
     if (token->type == TOKEN_IDENTIFIER_TYPE) {
       idToken = (IdentifierToken *)token;
         if (strcmp(idToken->str, "RLNCF") == 0) {
           fda(tokenizer, &OperandInfo);
-          return 0x4400 + (OperandInfo.value) + (OperandInfo.dirType) +
-                 (OperandInfo.banktype);
+          code[0] = 0x44+ (OperandInfo.dirType) +
+                    (OperandInfo.banktype);
+          code[1] = (OperandInfo.value);
+          *memoryPtr+=2;
                                                 }
         else {
           throwException(NOT_VALID_IDENTIFIER, (void *)idToken,
@@ -1461,7 +1583,7 @@ int rlncf(char *instr) {
             }
 }
 
-int rrcf(char *instr) {
+int rrcf(char *instr,char**memoryPtr) {
   OperandInfo OperandInfo;
   instr = touppercase(instr);
   Tokenizer *tokenizer = initTokenizer(instr);
@@ -1469,12 +1591,15 @@ int rrcf(char *instr) {
   IdentifierToken *idToken;
   IntegerToken *intToken;
   OperatorToken *opToken;
+  uint8_t *code = *memoryPtr;
     if (token->type == TOKEN_IDENTIFIER_TYPE) {
       idToken = (IdentifierToken *)token;
         if (strcmp(idToken->str, "RRCF") == 0) {
           fda(tokenizer, &OperandInfo);
-          return 0x3000 + (OperandInfo.value) + (OperandInfo.dirType) +
-                 (OperandInfo.banktype);
+          code[0] = 0x30+ (OperandInfo.dirType) +
+                    (OperandInfo.banktype);
+          code[1] = (OperandInfo.value);
+          *memoryPtr+=2;
                                                 }
         else {
           throwException(NOT_VALID_IDENTIFIER, (void *)idToken,
@@ -1489,7 +1614,7 @@ int rrcf(char *instr) {
             }
 }
 
-int rrncf(char *instr) {
+int rrncf(char *instr,char**memoryPtr) {
   OperandInfo OperandInfo;
   instr = touppercase(instr);
   Tokenizer *tokenizer = initTokenizer(instr);
@@ -1497,12 +1622,15 @@ int rrncf(char *instr) {
   IdentifierToken *idToken;
   IntegerToken *intToken;
   OperatorToken *opToken;
+  uint8_t *code = *memoryPtr;
     if (token->type == TOKEN_IDENTIFIER_TYPE) {
       idToken = (IdentifierToken *)token;
         if (strcmp(idToken->str, "RRNCF") == 0) {
           fda(tokenizer, &OperandInfo);
-          return 0x4000 + (OperandInfo.value) + (OperandInfo.dirType) +
-                 (OperandInfo.banktype);
+          code[0] = 0x40+ (OperandInfo.dirType) +
+                    (OperandInfo.banktype);
+          code[1] = (OperandInfo.value);
+          *memoryPtr+=2;
                                                 }
         else {
           throwException(NOT_VALID_IDENTIFIER, (void *)idToken,
@@ -1517,7 +1645,7 @@ int rrncf(char *instr) {
             }
 }
 
-int setf(char *instr) {
+int setf(char *instr,char**memoryPtr) {
   OperandInfo OperandInfo;
   instr = touppercase(instr);
   Tokenizer *tokenizer = initTokenizer(instr);
@@ -1525,12 +1653,14 @@ int setf(char *instr) {
   IdentifierToken *idToken;
   IntegerToken *intToken;
   OperatorToken *opToken;
+  uint8_t *code = *memoryPtr;
     if (token->type == TOKEN_IDENTIFIER_TYPE) {
       idToken = (IdentifierToken *)token;
         if (strcmp(idToken->str, "SETF") == 0) {
           fa(tokenizer, &OperandInfo);
-          return 0x6800 + (OperandInfo.value) + (OperandInfo.dirType) +
-                 (OperandInfo.banktype);
+          code[0] = 0x68+(OperandInfo.banktype);
+          code[1] = (OperandInfo.value) + (OperandInfo.dirType);
+          *memoryPtr+=2;
                                                 }
         else {
           throwException(NOT_VALID_IDENTIFIER, (void *)idToken,
@@ -1545,16 +1675,19 @@ int setf(char *instr) {
             }
 }
 
-int sleep(char *instr) {
+int sleep(char *instr,char**memoryPtr) {
   instr = touppercase(instr);
   Tokenizer *tokenizer = initTokenizer(instr);
   Token *token = getToken(tokenizer);
   IdentifierToken *idToken;
   OperatorToken *opToken;
+  uint8_t *code = *memoryPtr;
     if (token->type == TOKEN_IDENTIFIER_TYPE) {
       idToken = (IdentifierToken *)token;
         if (strcmp(idToken->str, "SLEEP") == 0) {
-          return 0x0003;
+          code[0] = 0x00;
+          code[1] = 0x03;
+          *memoryPtr+=2;
         }
         else {
           throwException(NOT_VALID_IDENTIFIER, (void *)idToken,
@@ -1569,7 +1702,7 @@ int sleep(char *instr) {
             }
 }
 
-int sublw(char *instr) {
+int sublw(char *instr,char**memoryPtr) {
   instr = touppercase(instr);
   OperandInfo OperandInfo;
   Tokenizer *tokenizer = initTokenizer(instr);
@@ -1577,12 +1710,15 @@ int sublw(char *instr) {
   IdentifierToken *idToken;
   IntegerToken *intToken;
   OperatorToken *opToken;
+  uint8_t *code = *memoryPtr;
     if (token->type == TOKEN_IDENTIFIER_TYPE) {
       idToken = (IdentifierToken *)token;
         if (strcmp(idToken->str, "SUBLW") == 0) {
           k(tokenizer, &OperandInfo);
-          return 0x0800 + (OperandInfo.value) + (OperandInfo.dirType) +
-                 (OperandInfo.banktype);
+          code[0] = 0x08;
+          code[1] = (OperandInfo.value) + (OperandInfo.dirType) +
+                    (OperandInfo.banktype);
+          *memoryPtr+=2;
                                                 }
         else {
           throwException(NOT_VALID_IDENTIFIER, (void *)idToken,
@@ -1597,7 +1733,7 @@ int sublw(char *instr) {
             }
 }
 
-int subwf(char *instr) {
+int subwf(char *instr,char**memoryPtr) {
   OperandInfo OperandInfo;
   instr = touppercase(instr);
   Tokenizer *tokenizer = initTokenizer(instr);
@@ -1605,12 +1741,15 @@ int subwf(char *instr) {
   IdentifierToken *idToken;
   IntegerToken *intToken;
   OperatorToken *opToken;
+  uint8_t *code = *memoryPtr;
     if (token->type == TOKEN_IDENTIFIER_TYPE) {
       idToken = (IdentifierToken *)token;
         if (strcmp(idToken->str, "SUBWF") == 0) {
           fda(tokenizer, &OperandInfo);
-          return 0x5c00 + (OperandInfo.value) + (OperandInfo.dirType) +
-                 (OperandInfo.banktype);
+          code[0] = 0x5c+ (OperandInfo.dirType) +
+                    (OperandInfo.banktype);
+          code[1] = (OperandInfo.value);
+          *memoryPtr+=2;
                                                 }
         else {
           throwException(NOT_VALID_IDENTIFIER, (void *)idToken,
@@ -1626,7 +1765,7 @@ int subwf(char *instr) {
             }
 }
 
-int subwfb(char *instr) {
+int subwfb(char *instr,char**memoryPtr) {
   OperandInfo OperandInfo;
   instr = touppercase(instr);
   Tokenizer *tokenizer = initTokenizer(instr);
@@ -1634,12 +1773,15 @@ int subwfb(char *instr) {
   IdentifierToken *idToken;
   IntegerToken *intToken;
   OperatorToken *opToken;
+  uint8_t *code = *memoryPtr;
     if (token->type == TOKEN_IDENTIFIER_TYPE) {
       idToken = (IdentifierToken *)token;
         if (strcmp(idToken->str, "SUBWFB") == 0) {
           fda(tokenizer, &OperandInfo);
-          return 0x5800 + (OperandInfo.value) + (OperandInfo.dirType) +
-                 (OperandInfo.banktype);
+          code[0] = 0x58+ (OperandInfo.dirType) +
+                    (OperandInfo.banktype);
+          code[1] = (OperandInfo.value);
+          *memoryPtr+=2;
                                                   }
         else {
           throwException(NOT_VALID_IDENTIFIER, (void *)idToken,
@@ -1654,7 +1796,7 @@ int subwfb(char *instr) {
             }
 }
 
-int subfwb(char *instr) {
+int subfwb(char *instr,char**memoryPtr) {
   OperandInfo OperandInfo;
   instr = touppercase(instr);
   Tokenizer *tokenizer = initTokenizer(instr);
@@ -1662,12 +1804,15 @@ int subfwb(char *instr) {
   IdentifierToken *idToken;
   IntegerToken *intToken;
   OperatorToken *opToken;
+  uint8_t *code = *memoryPtr;
     if (token->type == TOKEN_IDENTIFIER_TYPE) {
       idToken = (IdentifierToken *)token;
         if (strcmp(idToken->str, "SUBFWB") == 0) {
           fda(tokenizer, &OperandInfo);
-          return 0x5400 + (OperandInfo.value) + (OperandInfo.dirType) +
-                 (OperandInfo.banktype);
+          code[0] = 0x54+ (OperandInfo.dirType) +
+                    (OperandInfo.banktype);
+          code[1] = (OperandInfo.value);
+          *memoryPtr+=2;
                                                   }
         else {
           throwException(NOT_VALID_IDENTIFIER, (void *)idToken,
@@ -1683,7 +1828,7 @@ int subfwb(char *instr) {
           }
 }
 
-int swapf(char *instr) {
+int swapf(char *instr,char**memoryPtr) {
   OperandInfo OperandInfo;
   instr = touppercase(instr);
   Tokenizer *tokenizer = initTokenizer(instr);
@@ -1691,12 +1836,15 @@ int swapf(char *instr) {
   IdentifierToken *idToken;
   IntegerToken *intToken;
   OperatorToken *opToken;
+  uint8_t *code = *memoryPtr;
     if (token->type == TOKEN_IDENTIFIER_TYPE) {
       idToken = (IdentifierToken *)token;
         if (strcmp(idToken->str, "SWAPF") == 0) {
           fda(tokenizer, &OperandInfo);
-            return 0x3800 + (OperandInfo.value) + (OperandInfo.dirType) +
-                 (OperandInfo.banktype);
+          code[0] = 0x38+ (OperandInfo.dirType) +
+                    (OperandInfo.banktype);
+          code[1] = (OperandInfo.value);
+          *memoryPtr+=2;
                                                 }
         else {
           throwException(NOT_VALID_IDENTIFIER, (void *)idToken,
@@ -1711,12 +1859,13 @@ int swapf(char *instr) {
             }
 }
 
-int tblrd_star(char *instr) {
+int tblrd_star(char *instr,char**memoryPtr) {
   instr = touppercase(instr);
   Tokenizer *tokenizer = initTokenizer(instr);
   Token *token = getToken(tokenizer);
   IdentifierToken *idToken;
   OperatorToken *opToken;
+  uint8_t *code = *memoryPtr;
     if (token->type == TOKEN_IDENTIFIER_TYPE) {
       idToken = (IdentifierToken *)token;
         if (strcmp(idToken->str, "TBLRD") == 0) {
@@ -1724,7 +1873,9 @@ int tblrd_star(char *instr) {
             if (token->type == TOKEN_OPERATOR_TYPE) {
               opToken = (OperatorToken *)token;
                 if (strcmp(opToken->str, "*") == 0) {
-                  return 0x0008;
+                  code[0] = 0x00;
+                  code[1] = 0x08;
+                  *memoryPtr+=2;
 
                                                     }
                 else {
@@ -1753,12 +1904,13 @@ int tblrd_star(char *instr) {
             }
 }
 
-int tblrd_star_plus(char *instr) {
+int tblrd_star_plus(char *instr,char**memoryPtr) {
   instr = touppercase(instr);
   Tokenizer *tokenizer = initTokenizer(instr);
   Token *token = getToken(tokenizer);
   IdentifierToken *idToken;
   OperatorToken *opToken;
+  uint8_t *code = *memoryPtr;
       if (token->type == TOKEN_IDENTIFIER_TYPE) {
         idToken = (IdentifierToken *)token;
         if (strcmp(idToken->str, "TBLRD") == 0) {
@@ -1766,7 +1918,9 @@ int tblrd_star_plus(char *instr) {
           if (token->type == TOKEN_OPERATOR_TYPE) {
             opToken = (OperatorToken *)token;
             if (strcmp(opToken->str, "*+") == 0) {
-              return 0x0009;
+              code[0] = 0x00;
+              code[1] = 0x09;
+              *memoryPtr+=2;
                                                   }
             else {
               throwException(NOT_VALID_OPERATOR, (void *)opToken,
@@ -1794,12 +1948,13 @@ int tblrd_star_plus(char *instr) {
           }
 }
 
-int tblrd_star_minus(char *instr) {
+int tblrd_star_minus(char *instr,char**memoryPtr) {
   instr = touppercase(instr);
   Tokenizer *tokenizer = initTokenizer(instr);
   Token *token = getToken(tokenizer);
   IdentifierToken *idToken;
   OperatorToken *opToken;
+  uint8_t *code = *memoryPtr;
     if (token->type == TOKEN_IDENTIFIER_TYPE) {
       idToken = (IdentifierToken *)token;
         if (strcmp(idToken->str, "TBLRD") == 0) {
@@ -1807,7 +1962,9 @@ int tblrd_star_minus(char *instr) {
             if (token->type == TOKEN_OPERATOR_TYPE) {
               opToken = (OperatorToken *)token;
                 if (strcmp(opToken->str, "*-") == 0) {
-                  return 0x000a;
+                  code[0] = 0x00;
+                  code[1] = 0x0a;
+                  *memoryPtr+=2;
                                                       }
                 else {
               throwException(NOT_VALID_OPERATOR, (void *)opToken,
@@ -1836,12 +1993,13 @@ int tblrd_star_minus(char *instr) {
           }
 }
 
-int tblrd_plus_star(char *instr) {
+int tblrd_plus_star(char *instr,char**memoryPtr) {
   instr = touppercase(instr);
   Tokenizer *tokenizer = initTokenizer(instr);
   Token *token = getToken(tokenizer);
   IdentifierToken *idToken;
   OperatorToken *opToken;
+  uint8_t *code = *memoryPtr;
     if (token->type == TOKEN_IDENTIFIER_TYPE) {
       idToken = (IdentifierToken *)token;
         if (strcmp(idToken->str, "TBLRD") == 0) {
@@ -1849,7 +2007,9 @@ int tblrd_plus_star(char *instr) {
             if (token->type == TOKEN_OPERATOR_TYPE) {
               opToken = (OperatorToken *)token;
                 if (strcmp(opToken->str, "+*") == 0) {
-                  return 0x000b;
+                  code[0] = 0x00;
+                  code[1] = 0x0b;
+                  *memoryPtr+=2;
                                                       }
                 else {
                   throwException(NOT_VALID_OPERATOR, (void *)opToken,
@@ -1878,12 +2038,13 @@ int tblrd_plus_star(char *instr) {
             }
 }
 
-int tblwt_star(char *instr) {
+int tblwt_star(char *instr,char**memoryPtr) {
   instr = touppercase(instr);
   Tokenizer *tokenizer = initTokenizer(instr);
   Token *token = getToken(tokenizer);
   IdentifierToken *idToken;
   OperatorToken *opToken;
+  uint8_t *code = *memoryPtr;
     if (token->type == TOKEN_IDENTIFIER_TYPE) {
       idToken = (IdentifierToken *)token;
         if (strcmp(idToken->str, "TBLWT") == 0) {
@@ -1891,8 +2052,9 @@ int tblwt_star(char *instr) {
           if (token->type == TOKEN_OPERATOR_TYPE) {
             opToken = (OperatorToken *)token;
               if (strcmp(opToken->str, "*") == 0) {
-                return 0x000c;
-
+                code[0] = 0x00;
+                code[1] = 0x0c;
+                *memoryPtr+=2;
                                                   }
               else {
               throwException(NOT_VALID_OPERATOR, (void *)opToken,
@@ -1921,12 +2083,13 @@ int tblwt_star(char *instr) {
             }
 }
 
-int tblwt_star_plus(char *instr) {
+int tblwt_star_plus(char *instr,char**memoryPtr) {
   instr = touppercase(instr);
   Tokenizer *tokenizer = initTokenizer(instr);
   Token *token = getToken(tokenizer);
   IdentifierToken *idToken;
   OperatorToken *opToken;
+  uint8_t *code = *memoryPtr;
     if (token->type == TOKEN_IDENTIFIER_TYPE) {
       idToken = (IdentifierToken *)token;
         if (strcmp(idToken->str, "TBLWT") == 0) {
@@ -1934,7 +2097,9 @@ int tblwt_star_plus(char *instr) {
           if (token->type == TOKEN_OPERATOR_TYPE) {
             opToken = (OperatorToken *)token;
               if (strcmp(opToken->str, "*+") == 0) {
-                return 0x000d;
+                code[0] = 0x00;
+                code[1] = 0x0d;
+                *memoryPtr+=2;
                                                     }
               else {
               throwException(NOT_VALID_OPERATOR, (void *)opToken,
@@ -1963,12 +2128,13 @@ int tblwt_star_plus(char *instr) {
           }
 }
 
-int tblwt_star_minus(char *instr) {
+int tblwt_star_minus(char *instr,char**memoryPtr) {
   instr = touppercase(instr);
   Tokenizer *tokenizer = initTokenizer(instr);
   Token *token = getToken(tokenizer);
   IdentifierToken *idToken;
   OperatorToken *opToken;
+  uint8_t *code = *memoryPtr;
     if (token->type == TOKEN_IDENTIFIER_TYPE) {
       idToken = (IdentifierToken *)token;
         if (strcmp(idToken->str, "TBLWT") == 0) {
@@ -1976,7 +2142,9 @@ int tblwt_star_minus(char *instr) {
             if (token->type == TOKEN_OPERATOR_TYPE) {
               opToken = (OperatorToken *)token;
                 if (strcmp(opToken->str, "*-") == 0) {
-                  return 0x000e;
+                  code[0] = 0x00;
+                  code[1] = 0x0e;
+                  *memoryPtr+=2;
                                                       }
                 else {
                   throwException(NOT_VALID_OPERATOR, (void *)opToken,
@@ -2004,12 +2172,13 @@ int tblwt_star_minus(char *instr) {
             }
 }
 
-int tblwt_plus_star(char *instr) {
+int tblwt_plus_star(char *instr,char**memoryPtr) {
   instr = touppercase(instr);
   Tokenizer *tokenizer = initTokenizer(instr);
   Token *token = getToken(tokenizer);
   IdentifierToken *idToken;
   OperatorToken *opToken;
+  uint8_t *code = *memoryPtr;
     if (token->type == TOKEN_IDENTIFIER_TYPE) {
       idToken = (IdentifierToken *)token;
         if (strcmp(idToken->str, "TBLWT") == 0) {
@@ -2017,7 +2186,9 @@ int tblwt_plus_star(char *instr) {
             if (token->type == TOKEN_OPERATOR_TYPE) {
               opToken = (OperatorToken *)token;
                 if (strcmp(opToken->str, "+*") == 0) {
-                  return 0x000f;
+                  code[0] = 0x00;
+                  code[1] = 0x0f;
+                  *memoryPtr+=2;
                                                       }
                 else {
                 throwException(NOT_VALID_OPERATOR, (void *)opToken,
@@ -2046,7 +2217,7 @@ int tblwt_plus_star(char *instr) {
             }
 }
 
-int tstfsz(char *instr) {
+int tstfsz(char *instr,char**memoryPtr) {
   OperandInfo OperandInfo;
   instr = touppercase(instr);
   Tokenizer *tokenizer = initTokenizer(instr);
@@ -2054,12 +2225,14 @@ int tstfsz(char *instr) {
   IdentifierToken *idToken;
   IntegerToken *intToken;
   OperatorToken *opToken;
+  uint8_t *code = *memoryPtr;
     if (token->type == TOKEN_IDENTIFIER_TYPE) {
       idToken = (IdentifierToken *)token;
         if (strcmp(idToken->str, "TSTFSZ") == 0) {
           fa(tokenizer, &OperandInfo);
-          return 0x6600 + (OperandInfo.value) + (OperandInfo.dirType) +
-                 (OperandInfo.banktype);
+          code[0] = 0x66+(OperandInfo.banktype);
+          code[1] = (OperandInfo.value) + (OperandInfo.dirType);
+          *memoryPtr+=2;
                                                   }
         else {
           throwException(NOT_VALID_IDENTIFIER, (void *)idToken,
@@ -2074,7 +2247,7 @@ int tstfsz(char *instr) {
           }
 }
 
-int xorlw(char *instr) {
+int xorlw(char *instr,char**memoryPtr) {
   instr = touppercase(instr);
   OperandInfo OperandInfo;
   Tokenizer *tokenizer = initTokenizer(instr);
@@ -2082,12 +2255,15 @@ int xorlw(char *instr) {
   IdentifierToken *idToken;
   IntegerToken *intToken;
   OperatorToken *opToken;
+  uint8_t *code = *memoryPtr;
     if (token->type == TOKEN_IDENTIFIER_TYPE) {
       idToken = (IdentifierToken *)token;
         if (strcmp(idToken->str, "XORLW") == 0) {
           k(tokenizer, &OperandInfo);
-          return 0x0a00 + (OperandInfo.value) + (OperandInfo.dirType) +
-                 (OperandInfo.banktype);
+          code[0] = 0x0a;
+          code[1] = (OperandInfo.value) + (OperandInfo.dirType) +
+                    (OperandInfo.banktype);
+          *memoryPtr+=2;
                                                 }
         else {
           throwException(NOT_VALID_IDENTIFIER, (void *)idToken,
@@ -2102,7 +2278,7 @@ int xorlw(char *instr) {
             }
 }
 
-int xorwf(char *instr) {
+int xorwf(char *instr,char**memoryPtr) {
   OperandInfo OperandInfo;
   instr = touppercase(instr);
   Tokenizer *tokenizer = initTokenizer(instr);
@@ -2110,12 +2286,15 @@ int xorwf(char *instr) {
   IdentifierToken *idToken;
   IntegerToken *intToken;
   OperatorToken *opToken;
+  uint8_t *code = *memoryPtr;
     if (token->type == TOKEN_IDENTIFIER_TYPE) {
       idToken = (IdentifierToken *)token;
         if (strcmp(idToken->str, "XORWF") == 0) {
           fda(tokenizer, &OperandInfo);
-          return 0x1800 + (OperandInfo.value) + (OperandInfo.dirType) +
-                 (OperandInfo.banktype);
+          code[0] = 0x18+ (OperandInfo.dirType) +
+                    (OperandInfo.banktype);
+          code[1] = (OperandInfo.value);
+          *memoryPtr+=2;
                                                 }
         else {
           throwException(NOT_VALID_IDENTIFIER, (void *)idToken,
@@ -2129,4 +2308,3 @@ int xorwf(char *instr) {
           token->type);
           }
 }
-*/
