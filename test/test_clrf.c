@@ -229,7 +229,7 @@ void tearDown(void)
   	IdentifierToken clrfToken = {TOKEN_IDENTIFIER_TYPE, 3,4,instr,"CLRF"};
   	IntegerToken intToken = {TOKEN_INTEGER_TYPE,9,4,instr,"0x37",0x37};
   	OperatorToken opToken = {TOKEN_OPERATOR_TYPE,13,1,instr,","};
-  	IdentifierToken BANKEDToken = {TOKEN_OPERATOR_TYPE,14,1,instr,"1",1};
+  	IdentifierToken BANKEDToken = {TOKEN_OPERATOR_TYPE,14,1,instr,"1"};
 
   	initTokenizer_ExpectAndReturn(instr,tokenizer);
   	getToken_ExpectAndReturn(tokenizer, (Token *)&clrfToken);//
